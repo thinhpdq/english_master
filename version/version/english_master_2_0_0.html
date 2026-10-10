@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Master - Version 2.0.0 (Demo Sample)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ms-bg-main: #0c213b;
+            --ms-card-bg: rgba(18, 44, 76, 0.75);
+            --ms-card-inner: rgba(9, 26, 48, 0.65);
+            --ms-card-border: rgba(56, 189, 248, 0.22);
+            --ms-blue-primary: #0078d4;
+            --ms-azure-light: #38bdf8;
+            --ms-text-bright: #ffffff;
+            --ms-text-body: #e2e8f0;
+            --ms-text-muted: #94a3b8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', 'Outfit', sans-serif; }
+
+        body {
+            background-color: var(--ms-bg-main);
+            background-image: radial-gradient(circle at 50% 0%, #174278 0%, #0c213b 70%);
+            color: var(--ms-text-body);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 760px;
+            width: 100%;
+            background: var(--ms-card-bg);
+            border: 1px solid var(--ms-card-border);
+            border-radius: 16px;
+            padding: 36px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            text-align: center;
+            backdrop-filter: blur(14px);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 14px;
+            background: rgba(148, 163, 184, 0.14);
+            color: #cbd5e1;
+            border: 1px solid rgba(203, 213, 225, 0.3);
+            font-weight: 700;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            color: var(--ms-text-bright);
+        }
+
+        p.desc {
+            color: var(--ms-text-muted);
+            font-size: 0.98rem;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .features {
+            text-align: left;
+            background: var(--ms-card-inner);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .features h3 {
+            color: var(--ms-azure-light);
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+        }
+
+        .features ul {
+            list-style: none;
+        }
+
+        .features li {
+            padding: 6px 0;
+            color: var(--ms-text-body);
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features li::before {
+            content: "✓";
+            color: var(--ms-azure-light);
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--ms-text-bright);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: var(--ms-blue-primary);
+            border-color: var(--ms-azure-light);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="badge">Version 2.0.0 (Release Sample)</span>
+        <h1>🎓 English Master</h1>
+        <p class="desc">Tệp mẫu phiên bản 2.0.0. Tích hợp Web Speech API Luyện nói (Speaking) & Phiên âm IPA Anh-Anh chuẩn.</p>
+        
+        <div class="features">
+            <h3>📋 Nhật Ký Cập Nhật (Release Notes):</h3>
+            <ul>
+                <li>Tích hợp Web Speech API Luyện nói (Speaking) & Phiên âm IPA Anh-Anh chuẩn.</li>
+                <li>Hỗ trợ chuyển đổi giọng đọc hệ thống & Google TTS fallback.</li>
+            </ul>
+        </div>
+
+        <a href="../index.html" class="btn">⬅️ Quay Lại Hub Phiên Bản</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Master - Version Hub</title>
+    <meta name="description" content="Trung tâm quản lý và tải các phiên bản đóng gói độc lập Offline (Single-File HTML) của ứng dụng English Master.">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Microsoft Modern Elegant Azure & Royal Navy Palette */
+            --ms-bg-main: #0c213b;
+            --ms-bg-gradient: radial-gradient(circle at 50% -10%, #174278 0%, #0c213b 65%);
+            
+            /* Elegant Acrylic Navy Surfaces (Khắc phục hoàn toàn các khối trắng sáng gắt) */
+            --ms-card-bg: rgba(18, 44, 76, 0.75);
+            --ms-card-inner-bg: rgba(9, 26, 48, 0.65);
+            --ms-card-border: rgba(56, 189, 248, 0.22);
+            --ms-card-border-hover: rgba(56, 189, 248, 0.55);
+            
+            --ms-blue-primary: #0078d4;
+            --ms-blue-hover: #106ebe;
+            --ms-azure-light: #38bdf8;
+            --ms-blue-soft-bg: rgba(0, 120, 212, 0.18);
+            --ms-blue-soft-border: rgba(56, 189, 248, 0.35);
+            
+            --ms-text-bright: #ffffff;
+            --ms-text-body: #e2e8f0;
+            --ms-text-muted: #94a3b8;
+            --ms-border: rgba(255, 255, 255, 0.12);
+            --ms-border-strong: rgba(56, 189, 248, 0.3);
+            
+            --radius-lg: 16px;
+            --radius-md: 10px;
+            --radius-sm: 6px;
+            
+            --ms-shadow-card: 0 8px 24px rgba(0, 0, 0, 0.25);
+            --ms-shadow-hover: 0 14px 36px rgba(0, 120, 212, 0.28);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--ms-bg-main);
+            background-image: 
+                radial-gradient(circle at 50% -10%, #174278 0%, #0c213b 65%),
+                radial-gradient(circle at 90% 90%, #0a274c 0%, transparent 50%);
+            background-attachment: fixed;
+            color: var(--ms-text-body);
+            min-height: 100vh;
+            padding: 40px 20px 80px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* HEADER SECTION */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--ms-blue-soft-bg);
+            border: 1px solid var(--ms-blue-soft-border);
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--ms-azure-light);
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 15px rgba(0, 120, 212, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+            color: var(--ms-text-bright);
+        }
+
+        header p {
+            color: var(--ms-text-muted);
+            font-size: 1.05rem;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        /* STATS OVERVIEW */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: var(--ms-card-bg);
+            border: 1px solid var(--ms-card-border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--ms-shadow-card);
+            backdrop-filter: blur(12px);
+            transition: all 0.25s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--ms-azure-light);
+            box-shadow: var(--ms-shadow-hover);
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--ms-azure-light);
+            margin-bottom: 2px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--ms-text-muted);
+            font-weight: 600;
+        }
+
+        /* CONTROLS & SEARCH BAR */
+        .controls-bar {
+            background: var(--ms-card-bg);
+            border: 1px solid var(--ms-card-border);
+            border-radius: var(--radius-lg);
+            padding: 16px 20px;
+            margin-bottom: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--ms-shadow-card);
+            backdrop-filter: blur(12px);
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            background: var(--ms-card-inner-bg);
+            border: 1px solid var(--ms-card-border);
+            border-radius: var(--radius-md);
+            padding: 10px 16px 10px 40px;
+            color: var(--ms-text-bright);
+            font-size: 0.92rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .search-box input:focus {
+            border-color: var(--ms-azure-light);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--ms-text-muted);
+        }
+
+        .filter-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--ms-border);
+            color: var(--ms-text-body);
+            padding: 7px 15px;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tag-btn:hover, .tag-btn.active {
+            background: var(--ms-blue-primary);
+            color: #ffffff;
+            border-color: var(--ms-azure-light);
+            box-shadow: 0 4px 12px rgba(0, 120, 212, 0.35);
+        }
+
+        /* VERSION CARDS GRID */
+        .version-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 22px;
+            margin-bottom: 48px;
+        }
+
+        .version-card {
+            background: var(--ms-card-bg);
+            border: 1px solid var(--ms-card-border);
+            border-radius: var(--radius-lg);
+            padding: 26px;
+            transition: all 0.25s ease;
+            position: relative;
+            box-shadow: var(--ms-shadow-card);
+            backdrop-filter: blur(14px);
+        }
+
+        .version-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--ms-blue-primary);
+            border-top-left-radius: var(--radius-lg);
+            border-bottom-left-radius: var(--radius-lg);
+        }
+
+        .version-card.latest::before {
+            background: var(--ms-azure-light);
+        }
+
+        .version-card:hover {
+            border-color: var(--ms-card-border-hover);
+            transform: translateY(-3px);
+            box-shadow: var(--ms-shadow-hover);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .version-title-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .version-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--ms-text-bright);
+        }
+
+        .status-badge {
+            padding: 3px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-latest {
+            background: rgba(56, 189, 248, 0.16);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+        }
+
+        .badge-stable {
+            background: rgba(16, 185, 129, 0.16);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.35);
+        }
+
+        .badge-archive {
+            background: rgba(246, 211, 101, 0.15);
+            color: var(--accent-gold);
+            border: 1px solid rgba(246, 211, 101, 0.4);
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 16px;
+            color: var(--ms-text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .release-notes-box {
+            background: var(--ms-card-inner-bg);
+            border: 1px solid var(--ms-border);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            margin-bottom: 20px;
+        }
+
+        .release-notes-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--ms-azure-light);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .release-notes-list {
+            list-style: none;
+        }
+
+        .release-notes-list li {
+            font-size: 0.9rem;
+            color: var(--ms-text-body);
+            padding: 3px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            line-height: 1.5;
+        }
+
+        .release-notes-list li::before {
+            content: "•";
+            color: var(--ms-azure-light);
+            font-weight: bold;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+            padding-top: 14px;
+            border-top: 1px solid var(--ms-border);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.88rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-download {
+            background: var(--ms-blue-primary);
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(0, 120, 212, 0.4);
+        }
+
+        .btn-download:hover {
+            background: var(--ms-blue-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 120, 212, 0.55);
+        }
+
+        .btn-launch {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-launch:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .btn-copy {
+            background: transparent;
+            color: var(--ms-text-muted);
+            padding: 10px 14px;
+            font-size: 0.84rem;
+        }
+
+        .btn-copy:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        /* GUIDE SECTION */
+        .guide-section {
+            background: var(--ms-card-bg);
+            border: 1px solid var(--ms-card-border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            margin-bottom: 40px;
+            box-shadow: var(--ms-shadow-card);
+            backdrop-filter: blur(14px);
+        }
+
+        .guide-section h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: var(--ms-azure-light);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .guide-card {
+            background: var(--ms-card-inner-bg);
+            border: 1px solid var(--ms-border);
+            border-radius: var(--radius-md);
+            padding: 18px;
+        }
+
+        .guide-card h3 {
+            font-size: 0.98rem;
+            color: var(--ms-text-bright);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .guide-card p {
+            font-size: 0.86rem;
+            color: var(--ms-text-muted);
+            line-height: 1.5;
+        }
+
+        .code-snippet {
+            background: rgba(4, 15, 30, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: var(--radius-sm);
+            padding: 8px 12px;
+            font-family: Consolas, Monaco, monospace;
+            font-size: 0.82rem;
+            color: var(--ms-azure-light);
+            margin-top: 8px;
+            display: block;
+            word-break: break-all;
+            font-weight: 600;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            color: var(--ms-text-muted);
+            font-size: 0.85rem;
+            padding-top: 24px;
+            border-top: 1px solid var(--ms-border);
+        }
+
+        /* TOAST NOTIFICATION */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #0f172a;
+            border: 1px solid var(--ms-blue-primary);
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.25s ease;
+            z-index: 9999;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .controls-bar { flex-direction: column; align-items: stretch; }
+            .card-actions { flex-direction: column; align-items: stretch; }
+            .btn { justify-content: center; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-logo">
+                <span>🎓</span>
+                <span>English Master • Release Hub</span>
+            </div>
+            <h1>Trung Tâm Phân Phối Phiên Bản Ứng Dụng</h1>
+            <p>Quản lý và tải các bản đóng gói độc lập (Single-File Offline Bundle) ứng dụng English Master</p>
+        </header>
+
+        <!-- STATS OVERVIEW -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">3.5.0</div>
+                <div class="stat-label">Latest Release</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">15,000+ Words</div>
+                <div class="stat-label">IELTS Academic & AWL</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100% Offline</div>
+                <div class="stat-label">Single-File HTML</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">Cross-Platform</div>
+                <div class="stat-label">Android • iOS • Windows / Linux</div>
+            </div>
+        </div>
+
+        <!-- SEARCH & FILTER BAR -->
+        <div class="controls-bar">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Tìm kiếm phiên bản (VD: 3.5.0, IELTS, B2, PCM WAV)..." onkeyup="filterVersions()">
+            </div>
+            <div class="filter-tags">
+                <button class="tag-btn active" onclick="setFilter('all', this)">Tất Cả</button>
+                <button class="tag-btn" onclick="setFilter('latest', this)">✨ Latest (3.5.0)</button>
+                <button class="tag-btn" onclick="setFilter('stable', this)">🛡️ Stable (3.2.0 - 3.0.0)</button>
+                <button class="tag-btn" onclick="setFilter('archive', this)">📜 Archive (2.0.0 - 1.0.0)</button>
+            </div>
+        </div>
+
+        <!-- VERSION CARDS LIST -->
+        <div class="version-grid" id="versionGrid">
+
+            <!-- VERSION 3.5.0 (LATEST BUILD) -->
+            <div class="version-card latest" data-category="latest" data-keywords="3.5.0 ios audio wav timeout ui polish about offline single file">
+                <div class="card-header">
+                    <div class="version-title-group">
+                        <div class="version-title">english_master_3_5_0.html</div>
+                        <span class="status-badge badge-latest">✨ Latest Release</span>
+                    </div>
+                    <div class="meta-info">
+                        <span>📅 10/2026</span>
+                        <span>📦 ~11.67 MB</span>
+                    </div>
+                </div>
+
+                <div class="release-notes-box">
+                    <div class="release-notes-title">📋 3.5.0 — iOS Audio & UI Polish:</div>
+                    <ul class="release-notes-list">
+                        <li>Tối ưu động cơ phát âm thanh PCM WAV độc lập cho iPhone/iPad (iOS).</li>
+                        <li>Bổ sung âm cảnh báo hết thời gian (timeout) đồng bộ cho Thi thử & Trắc nghiệm.</li>
+                        <li>Nâng cấp giao diện Cài đặt Giọng đọc gọn gàng, hiển thị chuẩn 1 dòng trên Mobile.</li>
+                        <li>Bổ sung Popup About hiển thị thông tin phiên bản & lịch sử cập nhật.</li>
+                    </ul>
+                </div>
+
+                <div class="card-actions">
+                    <button onclick="downloadVersionFile('./version/english_master_3_5_0.html', 'english_master_3_5_0.html', event)" class="btn btn-download">
+                        📥 Tải File HTML (3.5.0)
+                    </button>
+                    <a href="./version/english_master_3_5_0.html" target="_blank" rel="noopener" class="btn btn-launch">
+                        🚀 Chạy Trực Tiếp
+                    </a>
+                </div>
+            </div>
+
+            <!-- VERSION 3.2.0 -->
+            <div class="version-card" data-category="stable" data-keywords="3.2.0 ielts academic awl expansion 48 topics 4800 words">
+                <div class="card-header">
+                    <div class="version-title-group">
+                        <div class="version-title">english_master_3_2_0.html</div>
+                        <span class="status-badge badge-stable">🛡️ Stable</span>
+                    </div>
+                    <div class="meta-info">
+                        <span>📅 09/2026</span>
+                        <span>📦 ~10.5 MB</span>
+                    </div>
+                </div>
+
+                <div class="release-notes-box">
+                    <div class="release-notes-title">📋 3.2.0 — IELTS Academic & AWL Expansion:</div>
+                    <ul class="release-notes-list">
+                        <li>Mở rộng bộ dữ liệu IELTS Academic & Academic Word List (AWL) lên 48 Bài học (4,800 từ).</li>
+                        <li>Kiểm tra tính độc lập 100% không trùng lặp từ vựng trên toàn hệ thống.</li>
+                    </ul>
+                </div>
+
+                <div class="card-actions">
+                    <button onclick="downloadVersionFile('./version/english_master_3_2_0.html', 'english_master_3_2_0.html', event)" class="btn btn-download">
+                        📥 Tải File HTML (3.2.0)
+                    </button>
+                    <a href="./version/english_master_3_2_0.html" target="_blank" rel="noopener" class="btn btn-launch">
+                        🚀 Chạy Trực Tiếp
+                    </a>
+                </div>
+            </div>
+
+            <!-- VERSION 3.0.0 -->
+            <div class="version-card" data-category="stable" data-keywords="3.0.0 multi level mock exam certificates a2 b1 b2 flyers pet fce">
+                <div class="card-header">
+                    <div class="version-title-group">
+                        <div class="version-title">english_master_3_0_0.html</div>
+                        <span class="status-badge badge-stable">🛡️ Stable</span>
+                    </div>
+                    <div class="meta-info">
+                        <span>📅 08/2026</span>
+                        <span>📦 ~8.8 MB</span>
+                    </div>
+                </div>
+
+                <div class="release-notes-box">
+                    <div class="release-notes-title">📋 3.0.0 — Multi-Level Mock Exam & Certificates:</div>
+                    <ul class="release-notes-list">
+                        <li>Hệ thống Thi thử tự động theo trình độ (A2 Flyers • B1 PET • B2 First).</li>
+                        <li>Cấp Bằng Chứng Nhận Động (Dynamic Certificate) hỗ trợ in ấn & lưu hình ảnh.</li>
+                    </ul>
+                </div>
+
+                <div class="card-actions">
+                    <button onclick="downloadVersionFile('./version/english_master_3_0_0.html', 'english_master_3_0_0.html', event)" class="btn btn-download">
+                        📥 Tải File HTML (3.0.0)
+                    </button>
+                    <a href="./version/english_master_3_0_0.html" target="_blank" rel="noopener" class="btn btn-launch">
+                        🚀 Chạy Trực Tiếp
+                    </a>
+                </div>
+            </div>
+
+            <!-- VERSION 2.0.0 -->
+            <div class="version-card" data-category="archive" data-keywords="2.0.0 speech recognition ipa voice engine google tts">
+                <div class="card-header">
+                    <div class="version-title-group">
+                        <div class="version-title">english_master_2_0_0.html</div>
+                        <span class="status-badge badge-archive">📜 Archive</span>
+                    </div>
+                    <div class="meta-info">
+                        <span>📅 07/2026</span>
+                        <span>📦 ~6.5 MB</span>
+                    </div>
+                </div>
+
+                <div class="release-notes-box">
+                    <div class="release-notes-title">📋 2.0.0 — Speech Recognition & IPA Voice Engine:</div>
+                    <ul class="release-notes-list">
+                        <li>Tích hợp Web Speech API Luyện nói (Speaking) & Phiên âm IPA Anh-Anh chuẩn.</li>
+                        <li>Hỗ trợ chuyển đổi giọng đọc hệ thống & Google TTS fallback.</li>
+                    </ul>
+                </div>
+
+                <div class="card-actions">
+                    <button onclick="downloadVersionFile('./version/english_master_2_0_0.html', 'english_master_2_0_0.html', event)" class="btn btn-download">
+                        📥 Tải File HTML (2.0.0)
+                    </button>
+                    <a href="./version/english_master_2_0_0.html" target="_blank" rel="noopener" class="btn btn-launch">
+                        🚀 Chạy Trực Tiếp
+                    </a>
+                </div>
+            </div>
+
+            <!-- VERSION 1.0.0 -->
+            <div class="version-card" data-category="archive" data-keywords="1.0.0 first release movers initial">
+                <div class="card-header">
+                    <div class="version-title-group">
+                        <div class="version-title">english_master_1_0_0.html</div>
+                        <span class="status-badge badge-archive">📜 Legacy Baseline</span>
+                    </div>
+                    <div class="meta-info">
+                        <span>📅 06/2026</span>
+                        <span>📦 ~4.2 MB</span>
+                    </div>
+                </div>
+
+                <div class="release-notes-box">
+                    <div class="release-notes-title">📋 1.0.0 — First Release:</div>
+                    <ul class="release-notes-list">
+                        <li>Hỗ trợ ôn tập và luyện thi trình độ Movers.</li>
+                    </ul>
+                </div>
+
+                <div class="card-actions">
+                    <button onclick="downloadVersionFile('./version/english_master_1_0_0.html', 'english_master_1_0_0.html', event)" class="btn btn-download">
+                        📥 Tải File HTML (1.0.0)
+                    </button>
+                    <a href="./version/english_master_1_0_0.html" target="_blank" rel="noopener" class="btn btn-launch">
+                        🚀 Chạy Trực Tiếp
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- GUIDE SECTION -->
+        <div class="guide-section">
+            <h2>📖 Hướng Dẫn Sử Dụng</h2>
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <h3>📱 1. Điện Thoại (Android / iOS)</h3>
+                    <p>Nhấp <b>Tải File HTML</b> tương ứng. Mở file bằng trình duyệt <b>Chrome</b> (Android) hoặc <b>HTML Viewer Q</b> (iPhone/iPad). Chạy 100% Offline không cần Internet.</p>
+                </div>
+                <div class="guide-card">
+                    <h3>💻 2. Máy Tính (Laptop / PC)</h3>
+                    <p>Mở trực tiếp file HTML vừa tải bằng bất kỳ trình duyệt hiện đại nào (Chrome, Edge, Firefox). Khuyến nghị dùng Chrome. Ứng dụng hoạt động độc lập không cần server.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>© 2026 <b>English Master</b> • Developed by <b>Phan Đăng Quốc Thịnh</b> with <b>Google Antigravity AI</b></p>
+        </footer>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="toast">
+        <span id="toastMessage">Đã copy đường dẫn tương đối!</span>
+    </div>
+
+    <script>
+        let currentFilter = 'all';
+
+        function filterVersions() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.version-card');
+
+            cards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                const keywords = card.getAttribute('data-keywords').toLowerCase();
+                
+                const matchesFilter = (currentFilter === 'all' || category === currentFilter);
+                const matchesSearch = (!query || keywords.includes(query) || card.innerText.toLowerCase().includes(query));
+
+                if (matchesFilter && matchesSearch) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function setFilter(filter, btnElem) {
+            currentFilter = filter;
+            document.querySelectorAll('.tag-btn').forEach(btn => btn.classList.remove('active'));
+            if (btnElem) btnElem.classList.add('active');
+            filterVersions();
+        }
+
+        function downloadVersionFile(filePath, fileName, event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            showToast("⏳ Đang chuẩn bị tải tệp " + fileName + "...");
+
+            // Chuẩn tải file Web Server (HTTP / HTTPS): Dùng Blob URL ép tải về thư mục Downloads
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) throw new Error("HTTP error " + response.status);
+                    return response.blob();
+                })
+                .then(blob => {
+                    const blobUrl = URL.createObjectURL(new Blob([blob], { type: 'application/octet-stream' }));
+                    const link = document.createElement('a');
+                    link.href = blobUrl;
+                    link.download = fileName;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
+                    showToast("✅ Đã hoàn tất tải tệp " + fileName);
+                })
+                .catch(err => {
+                    // Fallback khi chạy file:// cục bộ (Chrome chặn fetch local):
+                    // Kích hoạt link tải trực tiếp hoặc hướng dẫn click chuột phải
+                    const link = document.createElement('a');
+                    link.href = filePath;
+                    link.download = fileName;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    if (window.location.protocol === 'file:') {
+                        showToast("💡 Nếu trình duyệt tự mở file, hãy nhấp chuột phải ➔ Lưu liên kết thành...");
+                    }
+                });
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMessage');
+            toastMsg.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

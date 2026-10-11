@@ -101,6 +101,228 @@
             margin: 0 auto;
         }
 
+        /* HERO ONLINE LIVE BANNER */
+        .online-hero-banner {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.22) 0%, rgba(30, 64, 175, 0.45) 50%, rgba(12, 33, 59, 0.85) 100%);
+            border: 1.5px solid rgba(56, 189, 248, 0.65);
+            border-radius: var(--radius-lg);
+            padding: 26px 30px;
+            margin-bottom: 32px;
+            position: relative;
+            box-shadow: 0 12px 36px rgba(0, 120, 212, 0.35), inset 0 0 20px rgba(56, 189, 248, 0.15);
+            backdrop-filter: blur(16px);
+            overflow: hidden;
+            animation: pulseOnlineHero 4s ease-in-out infinite;
+        }
+
+        @keyframes pulseOnlineHero {
+            0%, 100% {
+                border-color: rgba(56, 189, 248, 0.6);
+                box-shadow: 0 12px 36px rgba(0, 120, 212, 0.3), inset 0 0 16px rgba(56, 189, 248, 0.12);
+            }
+            50% {
+                border-color: #38bdf8;
+                box-shadow: 0 16px 48px rgba(56, 189, 248, 0.5), inset 0 0 28px rgba(56, 189, 248, 0.25);
+            }
+        }
+
+        .online-hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.12) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .online-hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .online-hero-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .online-hero-tag-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .online-live-pill {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(52, 211, 153, 0.7);
+            color: #34d399;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.76rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
+        }
+
+        .online-live-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 8px #34d399;
+            animation: blinkLiveDot 1.6s ease-in-out infinite;
+        }
+
+        @keyframes blinkLiveDot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .online-hero-title {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.3px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .online-hero-desc {
+            font-size: 0.94rem;
+            color: #e2e8f0;
+            line-height: 1.6;
+            max-width: 860px;
+        }
+
+        .online-url-box {
+            display: flex;
+            align-items: center;
+            background: rgba(4, 15, 30, 0.85);
+            border: 1.5px solid rgba(56, 189, 248, 0.4);
+            border-radius: var(--radius-md);
+            padding: 12px 18px;
+            gap: 14px;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+            transition: all 0.25s ease;
+        }
+
+        .online-url-box:hover {
+            border-color: #38bdf8;
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.3);
+        }
+
+        .online-url-text {
+            font-family: Consolas, Monaco, monospace;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #38bdf8;
+            flex: 1;
+            min-width: 250px;
+            word-break: break-all;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .online-url-text:hover {
+            color: #7dd3fc;
+            text-decoration: underline;
+        }
+
+        .online-actions-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-online-launch {
+            background: linear-gradient(135deg, #0078d4 0%, #0284c7 50%, #38bdf8 100%);
+            border: 1px solid #7dd3fc;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.92rem;
+            padding: 10px 22px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 16px rgba(0, 120, 212, 0.5), 0 0 10px rgba(56, 189, 248, 0.3);
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        .btn-online-launch:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 24px rgba(56, 189, 248, 0.7);
+            border-color: #ffffff;
+        }
+
+        .btn-online-copy {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.88rem;
+            padding: 10px 16px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-online-copy:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #38bdf8;
+            color: #38bdf8;
+        }
+
+        .online-pills-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 2px;
+        }
+
+        .online-feature-pill {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 3px 10px;
+            font-size: 0.76rem;
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        .guide-link-online {
+            color: var(--ms-azure-light);
+            font-weight: 700;
+            text-decoration: underline;
+            margin-left: 4px;
+        }
+
+        .guide-link-online:hover {
+            color: #ffffff;
+        }
+
         /* STATS OVERVIEW */
         .stats-grid {
             display: grid;
@@ -246,6 +468,10 @@
             background: var(--ms-azure-light);
         }
 
+        .version-card.legacy::before {
+            background: #f59e0b;
+        }
+
         .version-card:hover {
             border-color: var(--ms-card-border-hover);
             transform: translateY(-3px);
@@ -274,24 +500,78 @@
         }
 
         .status-badge {
-            padding: 3px 12px;
+            padding: 4px 13px;
             border-radius: 50px;
-            font-size: 0.75rem;
+            font-size: 0.76rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            line-height: 1.2;
+            transition: all 0.25s ease;
+            position: relative;
         }
 
+        /* ✨ LATEST RELEASE TAG - Glowing Electric Cyan / Microsoft Azure */
         .badge-latest {
-            background: rgba(56, 189, 248, 0.16);
-            color: #38bdf8;
-            border: 1px solid rgba(56, 189, 248, 0.35);
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.28) 0%, rgba(56, 189, 248, 0.48) 100%);
+            color: #ffffff;
+            border: 1px solid rgba(56, 189, 248, 0.85);
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.95), 0 0 2px #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.45), inset 0 0 8px rgba(56, 189, 248, 0.25);
+            animation: pulseGlowLatest 3.2s ease-in-out infinite;
+        }
+
+        .badge-latest:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 24px rgba(56, 189, 248, 0.85), 0 0 8px #ffffff;
+            border-color: #e0f2fe;
+        }
+
+        @keyframes pulseGlowLatest {
+            0%, 100% {
+                box-shadow: 0 0 12px rgba(56, 189, 248, 0.4), inset 0 0 6px rgba(56, 189, 248, 0.2);
+                border-color: rgba(56, 189, 248, 0.75);
+            }
+            50% {
+                box-shadow: 0 0 22px rgba(56, 189, 248, 0.78), 0 0 32px rgba(56, 189, 248, 0.3), inset 0 0 10px rgba(56, 189, 248, 0.45);
+                border-color: #bae6fd;
+            }
         }
 
         .badge-stable {
             background: rgba(16, 185, 129, 0.16);
             color: #34d399;
             border: 1px solid rgba(52, 211, 153, 0.35);
+        }
+
+        /* 📜 LEGACY BASELINE TAG - Luminous Heritage Amber / Radiant Gold */
+        .badge-legacy {
+            background: linear-gradient(135deg, rgba(217, 119, 6, 0.28) 0%, rgba(245, 158, 11, 0.48) 100%);
+            color: #ffffff;
+            border: 1px solid rgba(251, 191, 36, 0.85);
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.95), 0 0 2px #fbbf24;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.45), inset 0 0 8px rgba(251, 191, 36, 0.25);
+            animation: pulseGlowLegacy 3.2s ease-in-out infinite;
+        }
+
+        .badge-legacy:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 24px rgba(245, 158, 11, 0.85), 0 0 8px #ffffff;
+            border-color: #fef9c3;
+        }
+
+        @keyframes pulseGlowLegacy {
+            0%, 100% {
+                box-shadow: 0 0 12px rgba(245, 158, 11, 0.4), inset 0 0 6px rgba(245, 158, 11, 0.2);
+                border-color: rgba(251, 191, 36, 0.75);
+            }
+            50% {
+                box-shadow: 0 0 22px rgba(245, 158, 11, 0.78), 0 0 32px rgba(245, 158, 11, 0.3), inset 0 0 10px rgba(251, 191, 36, 0.45);
+                border-color: #fef08a;
+            }
         }
 
         .badge-archive {
@@ -418,42 +698,135 @@
             backdrop-filter: blur(14px);
         }
 
+        .guide-header {
+            margin-bottom: 24px;
+        }
+
         .guide-section h2 {
             font-size: 1.35rem;
             font-weight: 700;
-            margin-bottom: 18px;
+            margin-bottom: 6px;
             color: var(--ms-azure-light);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+        }
+
+        .guide-subtitle {
+            font-size: 0.88rem;
+            color: var(--ms-text-muted);
         }
 
         .guide-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
         }
 
         .guide-card {
             background: var(--ms-card-inner-bg);
             border: 1px solid var(--ms-border);
             border-radius: var(--radius-md);
-            padding: 18px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transition: all 0.25s ease;
+        }
+
+        .guide-card:hover {
+            border-color: var(--ms-card-border-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .guide-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .guide-card h3 {
-            font-size: 0.98rem;
+            font-size: 1.02rem;
             color: var(--ms-text-bright);
-            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 700;
         }
 
-        .guide-card p {
+        .guide-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 50px;
+            letter-spacing: 0.5px;
+        }
+
+        .guide-badge-offline {
+            background: rgba(16, 185, 129, 0.16);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.35);
+        }
+
+        .guide-badge-hybrid {
+            background: rgba(56, 189, 248, 0.16);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+        }
+
+        .guide-item-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .guide-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-sm);
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .guide-item-title {
             font-size: 0.86rem;
-            color: var(--ms-text-muted);
-            line-height: 1.5;
+            font-weight: 700;
+            color: var(--ms-azure-light);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .guide-item-desc {
+            font-size: 0.85rem;
+            color: var(--ms-text-body);
+            line-height: 1.55;
+        }
+
+        .guide-tag-highlight {
+            background: rgba(56, 189, 248, 0.15);
+            color: #7dd3fc;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+        }
+
+        .guide-tag-app {
+            background: rgba(236, 72, 153, 0.15);
+            color: #f472b6;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            border: 1px solid rgba(236, 72, 153, 0.3);
         }
 
         .code-snippet {
@@ -468,6 +841,408 @@
             display: block;
             word-break: break-all;
             font-weight: 600;
+        }
+
+        /* SCREENSHOTS SHOWCASE */
+        .screenshots-section {
+            background: var(--ms-card-bg);
+            border: 1px solid var(--ms-card-border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            margin-bottom: 40px;
+            box-shadow: var(--ms-shadow-card);
+            backdrop-filter: blur(14px);
+        }
+
+        .screenshots-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .screenshots-header h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--ms-azure-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .screenshots-subtitle {
+            font-size: 0.88rem;
+            color: var(--ms-text-muted);
+        }
+
+        .screenshots-badge {
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            color: #38bdf8;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 50px;
+            letter-spacing: 0.5px;
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        @media (min-width: 1200px) {
+            .screenshots-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        .screenshot-card {
+            background: var(--ms-card-inner-bg);
+            border: 1px solid var(--ms-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .screenshot-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--ms-azure-light);
+            box-shadow: 0 12px 28px rgba(0, 120, 212, 0.35);
+        }
+
+        .screenshot-img-box {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: rgba(4, 15, 30, 0.85);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .screenshot-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform 0.35s ease;
+        }
+
+        .screenshot-card:hover .screenshot-img {
+            transform: scale(1.06);
+        }
+
+        .screenshot-hover-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(12, 33, 59, 0.2) 0%, rgba(12, 33, 59, 0.85) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            color: #ffffff;
+            font-size: 0.84rem;
+            font-weight: 700;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .screenshot-card:hover .screenshot-hover-overlay {
+            opacity: 1;
+        }
+
+        /* Placeholder khi chưa nạp file ảnh thật */
+        .screenshot-placeholder-box {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(12, 33, 59, 0.9) 0%, rgba(18, 44, 76, 0.85) 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .placeholder-icon {
+            font-size: 1.8rem;
+            margin-bottom: 6px;
+            filter: drop-shadow(0 2px 6px rgba(56, 189, 248, 0.4));
+        }
+
+        .placeholder-filename {
+            font-family: Consolas, Monaco, monospace;
+            font-size: 0.72rem;
+            color: var(--ms-azure-light);
+            background: rgba(56, 189, 248, 0.12);
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-top: 4px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .screenshot-card-body {
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .screenshot-category {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--ms-azure-light);
+            letter-spacing: 0.5px;
+        }
+
+        .screenshot-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--ms-text-bright);
+            line-height: 1.35;
+        }
+
+        /* LIGHTBOX MODAL */
+        .lightbox-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(4, 15, 30, 0.92);
+            backdrop-filter: blur(16px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            animation: fadeInLightbox 0.25s ease;
+        }
+
+        @keyframes fadeInLightbox {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-container {
+            background: var(--ms-card-bg);
+            border: 1px solid var(--ms-azure-light);
+            border-radius: var(--radius-lg);
+            max-width: 960px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(56, 189, 248, 0.2);
+            position: relative;
+        }
+
+        .lightbox-close-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(12, 33, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.2s ease;
+        }
+
+        .lightbox-close-btn:hover {
+            background: #ef4444;
+            border-color: #ef4444;
+            transform: scale(1.1);
+        }
+
+        .lightbox-img-wrapper {
+            position: relative;
+            background: #020b18;
+            min-height: 280px;
+            max-height: 64vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .lightbox-zoom-toolbar {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            display: flex;
+            align-items: center;
+            background: rgba(12, 33, 59, 0.88);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            border-radius: 50px;
+            padding: 4px 8px;
+            gap: 6px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+            z-index: 10;
+            backdrop-filter: blur(8px);
+        }
+
+        .zoom-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+
+        .zoom-btn:hover {
+            background: var(--ms-blue-primary);
+            border-color: var(--ms-azure-light);
+            transform: scale(1.1);
+        }
+
+        .zoom-btn.reset-btn {
+            width: auto;
+            border-radius: 50px;
+            padding: 0 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .zoom-level-text {
+            font-family: Consolas, Monaco, monospace;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--ms-azure-light);
+            padding: 0 4px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .zoom-level-text:hover {
+            color: #ffffff;
+        }
+
+        .lightbox-zoom-hint {
+            position: absolute;
+            bottom: 10px;
+            background: rgba(4, 15, 30, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--ms-text-muted);
+            font-size: 0.72rem;
+            padding: 3px 12px;
+            border-radius: 50px;
+            pointer-events: none;
+            backdrop-filter: blur(4px);
+            opacity: 0.85;
+            transition: opacity 0.2s ease;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 64vh;
+            object-fit: contain;
+            display: block;
+            cursor: zoom-in;
+            user-select: none;
+            -webkit-user-drag: none;
+            transform-origin: center center;
+            transition: transform 0.18s ease-out;
+        }
+
+        .lightbox-info {
+            padding: 20px 24px;
+            background: var(--ms-card-inner-bg);
+            border-top: 1px solid var(--ms-border);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .lightbox-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .lightbox-category {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--ms-azure-light);
+            letter-spacing: 0.6px;
+        }
+
+        .lightbox-counter {
+            font-size: 0.78rem;
+            color: var(--ms-text-muted);
+            font-weight: 600;
+        }
+
+        .lightbox-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--ms-text-bright);
+        }
+
+        .lightbox-desc {
+            font-size: 0.88rem;
+            color: var(--ms-text-muted);
+            line-height: 1.5;
+        }
+
+        .lightbox-nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .lightbox-nav-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--ms-border);
+            color: var(--ms-text-bright);
+            padding: 8px 18px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lightbox-nav-btn:hover {
+            background: var(--ms-blue-primary);
+            border-color: var(--ms-azure-light);
         }
 
         /* FOOTER */
@@ -523,6 +1298,50 @@
             <p>Quản lý và tải các bản đóng gói độc lập (Single-File Offline Bundle) ứng dụng English Master</p>
         </header>
 
+        <!-- HERO ONLINE LIVE ACCESS BANNER -->
+        <div class="online-hero-banner" id="onlineAccess">
+            <div class="online-hero-content">
+                <div class="online-hero-top">
+                    <div class="online-hero-tag-group">
+                        <span class="online-live-pill">
+                            <span class="online-live-dot"></span>
+                            ONLINE LIVE DEMO
+                        </span>
+                        <span style="font-size:0.8rem; color:var(--ms-text-muted); font-weight:600;">GitHub Pages Cloud Hosting</span>
+                    </div>
+                    <div class="online-pills-row">
+                        <span class="online-feature-pill">⚡ Không Cần Tải File</span>
+                        <span class="online-feature-pill">📱 Mọi Thiết Bị (Android, iOS, PC)</span>
+                        <span class="online-feature-pill">🆓 Miễn Phí 100%</span>
+                    </div>
+                </div>
+
+                <div class="online-hero-title">
+                    <span>🌐</span>
+                    <span>TRẢI NGHIỆM TRỰC TUYẾN NGAY TRÊN INTERNET</span>
+                </div>
+
+                <p class="online-hero-desc">
+                    Ứng dụng đã được triển khai chính thức trên Internet qua <b>GitHub Pages</b>. Bạn có thể truy cập tức thì bằng bất kỳ trình duyệt nào (Safari, Chrome, Edge...) để tự học và làm bài thi thử mà không cần tải tệp về máy!
+                </p>
+
+                <div class="online-url-box">
+                    <a href="https://thinhpdq.github.io/english_master" target="_blank" rel="noopener" class="online-url-text" title="Nhấp để truy cập trực tiếp">
+                        <span>🔗</span>
+                        <span>https://thinhpdq.github.io/english_master</span>
+                    </a>
+                    <div class="online-actions-group">
+                        <button onclick="copyOnlineUrl(event)" class="btn-online-copy" title="Copy liên kết Online vào bộ nhớ đệm">
+                            📋 Copy Link
+                        </button>
+                        <a href="https://thinhpdq.github.io/english_master" target="_blank" rel="noopener" class="btn-online-launch">
+                            🚀 Chạy Trực Tiếp Online ↗
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- STATS OVERVIEW -->
         <div class="stats-grid">
             <div class="stat-card">
@@ -550,7 +1369,7 @@
                 <input type="text" id="searchInput" placeholder="Tìm kiếm phiên bản (VD: 3.5.0, IELTS, B2, PCM WAV)..." onkeyup="filterVersions()">
             </div>
             <div class="filter-tags">
-                <button class="tag-btn active" onclick="setFilter('all', this)">Tất Cả</button>
+                <button class="tag-btn active" onclick="setFilter('all', this)">All Versions</button>
                 <button class="tag-btn" onclick="setFilter('latest', this)">✨ Latest (3.5.0)</button>
                 <button class="tag-btn" onclick="setFilter('stable', this)">🛡️ Stable (3.2.0 - 3.0.0)</button>
                 <button class="tag-btn" onclick="setFilter('archive', this)">📜 Archive (2.0.0 - 1.0.0)</button>
@@ -569,7 +1388,7 @@
                     </div>
                     <div class="meta-info">
                         <span>📅 10/2026</span>
-                        <span>📦 ~11.67 MB</span>
+                        <span>📦 ~12.2 MB</span>
                     </div>
                 </div>
 
@@ -584,10 +1403,10 @@
                 </div>
 
                 <div class="card-actions">
-                    <button onclick="downloadVersionFile('./version/english_master_3_5_0.html', 'english_master_3_5_0.html', event)" class="btn btn-download">
+                    <button onclick="downloadVersionFile('./release/english_master_3_5_0.html', 'english_master_3_5_0.html', event)" class="btn btn-download">
                         📥 Tải File HTML (3.5.0)
                     </button>
-                    <a href="./version/english_master_3_5_0.html" target="_blank" rel="noopener" class="btn btn-launch">
+                    <a href="./release/english_master_3_5_0.html" target="_blank" rel="noopener" class="btn btn-launch">
                         🚀 Chạy Trực Tiếp
                     </a>
                 </div>
@@ -602,7 +1421,7 @@
                     </div>
                     <div class="meta-info">
                         <span>📅 09/2026</span>
-                        <span>📦 ~10.5 MB</span>
+                        <span>📦 ~12.1 MB</span>
                     </div>
                 </div>
 
@@ -615,10 +1434,10 @@
                 </div>
 
                 <div class="card-actions">
-                    <button onclick="downloadVersionFile('./version/english_master_3_2_0.html', 'english_master_3_2_0.html', event)" class="btn btn-download">
+                    <button onclick="downloadVersionFile('./release/english_master_3_2_0.html', 'english_master_3_2_0.html', event)" class="btn btn-download">
                         📥 Tải File HTML (3.2.0)
                     </button>
-                    <a href="./version/english_master_3_2_0.html" target="_blank" rel="noopener" class="btn btn-launch">
+                    <a href="./release/english_master_3_2_0.html" target="_blank" rel="noopener" class="btn btn-launch">
                         🚀 Chạy Trực Tiếp
                     </a>
                 </div>
@@ -633,7 +1452,7 @@
                     </div>
                     <div class="meta-info">
                         <span>📅 08/2026</span>
-                        <span>📦 ~8.8 MB</span>
+                        <span>📦 ~8.0 MB</span>
                     </div>
                 </div>
 
@@ -646,10 +1465,10 @@
                 </div>
 
                 <div class="card-actions">
-                    <button onclick="downloadVersionFile('./version/english_master_3_0_0.html', 'english_master_3_0_0.html', event)" class="btn btn-download">
+                    <button onclick="downloadVersionFile('./release/english_master_3_0_0.html', 'english_master_3_0_0.html', event)" class="btn btn-download">
                         📥 Tải File HTML (3.0.0)
                     </button>
-                    <a href="./version/english_master_3_0_0.html" target="_blank" rel="noopener" class="btn btn-launch">
+                    <a href="./release/english_master_3_0_0.html" target="_blank" rel="noopener" class="btn btn-launch">
                         🚀 Chạy Trực Tiếp
                     </a>
                 </div>
@@ -664,7 +1483,7 @@
                     </div>
                     <div class="meta-info">
                         <span>📅 07/2026</span>
-                        <span>📦 ~6.5 MB</span>
+                        <span>📦 ~8.0 MB</span>
                     </div>
                 </div>
 
@@ -677,25 +1496,25 @@
                 </div>
 
                 <div class="card-actions">
-                    <button onclick="downloadVersionFile('./version/english_master_2_0_0.html', 'english_master_2_0_0.html', event)" class="btn btn-download">
+                    <button onclick="downloadVersionFile('./release/english_master_2_0_0.html', 'english_master_2_0_0.html', event)" class="btn btn-download">
                         📥 Tải File HTML (2.0.0)
                     </button>
-                    <a href="./version/english_master_2_0_0.html" target="_blank" rel="noopener" class="btn btn-launch">
+                    <a href="./release/english_master_2_0_0.html" target="_blank" rel="noopener" class="btn btn-launch">
                         🚀 Chạy Trực Tiếp
                     </a>
                 </div>
             </div>
 
             <!-- VERSION 1.0.0 -->
-            <div class="version-card" data-category="archive" data-keywords="1.0.0 first release movers initial">
+            <div class="version-card legacy" data-category="archive" data-keywords="1.0.0 first release movers initial legacy baseline">
                 <div class="card-header">
                     <div class="version-title-group">
                         <div class="version-title">english_master_1_0_0.html</div>
-                        <span class="status-badge badge-archive">📜 Legacy Baseline</span>
+                        <span class="status-badge badge-legacy">📜 Legacy Baseline</span>
                     </div>
                     <div class="meta-info">
                         <span>📅 06/2026</span>
-                        <span>📦 ~4.2 MB</span>
+                        <span>📦 ~0.2 MB</span>
                     </div>
                 </div>
 
@@ -707,10 +1526,10 @@
                 </div>
 
                 <div class="card-actions">
-                    <button onclick="downloadVersionFile('./version/english_master_1_0_0.html', 'english_master_1_0_0.html', event)" class="btn btn-download">
+                    <button onclick="downloadVersionFile('./release/english_master_1_0_0.html', 'english_master_1_0_0.html', event)" class="btn btn-download">
                         📥 Tải File HTML (1.0.0)
                     </button>
-                    <a href="./version/english_master_1_0_0.html" target="_blank" rel="noopener" class="btn btn-launch">
+                    <a href="./release/english_master_1_0_0.html" target="_blank" rel="noopener" class="btn btn-launch">
                         🚀 Chạy Trực Tiếp
                     </a>
                 </div>
@@ -718,17 +1537,97 @@
 
         </div>
 
+        <!-- SCREENSHOTS SHOWCASE SECTION -->
+        <div class="screenshots-section" id="screenshots">
+            <div class="screenshots-header">
+                <div class="screenshots-header-left">
+                    <h2>📸 Giao Diện & Tính Năng Nổi Bật</h2>
+                    <p class="screenshots-subtitle">Khám phá 10 tính năng cốt lõi được thiết kế hiện đại, thông minh và trực quan.</p>
+                </div>
+                <div class="screenshots-badge">
+                    <span>10 Màn Hình Tiêu Biểu</span>
+                </div>
+            </div>
+
+            <!-- Grid chứa 10 screenshots -->
+            <div class="screenshots-grid" id="screenshotsGrid">
+                <!-- Javascript will render 10 cards with fallback support -->
+            </div>
+        </div>
+
         <!-- GUIDE SECTION -->
         <div class="guide-section">
-            <h2>📖 Hướng Dẫn Sử Dụng</h2>
+            <div class="guide-header">
+                <h2>📖 HƯỚNG DẪN SỬ DỤNG</h2>
+                <p class="guide-subtitle">Hướng dẫn chi tiết cách chạy ứng dụng tối ưu nhất theo từng nhóm thiết bị và hệ điều hành.</p>
+            </div>
             <div class="guide-grid">
+                <!-- NHÓM 1: ANDROID & MÁY TÍNH -->
                 <div class="guide-card">
-                    <h3>📱 1. Điện Thoại (Android / iOS)</h3>
-                    <p>Nhấp <b>Tải File HTML</b> tương ứng. Mở file bằng trình duyệt <b>Chrome</b> (Android) hoặc <b>HTML Viewer Q</b> (iPhone/iPad). Chạy 100% Offline không cần Internet.</p>
+                    <div class="guide-card-header">
+                        <h3>🤖 Thiết bị Android và 💻 Máy tính</h3>
+                        <span class="guide-badge guide-badge-offline">⚡ Online & Offline 100%</span>
+                    </div>
+                    <div class="guide-item-list">
+                        <div class="guide-item">
+                            <div class="guide-item-title">
+                                <span>🌐 Khi chạy Online:</span>
+                            </div>
+                            <div class="guide-item-desc">
+                                Có thể mở và chạy trực tiếp mượt mà bằng bất cứ trình duyệt web hiện đại nào qua liên kết Online chính thức: <a href="https://thinhpdq.github.io/english_master" target="_blank" rel="noopener" class="guide-link-online">thinhpdq.github.io/english_master ↗</a>.
+                            </div>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-item-title">
+                                <span>📁 Khi muốn chạy Offline:</span>
+                            </div>
+                            <div class="guide-item-desc">
+                                Hoạt động 100% độc lập không cần Internet. Chỉ cần tải tệp HTML về máy và mở trực tiếp bằng trình duyệt, không cần cài đặt thêm phần mềm hỗ trợ hay web server.
+                            </div>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-item-title">
+                                <span>⭐ Trình duyệt khuyến nghị:</span>
+                            </div>
+                            <div class="guide-item-desc">
+                                Khuyến nghị dùng <span class="guide-tag-highlight">Google Chrome</span> để được trải nghiệm tốt nhất, mượt mà nhất về động cơ giọng đọc phát âm chuẩn và giao diện tương tác.
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- NHÓM 2: HỆ ĐIỀU HÀNH iOS (IPHONE / IPAD) -->
                 <div class="guide-card">
-                    <h3>💻 2. Máy Tính (Laptop / PC)</h3>
-                    <p>Mở trực tiếp file HTML vừa tải bằng bất kỳ trình duyệt hiện đại nào (Chrome, Edge, Firefox). Khuyến nghị dùng Chrome. Ứng dụng hoạt động độc lập không cần server.</p>
+                    <div class="guide-card-header">
+                        <h3>🍎 Thiết bị iOS (iPhone / iPad)</h3>
+                        <span class="guide-badge guide-badge-hybrid">📱 Safari & App Hỗ Trợ</span>
+                    </div>
+                    <div class="guide-item-list">
+                        <div class="guide-item">
+                            <div class="guide-item-title">
+                                <span>🌐 Khi chạy Online:</span>
+                            </div>
+                            <div class="guide-item-desc">
+                                Chỉ có thể chạy Online trực tiếp bằng trình duyệt <span class="guide-tag-highlight">Safari</span> hoặc <span class="guide-tag-highlight">Chrome</span> qua liên kết Online chính thức: <a href="https://thinhpdq.github.io/english_master" target="_blank" rel="noopener" class="guide-link-online">thinhpdq.github.io/english_master ↗</a>.
+                            </div>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-item-title">
+                                <span>📁 Khi muốn chạy Offline:</span>
+                            </div>
+                            <div class="guide-item-desc">
+                                Do cơ chế bảo mật sandbox của iOS không cho Safari/Chrome mở trực tiếp tệp HTML từ ứng dụng Tệp (Files), nên <b>bắt buộc cài thêm phần mềm hỗ trợ</b> để mở file HTML Offline.
+                            </div>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-item-title">
+                                <span>💡 Khuyến nghị phần mềm chạy Offline:</span>
+                            </div>
+                            <div class="guide-item-desc">
+                                Khuyến nghị dùng ứng dụng <span class="guide-tag-app">HTML Viewer Q</span> (tải miễn phí trên App Store). Ứng dụng này hỗ trợ mở file HTML Offline cực nhanh, giữ trọn âm thanh và không bị lỗi sandbox.
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -742,6 +1641,37 @@
     <!-- TOAST NOTIFICATION -->
     <div id="toast" class="toast">
         <span id="toastMessage">Đã copy đường dẫn tương đối!</span>
+    </div>
+
+    <!-- SCREENSHOT LIGHTBOX MODAL -->
+    <div id="screenshotLightbox" class="lightbox-modal" onclick="closeLightbox(event)">
+        <div class="lightbox-container" onclick="event.stopPropagation()">
+            <button class="lightbox-close-btn" onclick="closeLightbox()" title="Đóng (ESC)">✕</button>
+            <div class="lightbox-img-wrapper" id="lightboxImgWrapper">
+                <!-- Floating Zoom Toolbar -->
+                <div class="lightbox-zoom-toolbar">
+                    <button class="zoom-btn" onclick="zoomLightbox(-0.25)" title="Thu nhỏ (Phím -)">−</button>
+                    <span class="zoom-level-text" id="zoomLevelText" onclick="resetLightboxZoom()" title="Kích thước hiện tại (Nhấp để về 100%)">100%</span>
+                    <button class="zoom-btn" onclick="zoomLightbox(0.25)" title="Phóng to (Phím +)">+</button>
+                    <button class="zoom-btn reset-btn" onclick="resetLightboxZoom()" title="Khôi phục kích thước 100% (Phím 0)">⟲ 1:1</button>
+                </div>
+                <img id="lightboxImg" src="" alt="Screenshot Full View" class="lightbox-img" />
+                <div id="lightboxPlaceholder" class="lightbox-placeholder-box" style="display:none; height:260px;"></div>
+                <div class="lightbox-zoom-hint">💡 Lăn chuột hoặc chạm đúp để Zoom • Giữ chuột để kéo ảnh (Pan)</div>
+            </div>
+            <div class="lightbox-info">
+                <div class="lightbox-meta">
+                    <span id="lightboxCategory" class="lightbox-category"></span>
+                    <span id="lightboxCounter" class="lightbox-counter"></span>
+                </div>
+                <h3 id="lightboxTitle" class="lightbox-title"></h3>
+                <p id="lightboxDesc" class="lightbox-desc"></p>
+                <div class="lightbox-nav-buttons">
+                    <button class="lightbox-nav-btn prev-btn" onclick="navigateLightbox(-1)" title="Ảnh trước (Mũi tên trái)">‹ Trước</button>
+                    <button class="lightbox-nav-btn next-btn" onclick="navigateLightbox(1)" title="Ảnh tiếp theo (Mũi tên phải)">Tiếp Theo ›</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -821,6 +1751,377 @@
                 toast.classList.remove('show');
             }, 3000);
         }
+
+        function copyOnlineUrl(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            const url = 'https://thinhpdq.github.io/english_master';
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    showToast('✅ Đã copy link Online: ' + url);
+                }).catch(() => {
+                    prompt('Copy đường dẫn Online:', url);
+                });
+            } else {
+                prompt('Copy đường dẫn Online:', url);
+            }
+        }
+
+        // ==========================================
+        // SCREENSHOTS SHOWCASE SYSTEM (10 SCREENSHOTS)
+        // Đường dẫn: ./assets/screenshots/screenshot_XX.png
+        // ==========================================
+        const SCREENSHOTS_DATA = [
+            {
+                id: 1,
+                file: 'screenshot_01.png',
+                altFile: 'screenshot_01.webp',
+                title: 'Kho Từ Vựng & Flashcards Thông Minh',
+                category: 'Vocabulary System',
+                desc: 'Hơn 15,000 mục từ vựng học thuật với phiên âm IPA Anh-Anh chuẩn, dịch nghĩa tự nhiên, ngữ cảnh ví dụ sinh động và bài tập trắc nghiệm điền từ.'
+            },
+            {
+                id: 2,
+                file: 'screenshot_02.png',
+                altFile: 'screenshot_02.webp',
+                title: 'Phòng Thi Thử Đa Trình Độ (Mock Exam)',
+                category: 'Cambridge Exam',
+                desc: 'Hệ thống thi thử chuẩn hóa (A2 Flyers • B1 PET • B2 First) gồm đầy đủ 3 phần thi Listening, Reading & Writing, Speaking với đồng hồ đếm ngược SVG.'
+            },
+            {
+                id: 3,
+                file: 'screenshot_03.png',
+                altFile: 'screenshot_03.webp',
+                title: 'Bằng Chứng Nhận Động (Dynamic Certificate)',
+                category: 'Graduation Certificate',
+                desc: 'Tự động vinh danh và cấp Bằng Khen Cambridge danh dự theo điểm số đạt được, hiển thị họ tên học viên, ngày thi và hỗ trợ lưu ảnh/in ấn.'
+            },
+            {
+                id: 4,
+                file: 'screenshot_04.png',
+                altFile: 'screenshot_04.webp',
+                title: 'Luyện Phát Âm & Nhận Diện Giọng Nói AI',
+                category: 'AI Voice & Speech',
+                desc: 'Nhận diện phát âm thời gian thực qua microphone, phân tích đối chiếu từ vựng chuẩn xác và cung cấp phản hồi chấm điểm tức thì.'
+            },
+            {
+                id: 5,
+                file: 'screenshot_05.png',
+                altFile: 'screenshot_05.webp',
+                title: 'Luyện Nghe & Động Cơ Âm Thanh Kép (Dual TTS)',
+                category: 'Listening & Audio',
+                desc: 'Hệ thống âm thanh PCM WAV độc lập cho iOS cùng Web Speech API đa nền tảng, hỗ trợ điều chỉnh tốc độ đọc bình thường hoặc chậm.'
+            },
+            {
+                id: 6,
+                file: 'screenshot_06.png',
+                altFile: 'screenshot_06.webp',
+                title: 'Thử Thách Trắc Nghiệm Tốc Độ (Speed Quiz)',
+                category: 'Interactive Quiz',
+                desc: 'Bài tập phản xạ 4 lựa chọn, chuông báo kết quả đúng/sai cùng âm cảnh báo hết thời gian (timeout) đồng bộ nâng cao tập trung.'
+            },
+            {
+                id: 7,
+                file: 'screenshot_07.png',
+                altFile: 'screenshot_07.webp',
+                title: 'IELTS Academic & Academic Word List (AWL)',
+                category: 'IELTS Master 48 Topics',
+                desc: 'Bộ học phần chuyên sâu 4,800 từ vựng cốt lõi phân theo 48 chủ đề học thuật đại học, kiểm tra độc lập 100% không trùng lặp.'
+            },
+            {
+                id: 8,
+                file: 'screenshot_08.png',
+                altFile: 'screenshot_08.webp',
+                title: 'Tra Cứu Từ Điển & Cấu Trúc Toàn Diện',
+                category: 'Smart Search Engine',
+                desc: 'Bộ lọc tìm kiếm thông minh tức thì, tra cứu nhanh theo tiếng Anh, nghĩa tiếng Việt hoặc chủ đề mà không cần gõ dấu.'
+            },
+            {
+                id: 9,
+                file: 'screenshot_09.png',
+                altFile: 'screenshot_09.webp',
+                title: 'Tùy Chỉnh Giọng Đọc & Cài Đặt Hệ Thống',
+                category: 'Custom Voice & Settings',
+                desc: 'Giao diện cài đặt tinh gọn 1 dòng trên Mobile, dễ dàng chuyển đổi giọng nam/nữ, điều chỉnh tốc độ và bật/tắt âm thanh giao diện.'
+            },
+            {
+                id: 10,
+                file: 'screenshot_10.png',
+                altFile: 'screenshot_10.webp',
+                title: 'Luyện Ngữ Pháp & Cấu Trúc Câu Ngữ Cảnh',
+                category: 'Grammar & Sentence Context',
+                desc: 'Chế độ luyện tập đặt câu và điền từ vào ngữ cảnh thực tế với câu hỏi trắc nghiệm, dịch nghĩa tiếng Việt gợi ý và phân tích loại từ.'
+            }
+        ];
+
+        let currentLightboxIndex = 0;
+
+        function renderScreenshots() {
+            const grid = document.getElementById('screenshotsGrid');
+            if (!grid) return;
+            
+            grid.innerHTML = SCREENSHOTS_DATA.map((item, index) => {
+                const primarySrc = `./assets/screenshots/${item.file}`;
+                const fallbackSrc = `./assets/screenshots/${item.altFile}`;
+                
+                return `
+                <div class="screenshot-card" onclick="openLightbox(${index})" title="Nhấp để xem chi tiết ảnh: ${item.title}">
+                    <div class="screenshot-img-box">
+                        <img class="screenshot-img" 
+                             src="${primarySrc}" 
+                             alt="${item.title}" 
+                             loading="lazy"
+                             onerror="handleScreenshotError(this, '${fallbackSrc}', ${item.id}, '${item.file}')" />
+                        <div class="screenshot-hover-overlay">
+                            <span>🔍 Xem Chi Tiết</span>
+                        </div>
+                    </div>
+                    <div class="screenshot-card-body">
+                        <span class="screenshot-category">${item.category}</span>
+                        <div class="screenshot-title">${item.title}</div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function handleScreenshotError(imgElement, fallbackSrc, id, originalFilename) {
+            // Thử nạp fallback .webp nếu ảnh .png chưa có
+            if (!imgElement.dataset.triedFallback && fallbackSrc) {
+                imgElement.dataset.triedFallback = "true";
+                imgElement.src = fallbackSrc;
+                return;
+            }
+            // Nếu cả 2 đều chưa có thì hiển thị mockup placeholder tinh tế
+            const box = imgElement.parentElement;
+            if (box) {
+                imgElement.style.display = 'none';
+                const placeholder = document.createElement('div');
+                placeholder.className = 'screenshot-placeholder-box';
+                placeholder.innerHTML = `
+                    <div class="placeholder-icon">📸</div>
+                    <div style="font-size:0.8rem; font-weight:700; color:#e2e8f0;">Ảnh #${id < 10 ? '0' + id : id}</div>
+                    <div class="placeholder-filename">${originalFilename}</div>
+                    <div style="font-size:0.68rem; color:#94a3b8; margin-top:4px;">Chờ nạp ảnh vào thư mục</div>
+                `;
+                box.appendChild(placeholder);
+            }
+        }
+
+        // ==========================================
+        // ZOOM IN / ZOOM OUT & PAN SYSTEM
+        // ==========================================
+        let currentZoom = 1.0;
+        let panX = 0;
+        let panY = 0;
+        let isDragging = false;
+        let startX = 0;
+        let startY = 0;
+        const MIN_ZOOM = 0.5;
+        const MAX_ZOOM = 3.5;
+
+        function applyImageTransform(animate = true) {
+            const img = document.getElementById('lightboxImg');
+            const zoomText = document.getElementById('zoomLevelText');
+            if (!img) return;
+
+            if (animate) {
+                img.style.transition = 'transform 0.18s cubic-bezier(0.2, 0, 0, 1)';
+            } else {
+                img.style.transition = 'none';
+            }
+
+            img.style.transform = `translate(${panX}px, ${panY}px) scale(${currentZoom})`;
+            
+            if (currentZoom > 1.0) {
+                img.style.cursor = isDragging ? 'grabbing' : 'grab';
+            } else {
+                img.style.cursor = 'zoom-in';
+            }
+
+            if (zoomText) {
+                zoomText.innerText = Math.round(currentZoom * 100) + '%';
+            }
+        }
+
+        function zoomLightbox(delta) {
+            let newZoom = Math.round((currentZoom + delta) * 100) / 100;
+            if (newZoom < MIN_ZOOM) newZoom = MIN_ZOOM;
+            if (newZoom > MAX_ZOOM) newZoom = MAX_ZOOM;
+            
+            currentZoom = newZoom;
+            if (currentZoom <= 1.0) {
+                panX = 0;
+                panY = 0;
+            }
+            applyImageTransform(true);
+        }
+
+        function resetLightboxZoom() {
+            currentZoom = 1.0;
+            panX = 0;
+            panY = 0;
+            isDragging = false;
+            applyImageTransform(true);
+        }
+
+        function initZoomEvents() {
+            const wrapper = document.getElementById('lightboxImgWrapper');
+            const img = document.getElementById('lightboxImg');
+            if (!wrapper || !img) return;
+
+            // 1. Mouse Wheel Zoom
+            wrapper.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const delta = e.deltaY < 0 ? 0.25 : -0.25;
+                zoomLightbox(delta);
+            }, { passive: false });
+
+            // 2. Double Click to Toggle 100% / 200%
+            img.addEventListener('dblclick', (e) => {
+                e.preventDefault();
+                if (currentZoom > 1.0) {
+                    resetLightboxZoom();
+                } else {
+                    currentZoom = 2.0;
+                    applyImageTransform(true);
+                }
+            });
+
+            // 3. Mouse Drag / Pan
+            img.addEventListener('mousedown', (e) => {
+                if (currentZoom <= 1.0) {
+                    zoomLightbox(0.5);
+                    return;
+                }
+                isDragging = true;
+                startX = e.clientX - panX;
+                startY = e.clientY - panY;
+                img.style.cursor = 'grabbing';
+                e.preventDefault();
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                panX = e.clientX - startX;
+                panY = e.clientY - startY;
+                applyImageTransform(false);
+            });
+
+            window.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    applyImageTransform(true);
+                }
+            });
+
+            // 4. Touch Pan on Mobile
+            let touchStartX = 0;
+            let touchStartY = 0;
+            img.addEventListener('touchstart', (e) => {
+                if (currentZoom <= 1.0 || e.touches.length !== 1) return;
+                isDragging = true;
+                touchStartX = e.touches[0].clientX - panX;
+                touchStartY = e.touches[0].clientY - panY;
+            }, { passive: true });
+
+            img.addEventListener('touchmove', (e) => {
+                if (!isDragging || e.touches.length !== 1) return;
+                panX = e.touches[0].clientX - touchStartX;
+                panY = e.touches[0].clientY - touchStartY;
+                applyImageTransform(false);
+            }, { passive: true });
+
+            img.addEventListener('touchend', () => {
+                isDragging = false;
+                applyImageTransform(true);
+            });
+        }
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            resetLightboxZoom();
+            updateLightboxContent();
+            const modal = document.getElementById('screenshotLightbox');
+            if (modal) modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e && e.target && e.target.id !== 'screenshotLightbox' && !e.target.classList.contains('lightbox-close-btn')) {
+                return;
+            }
+            resetLightboxZoom();
+            const modal = document.getElementById('screenshotLightbox');
+            if (modal) modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function navigateLightbox(direction) {
+            resetLightboxZoom();
+            currentLightboxIndex = (currentLightboxIndex + direction + SCREENSHOTS_DATA.length) % SCREENSHOTS_DATA.length;
+            updateLightboxContent();
+        }
+
+        function updateLightboxContent() {
+            const item = SCREENSHOTS_DATA[currentLightboxIndex];
+            if (!item) return;
+
+            const img = document.getElementById('lightboxImg');
+            const placeholder = document.getElementById('lightboxPlaceholder');
+            const title = document.getElementById('lightboxTitle');
+            const desc = document.getElementById('lightboxDesc');
+            const cat = document.getElementById('lightboxCategory');
+            const counter = document.getElementById('lightboxCounter');
+
+            if (title) title.innerText = item.title;
+            if (desc) desc.innerText = item.desc;
+            if (cat) cat.innerText = item.category;
+            if (counter) counter.innerText = `${currentLightboxIndex + 1} / ${SCREENSHOTS_DATA.length}`;
+
+            if (img && placeholder) {
+                img.style.display = 'block';
+                placeholder.style.display = 'none';
+                delete img.dataset.triedFallback;
+                img.src = `./assets/screenshots/${item.file}`;
+                
+                img.onerror = () => {
+                    if (!img.dataset.triedFallback && item.altFile) {
+                        img.dataset.triedFallback = "true";
+                        img.src = `./assets/screenshots/${item.altFile}`;
+                        return;
+                    }
+                    img.style.display = 'none';
+                    placeholder.style.display = 'flex';
+                    placeholder.className = 'screenshot-placeholder-box';
+                    placeholder.innerHTML = `
+                        <div class="placeholder-icon" style="font-size:2.8rem;">📸</div>
+                        <div style="font-size:1.1rem; font-weight:700; color:#ffffff; margin-top:8px;">${item.title}</div>
+                        <div class="placeholder-filename" style="font-size:0.85rem; margin-top:8px;">deploy/assets/screenshots/${item.file}</div>
+                        <div style="font-size:0.8rem; color:#94a3b8; margin-top:8px;">Hãy lưu ảnh chụp màn hình tương ứng vào thư mục trên</div>
+                    `;
+                };
+            }
+        }
+
+        // Lắng nghe phím tắt: ESC (đóng), Mũi tên Trái/Phải (chuyển ảnh), Phím +/-/0 (Zoom)
+        window.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('screenshotLightbox');
+            if (modal && modal.classList.contains('active')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') navigateLightbox(-1);
+                if (e.key === 'ArrowRight') navigateLightbox(1);
+                if (e.key === '+' || e.key === '=') zoomLightbox(0.25);
+                if (e.key === '-' || e.key === '_') zoomLightbox(-0.25);
+                if (e.key === '0') resetLightboxZoom();
+            }
+        });
+
+        // Khởi tạo hiển thị 10 screenshots và sự kiện Zoom ngay khi tải trang
+        renderScreenshots();
+        initZoomEvents();
     </script>
 </body>
 </html>

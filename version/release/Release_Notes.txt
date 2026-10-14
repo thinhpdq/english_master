@@ -1,0 +1,15 @@
+====================================================================================================
+Release Notes
+====================================================================================================
+
+   * Build Branch:
+        release/github/20261014_2145_english_master_3_5_0
+
+   * Build Date:
+        2026-10-14 21:45
+
+   * Release Notes:
+        1) Quiz Timeout Config as Parameters at head of file. Don't hard code in the functions.
+        2) Fix serious BUG (merge EN and VN in the answer) in IT Lesion at "Tu Vung" Quiz Test.
+        3) Fix BUG don't chose the right answer after timeout.
+        4) Improve function waiting for clicking "Next" button after answer in count down test/exam.

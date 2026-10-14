@@ -135,6 +135,54 @@ h1 { color: #0284c7; font-size: 1.35rem; display: flex; align-items: center; jus
 .submit-btn { background-color: #0284c7; color: white; padding: 10px; border: none; border-radius: 12px; font-weight: bold; font-size: 0.9rem; cursor: pointer; }
 canvas#confettiCanvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; }
 
+/* 🚀 Quiz Next Step Action Bar & Skip Button (Gọn gàng vừa khít nhãn) */
+.quiz-next-bar {
+    display: none;
+    margin-top: 12px;
+    width: 100%;
+    text-align: center;
+    animation: fadeInNextBtn 0.25s ease-out;
+}
+@keyframes fadeInNextBtn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.quiz-next-btn {
+    width: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 auto;
+    padding: 8px 18px;
+    background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    letter-spacing: 0.3px;
+}
+.quiz-next-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 16px rgba(2, 132, 199, 0.45);
+    background: linear-gradient(135deg, #0369a1 0%, #1d4ed8 100%);
+}
+.quiz-next-btn:active {
+    transform: translateY(0) scale(0.97);
+}
+.next-countdown-badge {
+    background: rgba(255, 255, 255, 0.25);
+    padding: 2px 7px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
 /* Dashboard Overlay */
 .overlay {
     display: none;
@@ -33484,7 +33532,7 @@ window.databaseIT["📈 Monitoring, Observability & Logging"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/it_software/it_part16_ai_machine_learning.js -->
+<!-- Embedded Data: data/it_software/it_part16_ai_ml_data.js -->
 <script>
 if (typeof window.databaseIT === 'undefined') { window.databaseIT = {}; }
 
@@ -34292,7 +34340,7 @@ window.databaseIT["🤖 AI, Machine Learning & Data"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/it_software/it_part17_mobile_cross_platform.js -->
+<!-- Embedded Data: data/it_software/it_part17_mobile_crossplatform.js -->
 <script>
 if (typeof window.databaseIT === 'undefined') { window.databaseIT = {}; }
 
@@ -35100,7 +35148,7 @@ window.databaseIT["📱 Mobile & Cross-Platform Dev"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/it_software/it_part18_ui_ux_design.js -->
+<!-- Embedded Data: data/it_software/it_part18_ui_ux_handoff.js -->
 <script>
 if (typeof window.databaseIT === 'undefined') { window.databaseIT = {}; }
 
@@ -266042,6 +266090,7 @@ window.databaseB1["✍️ B1 Use of English: Word Formation"] = [
         <button class="audio-btn" style="margin: 0 auto 12px auto;" onclick="speakText(null, currentCardList[currentIndex].en)">🔊</button>
         <div class="quiz-options" id="wordQuizOptions"></div>
         <div class="sentence-translation" id="wordTranslation" style="display:none;">👉 <span></span></div>
+        <div class="quiz-next-bar" id="wordQuizNextBar" style="display:none;"><button class="quiz-next-btn" onclick="triggerQuizNext()">Tiếp tục ➔ <span class="next-countdown-badge"></span></button></div>
     </div>
 
     <div class="quiz-box" id="sentenceQuizArea">
@@ -266058,6 +266107,7 @@ window.databaseB1["✍️ B1 Use of English: Word Formation"] = [
         <button class="audio-btn" style="margin: 0 auto 12px auto;" onclick="speakText(null, currentCardList[currentIndex].example)">🔊</button>
         <div class="quiz-options" id="sentenceQuizOptions"></div>
         <div class="sentence-translation" id="sentenceTranslation">👉 <span></span></div>
+        <div class="quiz-next-bar" id="sentenceQuizNextBar" style="display:none;"><button class="quiz-next-btn" onclick="triggerQuizNext()">Tiếp tục ➔ <span class="next-countdown-badge"></span></button></div>
     </div>
 
     <div class="quiz-box" id="listeningArea">
@@ -266073,6 +266123,7 @@ window.databaseB1["✍️ B1 Use of English: Word Formation"] = [
         <button class="audio-btn" style="width:60px; height:60px; font-size:1.8rem; margin: 10px auto 20px auto;" onclick="playListeningAudio()">🔊</button>
         <div class="quiz-options" id="listeningOptions"></div>
         <div class="sentence-translation" id="listeningTranslation" style="display:none;">👉 <span></span></div>
+        <div class="quiz-next-bar" id="listeningNextBar" style="display:none;"><button class="quiz-next-btn" onclick="triggerQuizNext()">Tiếp tục ➔ <span class="next-countdown-badge"></span></button></div>
     </div>
 
     <div class="quiz-box" id="readingWritingArea">
@@ -266092,6 +266143,7 @@ window.databaseB1["✍️ B1 Use of English: Word Formation"] = [
             <button class="submit-btn" onclick="checkWritingAnswer()">Gửi Bài Viết</button>
         </div>
         <div class="sentence-translation" id="rwExplanation">👉 <span></span></div>
+        <div class="quiz-next-bar" id="rwNextBar" style="display:none;"><button class="quiz-next-btn" onclick="triggerQuizNext()">Tiếp tục ➔ <span class="next-countdown-badge"></span></button></div>
     </div>
 
     <div class="quiz-box" id="speakingArea">
@@ -266123,6 +266175,7 @@ window.databaseB1["✍️ B1 Use of English: Word Formation"] = [
         </div>
 
         <div class="sentence-translation" id="speakingResult" style="display:block; min-height:40px;">Bấm Micro 🎤 và đọc phát âm từ tiếng Anh trên</div>
+        <div class="quiz-next-bar" id="speakingNextBar" style="display:none;"><button class="quiz-next-btn" onclick="triggerQuizNext()">Tiếp tục ➔ <span class="next-countdown-badge"></span></button></div>
     </div>
 
     <div class="quiz-box" id="mockExamArea">
@@ -266164,6 +266217,7 @@ window.databaseB1["✍️ B1 Use of English: Word Formation"] = [
 
         <button class="submit-btn" id="startMockBtn" style="margin: 16px auto 0 auto; display: block; max-width: 340px;" onclick="startMockExamNextTask()">🚀 Bắt Đầu Thi Thử (15 Câu Ngẫu Nhiên)</button>
         <div class="sentence-translation" id="mockExamResult" style="display:none; margin-top:10px;">👉 <span></span></div>
+        <div class="quiz-next-bar" id="mockExamNextBar" style="display:none;"><button class="quiz-next-btn" onclick="triggerQuizNext()">Tiếp tục ➔ <span class="next-countdown-badge"></span></button></div>
     </div>
 
     <div class="progress-wrapper">
@@ -284239,6 +284293,29 @@ vocabularyData["📚 Cấu Trúc Ngữ Pháp Flyers"] = [
 
 <script>
 
+// ============================================================
+// ⏱️ QUIZ TIMEOUT CONFIG — Điều chỉnh thời gian tại đây
+// ============================================================
+const QUIZ_TIMEOUT_CONFIG = {
+    // --- Thời gian đếm ngược cho từng loại bài luyện (giây) ---
+    wordQuiz:        10,   // 📝 Từ Vựng        — chọn nghĩa tiếng Việt
+    sentenceQuiz:    12,   // 📝 Ngữ Pháp        — điền từ vào câu
+    listening:       12,   // 🎧 Luyện Nghe      — nghe và chọn từ
+    readingWriting:  15,   // 📖 Đọc & Viết      — điền từ / chọn đáp án
+    speaking:        12,   // 🗣️ Luyện Nói        — nhận diện giọng nói
+
+    // --- Thời gian đếm ngược cho từng phần thi thử (giây) ---
+    mockListening:       30,  // 🏆 Thi Thử — Phần 1: Listening
+    mockReadingWriting:  45,  // 🏆 Thi Thử — Phần 2: Reading & Writing
+    mockSpeaking:        30,  // 🏆 Thi Thử — Phần 3: Speaking
+
+    // --- Thời gian hiển thị kết quả rồi chuyển câu tiếp (giây) ---
+    nextCorrect:        3.5,  // ✅ Trả lời đúng   — chuyển nhanh
+    nextWrongHighLevel: 7,    // ❌ Sai / B1·B2·IELTS — đọc giải thích
+    nextWrongLowLevel:  6,    // ❌ Sai / Pre-A1·A1·A2 — đọc giải thích
+};
+// ============================================================
+
 const readingWritingData = [
     { type: "Part 1: Definitions", isWriting: false, question: "This person writes articles for newspapers or magazines.", options: ["A journalist", "An engineer", "A photographer"], answer: "A journalist", explanation: "Nhà báo (A journalist) là người viết bài cho báo hoặc tạp chí." },
     { type: "Part 1: Definitions", isWriting: false, question: "This vehicle is used to take sick people to hospital very fast.", options: ["An ambulance", "A rocket", "A taxi"], answer: "An ambulance", explanation: "Xe cấp cứu (An ambulance) được dùng để đưa người ốm đến bệnh viện nhanh nhất." },
@@ -284273,6 +284350,76 @@ let speakingScore = parseInt(localStorage.getItem('flyers_s_score')) || 0;
 let timerInterval = null;
 let activeQuizTimeout = null;
 let currentTTSAudio = null;
+let quizNextAction = null;
+let quizNextTimeout = null;
+let quizNextInterval = null;
+
+function cancelQuizNextStep() {
+    if (quizNextTimeout) {
+        clearTimeout(quizNextTimeout);
+        quizNextTimeout = null;
+    }
+    if (quizNextInterval) {
+        clearInterval(quizNextInterval);
+        quizNextInterval = null;
+    }
+    quizNextAction = null;
+    const allNextBars = document.querySelectorAll('.quiz-next-bar');
+    allNextBars.forEach(bar => {
+        if (bar) bar.style.display = 'none';
+    });
+}
+
+function triggerQuizNext() {
+    if (typeof quizNextAction === 'function') {
+        const action = quizNextAction;
+        cancelQuizNextStep();
+        action();
+    }
+}
+
+function scheduleQuizNext(nextCallback, isCorrect, nextBarId) {
+    cancelQuizNextStep();
+    if (typeof nextCallback !== 'function') return;
+
+    // Smart duration based on correctness and CEFR level
+    const isHighLevel = (typeof currentCEFRLevel !== 'undefined') &&
+        (currentCEFRLevel === 'B1' || currentCEFRLevel === 'B2' || currentCEFRLevel === 'IELTS');
+    
+    // Use config values for next-step delay
+    let totalSeconds = isCorrect
+        ? QUIZ_TIMEOUT_CONFIG.nextCorrect
+        : (isHighLevel ? QUIZ_TIMEOUT_CONFIG.nextWrongHighLevel : QUIZ_TIMEOUT_CONFIG.nextWrongLowLevel);
+    let remaining = Math.ceil(totalSeconds);
+
+    quizNextAction = nextCallback;
+
+    // Show the Next Bar with live countdown badge
+    const nextBar = document.getElementById(nextBarId);
+    if (nextBar) {
+        nextBar.style.display = 'block';
+        const badge = nextBar.querySelector('.next-countdown-badge');
+        if (badge) badge.innerText = `${remaining}s`;
+    }
+
+    quizNextInterval = setInterval(() => {
+        remaining--;
+        if (nextBar) {
+            const badge = nextBar.querySelector('.next-countdown-badge');
+            if (badge) badge.innerText = `${Math.max(remaining, 1)}s`;
+        }
+        if (remaining <= 0) {
+            if (quizNextInterval) {
+                clearInterval(quizNextInterval);
+                quizNextInterval = null;
+            }
+        }
+    }, 1000);
+
+    quizNextTimeout = setTimeout(() => {
+        triggerQuizNext();
+    }, Math.round(totalSeconds * 1000));
+}
 
 function stopAllQuizTimers() {
     if (timerInterval) {
@@ -284283,11 +284430,23 @@ function stopAllQuizTimers() {
         clearTimeout(activeQuizTimeout);
         activeQuizTimeout = null;
     }
+    cancelQuizNextStep();
     if (typeof mockMicWatchdog !== 'undefined' && mockMicWatchdog) {
         clearTimeout(mockMicWatchdog);
         mockMicWatchdog = null;
     }
 }
+
+// Phím tắt bàn phím: Space hoặc Enter để qua câu tiếp theo ngay lập tức khi bảng kết quả đang hiện
+document.addEventListener('keydown', (e) => {
+    if ((e.code === 'Space' || e.code === 'Enter') && quizNextAction) {
+        const activeEl = document.activeElement;
+        const tag = activeEl ? activeEl.tagName.toLowerCase() : '';
+        if (tag === 'input' || tag === 'textarea') return;
+        e.preventDefault();
+        triggerQuizNext();
+    }
+});
 
 // Mobile Backgrounding & Page Visibility listeners to halt timers when leaving tab/app
 document.addEventListener('visibilitychange', () => {
@@ -286344,6 +286503,22 @@ function startTimer(seconds, textId, progressId, onTimeout) {
     }, 1000);
 }
 
+// Helper: strip embedded English tech terms from vi translation (for CNTT Word Quiz display clarity)
+function cleanViForQuiz(viText) {
+    if (!viText) return viText;
+    const vietChars = 'àáảãạăắặằẳẵâầấẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđÀÁẢÃẠĂẮẶẰẲẴÂẦẤẨẪẬÈÉẺẼẸÊỀẾỂỄỆÌÍỈĨỊÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰỲÝỶỸỴĐ';
+    const hasViet = s => s && Array.from(s).some(c => vietChars.includes(c));
+    const m = viText.trim().match(/^([^()]+)\((.+)\)(.*)$/);
+    if (m) {
+        const before = m[1].trim(), inside = m[2].trim(), after = m[3].trim();
+        // Case: 'EnglishTerm (Nghĩa tiếng Việt)' → return Vietnamese
+        if (!hasViet(before) && hasViet(inside)) return (inside + (after ? ' ' + after : '')).trim();
+        // Case: 'Nghĩa tiếng Việt (EnglishTerm)' → strip English
+        if (hasViet(before) && !hasViet(inside)) return before;
+    }
+    return viText;
+}
+
 function startWordQuiz() {
     stopAllQuizTimers();
     if (currentMode !== 'wordQuiz') return;
@@ -286357,18 +286532,27 @@ function startWordQuiz() {
     const optionsContainer = document.getElementById('wordQuizOptions');
     optionsContainer.innerHTML = '';
 
-    let choices = [item.vi];
+    // Use cleaned vi to avoid English/Vietnamese mixing in answer options
+    const correctDisplay = cleanViForQuiz(item.vi);
+
+    let choices = [correctDisplay];
     if (currentCardList.length >= 3) {
         while (choices.length < 3) {
             let randomItem = currentCardList[Math.floor(Math.random() * currentCardList.length)];
-            if (randomItem && randomItem.vi && !choices.includes(randomItem.vi)) choices.push(randomItem.vi);
+            if (randomItem && randomItem.vi) {
+                let disp = cleanViForQuiz(randomItem.vi);
+                if (disp && !choices.includes(disp)) choices.push(disp);
+            }
         }
     } else {
         let allCategories = Object.keys(vocabularyData);
         while (choices.length < 3) {
             let randomCat = allCategories[Math.floor(Math.random() * allCategories.length)];
             let randomItem = vocabularyData[randomCat][Math.floor(Math.random() * vocabularyData[randomCat].length)];
-            if (randomItem && randomItem.vi && !choices.includes(randomItem.vi)) choices.push(randomItem.vi);
+            if (randomItem && randomItem.vi) {
+                let disp = cleanViForQuiz(randomItem.vi);
+                if (disp && !choices.includes(disp)) choices.push(disp);
+            }
         }
     }
     shuffleArray(choices);
@@ -286376,11 +286560,11 @@ function startWordQuiz() {
     choices.forEach(opt => {
         const btn = document.createElement('button');
         btn.className = 'option-btn'; btn.innerText = opt;
-        btn.onclick = () => checkWordAnswer(opt, item.vi, btn, item);
+        btn.onclick = () => checkWordAnswer(opt, correctDisplay, btn, item);
         optionsContainer.appendChild(btn);
     });
     updateProgress();
-    startTimer(10, 'wordTimerText', 'wordTimerProgress', () => checkWordAnswer(null, item.vi, null, item));
+    startTimer(QUIZ_TIMEOUT_CONFIG.wordQuiz, 'wordTimerText', 'wordTimerProgress', () => checkWordAnswer(null, correctDisplay, null, item));
 }
 
 function checkWordAnswer(selected, correct, btn, item) {
@@ -286399,7 +286583,8 @@ function checkWordAnswer(selected, correct, btn, item) {
         transBox.querySelector('span').innerText = `${item.en} (${item.phonetic}): ${item.vi}${item.example ? ' — ' + item.example : ''}`;
     }
 
-    if (selected === correct) {
+    let isCorrect = (selected === correct);
+    if (isCorrect) {
         playSound('correct'); 
         if (btn) btn.classList.add('correct');
         score += 10; streak++; correctAnswers++;
@@ -286417,12 +286602,12 @@ function checkWordAnswer(selected, correct, btn, item) {
         streak = 0; addWeakWord(item);
     }
     saveUserData(); updateStats();
-    activeQuizTimeout = setTimeout(() => {
+    scheduleQuizNext(() => {
         if (currentMode === 'wordQuiz') {
             currentIndex = (currentIndex + 1) % currentCardList.length;
             startWordQuiz();
         }
-    }, 2000);
+    }, isCorrect, 'wordQuizNextBar');
 }
 
 // Universal Helper Function for Sentence / Grammar Question & Options Generation across all 4 levels
@@ -286561,7 +286746,7 @@ function startSentenceQuiz() {
         optionsContainer.appendChild(btn);
     });
     updateProgress();
-    startTimer(12, 'sentenceTimerText', 'sentenceTimerProgress', () => checkSentenceAnswer(null, qData.answer, null));
+    startTimer(QUIZ_TIMEOUT_CONFIG.sentenceQuiz, 'sentenceTimerText', 'sentenceTimerProgress', () => checkSentenceAnswer(null, qData.answer, null));
 }
 
 function checkSentenceAnswer(selected, correct, btn) {
@@ -286602,12 +286787,12 @@ function checkSentenceAnswer(selected, correct, btn) {
         if (item) addWeakWord(item);
     }
     saveUserData(); updateStats();
-    activeQuizTimeout = setTimeout(() => {
+    scheduleQuizNext(() => {
         if (currentMode === 'sentenceQuiz') {
             currentIndex = (currentIndex + 1) % currentCardList.length;
             startSentenceQuiz();
         }
-    }, 2200);
+    }, isCorrect, 'sentenceQuizNextBar');
 }
 
 function handleListeningTimeout() {
@@ -286617,18 +286802,28 @@ function handleListeningTimeout() {
     playSound('timeout');
     const item = currentCardList[currentIndex];
     if (item) addWeakWord(item);
+
+    // Disable all option buttons and highlight correct answer
+    const optionsContainer = document.getElementById('listeningOptions');
+    if (optionsContainer) {
+        Array.from(optionsContainer.children).forEach(b => {
+            b.disabled = true;
+            if (b.innerText === item.en) b.classList.add('correct');
+        });
+    }
+
     const translationBox = document.getElementById('listeningTranslation');
     if (translationBox) {
         translationBox.style.display = 'block';
-        translationBox.querySelector('span').innerText = `${item.en} (${item.phonetic}): ${item.vi}${item.example ? ' — ' + item.example : ''}`;
+        translationBox.querySelector('span').innerText = `⏱️ Hết giờ! Đáp án đúng: ${item.en} (${item.phonetic}): ${item.vi}${item.example ? ' — ' + item.example : ''}`;
     }
     saveUserData(); updateStats();
-    activeQuizTimeout = setTimeout(() => {
+    scheduleQuizNext(() => {
         if (currentMode === 'listening') {
             currentIndex = (currentIndex + 1) % currentCardList.length;
             startListeningQuiz();
         }
-    }, 2200);
+    }, false, 'listeningNextBar');
 }
 
 function startListeningQuiz() {
@@ -286693,18 +286888,18 @@ function startListeningQuiz() {
             }
 
             saveUserData(); updateStats();
-            activeQuizTimeout = setTimeout(() => { 
+            scheduleQuizNext(() => { 
                 if (currentMode === 'listening') {
                     currentIndex = (currentIndex + 1) % currentCardList.length; 
                     startListeningQuiz(); 
                 }
-            }, 2200);
+            }, (opt === item.en), 'listeningNextBar');
         };
         optionsContainer.appendChild(btn);
     });
 
     playListeningAudio();
-    startTimer(12, 'listeningTimerText', 'listeningTimerProgress', handleListeningTimeout);
+    startTimer(QUIZ_TIMEOUT_CONFIG.listening, 'listeningTimerText', 'listeningTimerProgress', handleListeningTimeout);
 }
 
 function playListeningAudio() {
@@ -286762,7 +286957,7 @@ function startReadingWritingQuiz() {
     }
 
     updateProgress();
-    startTimer(15, 'rwTimerText', 'rwTimerProgress', () => {
+    startTimer(QUIZ_TIMEOUT_CONFIG.readingWriting, 'rwTimerText', 'rwTimerProgress', () => {
         checkReadingWritingAnswer(null, qData.answer, null, `Hết giờ! Đáp án đúng: "${qData.answer}" (${item.vi}).`);
     });
 }
@@ -286800,12 +286995,12 @@ function checkReadingWritingAnswer(selected, correct, btn, explanation) {
         if (trans) trans.querySelector('span').innerText = `❌ Đáp án đúng: "${correct}". ` + (explanation || "");
     }
     saveUserData(); updateStats();
-    activeQuizTimeout = setTimeout(() => {
+    scheduleQuizNext(() => {
         if (currentMode === 'readingWriting') {
             currentIndex = (currentIndex + 1) % currentCardList.length;
             startReadingWritingQuiz();
         }
-    }, 2200);
+    }, isCorrect, 'rwNextBar');
 }
 
 function checkWritingAnswer() {
@@ -286841,12 +287036,12 @@ function checkWritingAnswer() {
         if (trans) trans.querySelector('span').innerText = `❌ Đáp án đúng là: "${qData.answer}" (${item.phonetic || ''}) - Nghĩa: "${item.vi}". ${item.exampleVi || ''}`;
     }
     saveUserData(); updateStats();
-    activeQuizTimeout = setTimeout(() => {
+    scheduleQuizNext(() => {
         if (currentMode === 'readingWriting') {
             currentIndex = (currentIndex + 1) % currentCardList.length;
             startReadingWritingQuiz();
         }
-    }, 2200);
+    }, isCorrect, 'rwNextBar');
 }
 
 function startSpeakingQuiz() {
@@ -286863,7 +287058,7 @@ function startSpeakingQuiz() {
     document.getElementById('micBtn').classList.remove('listening');
     
     updateProgress();
-    startTimer(12, 'speakingTimerText', 'speakingTimerProgress', () => handleSpeakingTimeout());
+    startTimer(QUIZ_TIMEOUT_CONFIG.speaking, 'speakingTimerText', 'speakingTimerProgress', () => handleSpeakingTimeout());
 }
 
 function handleSpeakingTimeout() {
@@ -286882,12 +287077,12 @@ function handleSpeakingTimeout() {
     const resultBox = document.getElementById('speakingResult');
     if (resultBox) resultBox.innerText = `⏱️ Hết giờ! Đáp án phát âm chuẩn: "${item.en}" (${item.phonetic})`;
     saveUserData(); updateStats();
-    activeQuizTimeout = setTimeout(() => {
+    scheduleQuizNext(() => {
         if (currentMode === 'speaking') {
             currentIndex = (currentIndex + 1) % currentCardList.length;
             startSpeakingQuiz();
         }
-    }, 2000);
+    }, false, 'speakingNextBar');
 }
 
 
@@ -286937,25 +287132,37 @@ function submitMobileVoiceResult() {
         if (currentMode === 'mockExam') {
             if (mockMicWatchdog) clearTimeout(mockMicWatchdog);
             mockExamState.sCorrect++;
-            setTimeout(() => {
+            scheduleQuizNext(() => {
                 mockExamState.currentStep++;
                 startMockExamNextTask();
-            }, 1800);
+            }, true, 'mockExamNextBar');
         } else {
             totalAnswered++; score += 20; speakingScore += 5; correctAnswers++;
             let item = currentCardList[currentIndex];
             if (item) removeWeakWord(item);
             saveUserData(); updateStats();
-            setTimeout(() => {
+            scheduleQuizNext(() => {
                 currentIndex = (currentIndex + 1) % currentCardList.length;
                 startSpeakingQuiz();
-            }, 2000);
+            }, true, 'speakingNextBar');
         }
     } else {
         playSound('wrong');
         let item = currentCardList[currentIndex];
         if (item) addWeakWord(item);
         targetSpan.innerText = `❌ CHƯA ĐÚNG! Âm nghe được: "${cleanText}" | Đáp án chuẩn: "${targetWord}" (Độ khớp: ${matchPercentage}%)`;
+        if (currentMode === 'mockExam') {
+            if (mockMicWatchdog) clearTimeout(mockMicWatchdog);
+            scheduleQuizNext(() => {
+                mockExamState.currentStep++;
+                startMockExamNextTask();
+            }, false, 'mockExamNextBar');
+        } else {
+            scheduleQuizNext(() => {
+                currentIndex = (currentIndex + 1) % currentCardList.length;
+                startSpeakingQuiz();
+            }, false, 'speakingNextBar');
+        }
     }
 }
 
@@ -286997,14 +287204,18 @@ function startSpeechRecognition() {
                 totalAnswered++; score += 20; speakingScore += 5; correctAnswers++;
                 if (item) removeWeakWord(item);
                 saveUserData(); updateStats();
-                setTimeout(() => {
+                scheduleQuizNext(() => {
                     currentIndex = (currentIndex + 1) % currentCardList.length;
                     startSpeakingQuiz();
-                }, 2200);
+                }, true, 'speakingNextBar');
             } else {
                 playSound('wrong');
                 if (item) addWeakWord(item);
                 resultBox.innerText = `❌ CHƯA ĐÚNG! Âm nghe được: "${transcript}" | Đáp án chuẩn: "${targetWord}" (Độ khớp: ${matchScore}%)`;
+                scheduleQuizNext(() => {
+                    currentIndex = (currentIndex + 1) % currentCardList.length;
+                    startSpeakingQuiz();
+                }, false, 'speakingNextBar');
             }
         };
 
@@ -287041,7 +287252,7 @@ function resetMockExamUI() {
     const hideIds = [
         'mockTimerContainer', 'mockAudioBtn', 'mockWritingArea', 
         'mockMicBtn', 'mockSpeakingPhonetic', 'mockAndroidRecordBtnArea', 
-        'mockSpeakingInputArea', 'mockExamResult', 'startMockBtn'
+        'mockSpeakingInputArea', 'mockExamResult', 'startMockBtn', 'mockExamNextBar'
     ];
     hideIds.forEach(id => {
         const el = document.getElementById(id);
@@ -287238,7 +287449,7 @@ function startMockExamNextTask() {
         });
 
         playMockAudio();
-        startMockTimer(30);
+        startMockTimer(QUIZ_TIMEOUT_CONFIG.mockListening);
     } else if (q.section === 'readingWriting') {
         document.getElementById('mockExamImg').innerText = q.img || "📖";
         sectionHint.innerText = `[Thi Thử ${levelLabel} - Câu ${stepNum}/15 - Phần 2/3: Reading & Writing Test (5 Khiên)]`;
@@ -287261,7 +287472,7 @@ function startMockExamNextTask() {
             document.getElementById('mockWritingInput').focus();
         }
 
-        startMockTimer(45);
+        startMockTimer(QUIZ_TIMEOUT_CONFIG.mockReadingWriting);
     } else if (q.section === 'speaking') {
         document.getElementById('mockExamImg').innerText = q.img || "🗣️";
         sectionHint.innerText = `[Thi Thử ${levelLabel} - Câu ${stepNum}/15 - Phần 3/3: Speaking Test (5 Khiên)]`;
@@ -287275,22 +287486,35 @@ function startMockExamNextTask() {
         document.getElementById('mockSpeakingInputArea').style.display = 'flex';
         document.getElementById('mockSpeakingInput').value = '';
 
-        startMockTimer(30);
+        startMockTimer(QUIZ_TIMEOUT_CONFIG.mockListening);
     }
 }
 
 function startMockTimer(seconds) {
     startTimer(seconds, 'mockTimerText', 'mockTimerProgress', () => {
         playSound('timeout');
+        const q = mockExamState.questions[mockExamState.currentStep];
         const resultBox = document.getElementById('mockExamResult');
         if (resultBox) {
             resultBox.style.display = 'block';
-            resultBox.querySelector('span').innerText = "⏱️ Đã hết thời gian!";
+            resultBox.querySelector('span').innerText = `⏱️ Hết giờ! Đáp án đúng là: "${q ? (q.answer || q.target || '') : ''}";​`;
         }
-        setTimeout(() => {
+
+        // Highlight correct answer for multiple-choice sections
+        if (q && (q.section === 'listening' || (q.section === 'readingWriting' && !q.isWriting))) {
+            const allBtns = document.querySelectorAll('#mockExamOptions .option-btn');
+            allBtns.forEach(b => {
+                b.disabled = true;
+                if (b.innerText.trim().toLowerCase() === (q.answer || '').trim().toLowerCase()) {
+                    b.classList.add('correct');
+                }
+            });
+        }
+
+        scheduleQuizNext(() => {
             mockExamState.currentStep++;
             startMockExamNextTask();
-        }, 1500);
+        }, false, 'mockExamNextBar');
     });
 }
 
@@ -287310,7 +287534,8 @@ function submitMockListening(selectedOpt, btn) {
     const allBtns = document.querySelectorAll('#mockExamOptions .option-btn');
     allBtns.forEach(b => b.disabled = true);
 
-    if (selectedOpt.toLowerCase() === q.answer.toLowerCase()) {
+    let isCorrect = (selectedOpt.toLowerCase() === q.answer.toLowerCase());
+    if (isCorrect) {
         playSound('correct');
         if (btn) btn.classList.add('correct');
         mockExamState.lCorrect++;
@@ -287324,10 +287549,10 @@ function submitMockListening(selectedOpt, btn) {
         resultBox.querySelector('span').innerText = `❌ Chưa đúng! Đáp án đúng là: "${q.answer}"`;
     }
 
-    setTimeout(() => {
+    scheduleQuizNext(() => {
         mockExamState.currentStep++;
         startMockExamNextTask();
-    }, 1500);
+    }, isCorrect, 'mockExamNextBar');
 }
 
 function submitMockReading(selectedOpt, btn) {
@@ -287339,7 +287564,8 @@ function submitMockReading(selectedOpt, btn) {
     const allBtns = document.querySelectorAll('#mockExamOptions .option-btn');
     allBtns.forEach(b => b.disabled = true);
 
-    if (selectedOpt.toLowerCase() === q.answer.toLowerCase()) {
+    let isCorrect = (selectedOpt.toLowerCase() === q.answer.toLowerCase());
+    if (isCorrect) {
         playSound('correct');
         if (btn) btn.classList.add('correct');
         mockExamState.rCorrect++;
@@ -287353,10 +287579,10 @@ function submitMockReading(selectedOpt, btn) {
         resultBox.querySelector('span').innerText = `❌ Chưa đúng! Đáp án đúng là: "${q.answer}"`;
     }
 
-    setTimeout(() => {
+    scheduleQuizNext(() => {
         mockExamState.currentStep++;
         startMockExamNextTask();
-    }, 1500);
+    }, isCorrect, 'mockExamNextBar');
 }
 
 function submitMockWriting() {
@@ -287389,10 +287615,10 @@ function submitMockWriting() {
         resultBox.querySelector('span').innerText = userAns === "" ? `❌ Bạn chưa nhập câu trả lời! Đáp án đúng là: "${q.answer}"` : `❌ Chưa đúng! Đáp án đúng là: "${q.answer}"`;
     }
 
-    setTimeout(() => {
+    scheduleQuizNext(() => {
         mockExamState.currentStep++;
         startMockExamNextTask();
-    }, 1800);
+    }, isCorrect, 'mockExamNextBar');
 }
 
 function submitMockSpeakingText() {
@@ -287418,10 +287644,10 @@ function submitMockSpeakingText() {
         resultBox.querySelector('span').innerText = userAns === "" ? `❌ Bạn chưa nhập câu trả lời! Đáp án: "${target}"` : `❌ Chưa khớp! Nhận diện: "${userAns}". Đáp án: "${target}"`;
     }
 
-    setTimeout(() => {
+    scheduleQuizNext(() => {
         mockExamState.currentStep++;
         startMockExamNextTask();
-    }, 1500);
+    }, isCorrect, 'mockExamNextBar');
 }
 
 let mockMicWatchdog = null;

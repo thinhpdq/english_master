@@ -3,10 +3,14 @@ Release Notes
 ====================================================================================================
 
    * Build Branch:
-        release/github/20261018_1625_english_master_3_5_0
+        release/github/20261024_1315_english_master_3_5_1
 
    * Build Date:
-        2026-10-18 16:25
+        2026-10-24 13:15
 
    * Release Notes:
-        1) [CAMBRIDGE Keyword] Delete or replace the CAMBRIDGE keywords.
+        1) Cho phép mở rộng tra cứu từ trên tất cả các trình độ.
+        2) Cho phép cấu hình thời gian đếm ngược (Timeout).
+        3) Hướng dẫn cài đặt giọng đọc chất lượng cao trên iPhone / iPad.
+        4) Bổ sung phần Hướng Dẫn Kỹ Năng Thi. Tổ chức lại phần Bảng Kết Quả.
+        5) Sửa một số lỗi.

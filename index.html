@@ -133,6 +133,12 @@ h1 { color: #0284c7; font-size: 1.35rem; display: flex; align-items: center; jus
 .writing-input-area { width: 100%; display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
 .writing-textbox { width: 100%; height: 80px; padding: 10px; border-radius: 12px; border: 2px solid #38bdf8; font-size: 0.95rem; outline: none; resize: none; }
 .submit-btn { background-color: #0284c7; color: white; padding: 10px; border: none; border-radius: 12px; font-weight: bold; font-size: 0.9rem; cursor: pointer; }
+.voice-action-btn { transition: filter 0.15s, transform 0.12s, box-shadow 0.15s; }
+.voice-action-btn:hover { filter: brightness(1.14); transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,0,0,0.22); }
+.voice-action-btn:active { transform: scale(0.94) translateY(0px); filter: brightness(0.88); box-shadow: none; }
+.voice-row-item { transition: border-color 0.15s, background 0.15s, box-shadow 0.15s; }
+.voice-row-item:hover { box-shadow: 0 2px 10px rgba(139,92,246,0.18); border-color: #a78bfa !important; }
+.voice-row-item:active { background: #ede9fe !important; }
 canvas#confettiCanvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; }
 
 /* 🚀 Quiz Next Step Action Bar & Skip Button (Gọn gàng vừa khít nhãn) */
@@ -199,32 +205,34 @@ canvas#confettiCanvas { position: fixed; top: 0; left: 0; width: 100vw; height: 
     width: 100%;
     max-width: 420px;
     border-radius: 25px;
-    padding: 25px;
+    padding: clamp(14px, 4vw, 25px);
     text-align: center;
     position: relative;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     animation: slideUp 0.5s ease-out;
+    box-sizing: border-box;
 }
 @keyframes slideUp {
     from { transform: translateY(50px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
-.result-title { font-size: 1.6rem; color: #0284c7; font-weight: 800; margin-bottom: 5px; }
-.shield-display { font-size: 2.8rem; margin: 10px 0; letter-spacing: 2px; }
+.result-title { font-size: clamp(1rem, 4.5vw, 1.5rem); color: #0284c7; font-weight: 800; margin-bottom: 5px; word-break: break-word; line-height: 1.3; }
+.shield-display { font-size: clamp(1.6rem, 6vw, 2.8rem); margin: 10px 0; letter-spacing: 2px; word-break: break-word; }
 .stat-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
     margin-bottom: 15px;
 }
 .stat-box {
     background: #f0f9ff;
-    padding: 8px;
+    padding: clamp(5px, 2vw, 8px);
     border-radius: 12px;
     border: 1px solid #bae6fd;
+    min-width: 0;
 }
-.stat-label { font-size: 0.68rem; color: #64748b; text-transform: uppercase; font-weight: 700; }
-.stat-value { font-size: 1rem; font-weight: 800; color: #0369a1; }
+.stat-label { font-size: clamp(0.58rem, 1.8vw, 0.68rem); color: #64748b; text-transform: uppercase; font-weight: 700; word-break: break-word; }
+.stat-value { font-size: clamp(0.8rem, 2.8vw, 1rem); font-weight: 800; color: #0369a1; word-break: break-word; }
 
 /* Certificate Styles */
 .certificate {
@@ -258,6 +266,49 @@ header h1 { font-family: 'Outfit', sans-serif; font-size: 1.7rem; color: #0284c7
 .filter-chip { background: #ffffff; border: 2px solid #7dd3fc; color: #0369a1; padding: 6px 14px; border-radius: 18px; font-size: 0.78rem; font-weight: 800; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
 .filter-chip.active, .filter-chip:hover { background: #0284c7; color: #ffffff; border-color: #0284c7; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
 
+/* SEARCH ALL LEVELS CHECKBOX */
+/* Search-all pill toggle — centered */
+.search-all-row { display: flex; align-items: center; justify-content: center; width: 100%; margin: 4px 0 2px 0; }
+.search-all-label {
+    display: inline-flex; align-items: center; gap: 7px; cursor: pointer; user-select: none;
+    font-size: 0.76rem; font-weight: 700; color: #64748b;
+    background: #f1f5f9; border: 1.5px solid #cbd5e1; border-radius: 20px;
+    padding: 5px 14px; transition: all 0.2s;
+}
+.search-all-label:hover { background: #fff7ed; border-color: #fdba74; color: #ea580c; }
+.search-all-label.is-active {
+    background: linear-gradient(90deg, #f59e0b 0%, #ea580c 100%);
+    border-color: transparent; color: #fff;
+    box-shadow: 0 3px 10px rgba(234,88,12,0.35);
+}
+/* Toggle switch bên trong pill */
+.search-all-label input[type="checkbox"] {
+    appearance: none; -webkit-appearance: none;
+    width: 28px; height: 16px; border-radius: 8px;
+    background: #cbd5e1; border: none; cursor: pointer;
+    position: relative; flex-shrink: 0; transition: background 0.2s;
+}
+.search-all-label input[type="checkbox"]::after {
+    content: ""; position: absolute; top: 2px; left: 2px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #fff; transition: transform 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.search-all-label input[type="checkbox"]:checked { background: rgba(255,255,255,0.35); }
+.search-all-label input[type="checkbox"]:checked::after { transform: translateX(12px); }
+.search-all-label.is-active input[type="checkbox"] { background: rgba(255,255,255,0.3); }
+
+/* LEVEL BADGE trên kết quả search-all */
+.search-level-badge { display: inline-block; font-size: 0.62rem; font-weight: 800; padding: 1px 6px; border-radius: 8px; margin-left: 5px; vertical-align: middle; color: #fff; background: #64748b; letter-spacing: 0.3px; }
+.badge-PreA1 { background: #7c3aed !important; }
+.badge-A1   { background: #0891b2 !important; }
+.badge-A2   { background: #0284c7 !important; }
+.badge-B1   { background: #1d4ed8 !important; }
+.badge-B2   { background: #dc2626 !important; }
+.badge-IELTS{ background: #4f46e5 !important; }
+.badge-Daily{ background: #ea580c !important; }
+.badge-IT   { background: #0d9488 !important; }
+
 /* Category buttons & Smart Collapsible Container */
 .categories-wrapper { width: 100%; max-width: 820px; margin: 0 auto 12px auto; display: flex; flex-direction: column; align-items: center; }
 .categories { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; max-width: 820px; max-height: 68px; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1); padding: 1px 2px; }
@@ -270,6 +321,69 @@ header h1 { font-family: 'Outfit', sans-serif; font-size: 1.7rem; color: #0284c7
 /* Quiz box & Flashcard Cards */
 .flashcard { border-radius: 24px; box-shadow: 0 10px 30px rgba(2, 132, 199, 0.12); }
 .card-front { background: #ffffff; border: 3px solid #7dd3fc; color: #0f172a; }
+/* ── TIMEOUT CONFIG MODAL ── */
+.tc-field { display: flex; flex-direction: column; gap: 4px; }
+.tc-label { font-size: 0.72rem; font-weight: 700; color: #475569; white-space: nowrap; text-align: center; width: 100%; }
+.tc-input-row { display: flex; align-items: center; gap: 3px; width: 100%; }
+.tc-input {
+    width: 44px; min-width: 36px; flex: 1; text-align: center;
+    font-size: 0.88rem; font-weight: 800;
+    border: 2px solid #bfdbfe; border-radius: 8px; padding: 5px 2px;
+    color: #1e3a5f; background: #eff6ff; outline: none;
+    -moz-appearance: textfield;
+}
+.tc-input::-webkit-inner-spin-button,
+.tc-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.tc-input:focus { border-color: #0369a1; box-shadow: 0 0 0 3px rgba(3,105,161,0.15); }
+.tc-step {
+    width: 24px; height: 26px; min-width: 22px; border-radius: 7px; border: none;
+    background: #dbeafe; color: #1e40af; font-size: 0.95rem; font-weight: 800;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s; flex-shrink: 0;
+}
+.tc-step:hover { background: #bfdbfe; }
+.tc-step:active { background: #93c5fd; }
+/* ── TIMEOUT CONFIG — Zone Cards ── */
+.tc-zone {
+    border-radius: 12px; margin-bottom: 12px; overflow: hidden;
+    border: 1.5px solid transparent;
+}
+.tc-zone-header {
+    display: flex; align-items: center; gap: 7px;
+    padding: 8px 12px; font-size: 0.78rem; font-weight: 800;
+    letter-spacing: 0.3px; color: #fff;
+}
+.tc-zone-icon { font-size: 1rem; }
+.tc-zone-unit {
+    margin-left: auto; font-size: 0.65rem; font-weight: 700;
+    opacity: 0.85; background: rgba(255,255,255,0.2);
+    padding: 2px 7px; border-radius: 8px;
+}
+.tc-zone-grid { display: grid; gap: 8px; padding: 12px 10px 14px 10px; }
+/* Mặc định 3 cột — items tự co nhỏ vừa cột (minmax(0,1fr)) */
+.tc-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tc-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+/* Màn hình rất nhỏ (<340px): xuống 2 cột */
+@media (max-width: 340px) {
+    .tc-grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Zone 1 — Luyện Tập: Navy Blue */
+.tc-zone-practice { border-color: #bfdbfe; background: #f0f7ff; }
+.tc-zone-practice .tc-zone-header { background: linear-gradient(90deg, #0369a1, #1e40af); }
+
+/* Zone 2 — Thi Thử: Indigo-Violet */
+.tc-zone-mock { border-color: #c7d2fe; background: #f5f3ff; }
+.tc-zone-mock .tc-zone-header { background: linear-gradient(90deg, #4f46e5, #7c3aed); }
+
+/* Zone 3 — Chuyển câu: Teal-Green */
+.tc-zone-next { border-color: #99f6e4; background: #f0fdfa; }
+.tc-zone-next .tc-zone-header { background: linear-gradient(90deg, #0d9488, #059669); }
+
+
+
+/* SEARCH-ALL LEVEL BADGE trên thẻ học */
+#searchLevelBadge { position: absolute; top: 8px; right: 10px; font-size: 0.6rem; font-weight: 800; padding: 2px 8px 3px 8px; border-radius: 10px; color: #fff; background: #64748b; letter-spacing: 0.4px; display: none; z-index: 2; box-shadow: 0 2px 6px rgba(0,0,0,0.18); }
 .card-back { background: #fef9c3; color: #713f12; border: 3px solid #fde047; }
 .quiz-box { background: #ffffff !important; border: 3px solid #7dd3fc !important; color: #0f172a !important; border-radius: 24px !important; box-shadow: 0 10px 30px rgba(2, 132, 199, 0.12) !important; }
 .quiz-question { color: #0284c7 !important; font-family: 'Outfit', sans-serif !important; }
@@ -265917,7 +266031,7 @@ window.databaseB1["✍️ B1 Use of English: Word Formation"] = [
 <header>
     <h1 style="margin:0; font-size:1.6rem; font-weight:800; color:#0f172a; display:flex; align-items:center; gap:8px;">
         🎓 English Master
-        <span style="background: linear-gradient(135deg, #0284c7, #2563eb); color: #ffffff; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.5px; box-shadow: 0 2px 6px rgba(2,132,199,0.25);">3.5.0</span>
+        <span style="background: linear-gradient(135deg, #0284c7, #2563eb); color: #ffffff; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.5px; box-shadow: 0 2px 6px rgba(2,132,199,0.25);">3.5.1</span>
     </h1>
     <div class="subtitle">Tích hợp Nghe, Nói, Đọc, Viết với 15,000+ từ vựng chuẩn CEFR quốc tế & IELTS Academic</div>
 </header>
@@ -266014,7 +266128,14 @@ window.databaseB1["✍️ B1 Use of English: Word Formation"] = [
     </div>
 
     <div class="search-filter-container">
-    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Tìm kiếm từ vựng & cấu trúc Anh/Việt..." oninput="handleSearch(this.value)">
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Tìm kiếm từ vựng & cấu trúc Anh/Việt..." oninput="debouncedSearch(this.value)">
+    <!-- SEARCH ALL LEVELS CHECKBOX -->
+    <div class="search-all-row">
+        <label class="search-all-label" id="searchAllLabel" title="Tìm kiếm trên tất cả trình độ: PreA1, A1, A2, B1, B2, IELTS, Giao Tiếp, CNTT">
+            <input type="checkbox" id="chkSearchAll" onchange="onSearchAllToggle()">
+            🌐 Tìm trên tất cả trình độ
+        </label>
+    </div>
     <div class="filter-chips">
         <button class="filter-chip active" id="chipAll" onclick="filterByTag('all')">📌 20 Chủ Đề (1,112 từ)</button>
         <button class="filter-chip" id="chipStar" onclick="filterByTag('favorite')">⭐ Yêu Thích (<span id="favCount">0</span>)</button>
@@ -266035,6 +266156,8 @@ window.databaseB1["✍️ B1 Use of English: Word Formation"] = [
             <div class="flashcard" id="card">
                 <div class="card-front">
                     <button class="star-btn" id="starBtn" onclick="toggleFavorite(event)" title="Lưu vào Từ Vựng Yêu Thích">⭐</button>
+                    <!-- Badge trình độ (chỉ hiện khi Search All bật) -->
+                    <span id="searchLevelBadge"></span>
                     <div class="card-image" id="imgFront">🚀</div>
                     <div>
                         <div class="word-en" id="textEn">---</div>
@@ -266073,6 +266196,7 @@ window.databaseB1["✍️ B1 Use of English: Word Formation"] = [
         <div style="display: flex; gap: 8px; margin-bottom: 8px; justify-content: center; flex-wrap: wrap;">
             <button class="tool-btn" onclick="shuffleCards()">🔀 Trộn bài</button>
             <button class="tool-btn" onclick="speakText(null, currentCardList[currentIndex].en)">🔁 Phát âm UK</button>
+            <button class="tool-btn" style="border-color:#0369a1; color:#0369a1;" onclick="showTimeoutConfigModal()">⏱️ Timeout</button>
             <button class="tool-btn" style="border-color:#dc2626; color:#dc2626;" onclick="resetStats()">🔄 Đặt lại điểm</button>
         </div>
     </div>
@@ -284338,14 +284462,15 @@ let currentIndex = 0;
 let isFlipped = false;
 let currentMode = 'card';
 
-let score = parseInt(localStorage.getItem('flyers_score')) || 0;
-let streak = parseInt(localStorage.getItem('flyers_streak')) || 0;
-let totalAnswered = parseInt(localStorage.getItem('flyers_total')) || 0;
-let correctAnswers = parseInt(localStorage.getItem('flyers_correct')) || 0;
+// Scores are per-level — loaded dynamically in switchCEFRLevel() / window.onload
+let score = 0;
+let streak = 0;
+let totalAnswered = 0;
+let correctAnswers = 0;
 
-let listeningScore = parseInt(localStorage.getItem('flyers_l_score')) || 0;
-let readingScore = parseInt(localStorage.getItem('flyers_r_score')) || 0;
-let speakingScore = parseInt(localStorage.getItem('flyers_s_score')) || 0;
+let listeningScore = 0;
+let readingScore = 0;
+let speakingScore = 0;
 
 let timerInterval = null;
 let activeQuizTimeout = null;
@@ -284967,54 +285092,81 @@ function updateStarButton() {
     }
 }
 
+// =====================================================
+// DEBOUNCE wrapper — tránh gọi liên tục khi gõ nhanh
+// =====================================================
+let _searchDebounceTimer = null;
+function debouncedSearch(query) {
+    clearTimeout(_searchDebounceTimer);
+    _searchDebounceTimer = setTimeout(() => handleSearch(query), 200);
+}
+
+// Khi toggle checkbox: re-run search với query hiện tại
+function onSearchAllToggle() {
+    const label = document.getElementById('searchAllLabel');
+    const chk   = document.getElementById('chkSearchAll');
+    if (label) label.classList.toggle('is-active', chk && chk.checked);
+    const q = document.getElementById('searchInput');
+    if (q) handleSearch(q.value);
+}
+
 function handleSearch(query) {
-    const rawQuery = query ? query.trim().toLowerCase() : '';
+    const rawQuery  = query ? query.trim().toLowerCase() : '';
+    const searchAll = document.getElementById('chkSearchAll')?.checked || false;
+
     if (!rawQuery) {
+        // Reset về danh sách category hiện tại
         currentCardList = [...vocabularyData[currentCategory]];
         currentIndex = 0;
         switchMode(currentMode);
         return;
     }
 
+    // Xác định danh sách database cần duyệt
+    const dbMap = searchAll ? {
+        'PreA1': (typeof databasePreA1 !== 'undefined' ? databasePreA1 : {}),
+        'A1':    (typeof databaseA1    !== 'undefined' ? databaseA1    : {}),
+        'A2':    (typeof databaseA2    !== 'undefined' ? databaseA2    : {}),
+        'B1':    (typeof databaseB1    !== 'undefined' ? databaseB1    : {}),
+        'B2':    (typeof databaseB2    !== 'undefined' ? databaseB2    : {}),
+        'IELTS': (typeof databaseIELTS !== 'undefined' ? databaseIELTS : {}),
+        'Daily': (typeof databaseDaily !== 'undefined' ? databaseDaily : {}),
+        'IT':    (typeof databaseIT    !== 'undefined' ? databaseIT    : {})
+    } : { [currentCEFRLevel]: vocabularyData };
+
     let results = [];
-    Object.keys(vocabularyData).forEach(cat => {
-        if (cat === "⭐ Từ Vựng Yêu Thích" || cat === "⚠️ Từ Cần Ôn Lại") return;
-        vocabularyData[cat].forEach(item => {
-            const enText = item.en ? item.en.toLowerCase().trim() : '';
-            const viText = item.vi ? item.vi.toLowerCase().trim() : '';
+    const seenEn = new Set(); // dedup toàn cục khi search-all
 
-            // Match strictly on English vocabulary word or Vietnamese translation (NO item.example matching)
-            const isEnMatch = enText.includes(rawQuery);
-            const isViMatch = viText.includes(rawQuery);
-
-            if (isEnMatch || isViMatch) {
-                if (!results.some(r => r.en.toLowerCase() === item.en.toLowerCase())) {
-                    results.push(item);
+    Object.entries(dbMap).forEach(([levelKey, db]) => {
+        if (!db || typeof db !== 'object') return;
+        Object.keys(db).forEach(cat => {
+            if (cat === "⭐ Từ Vựng Yêu Thích" || cat === "⚠️ Từ Cần Ôn Lại") return;
+            if (!Array.isArray(db[cat])) return;
+            db[cat].forEach(item => {
+                const enText = item.en ? item.en.toLowerCase().trim() : '';
+                const viText = item.vi ? item.vi.toLowerCase().trim() : '';
+                if ((enText.includes(rawQuery) || viText.includes(rawQuery)) && !seenEn.has(enText)) {
+                    seenEn.add(enText);
+                    // Gắn _level để hiển thị badge trình độ (chỉ khi search-all)
+                    results.push(searchAll ? { ...item, _level: levelKey } : item);
                 }
-            }
+            });
         });
     });
 
     // Intelligent Sorting:
-    // Priority 1: Exact Match (en or vi === rawQuery)
-    // Priority 2: Starts with rawQuery (en or vi startsWith rawQuery)
-    // Priority 3: Contains rawQuery
+    // Priority 1: Exact match | Priority 2: Starts with | Priority 3: Contains
     results.sort((a, b) => {
-        const aEn = a.en.toLowerCase();
-        const bEn = b.en.toLowerCase();
-        const aVi = a.vi.toLowerCase();
-        const bVi = b.vi.toLowerCase();
-
-        const aExact = (aEn === rawQuery || aVi === rawQuery);
-        const bExact = (bEn === rawQuery || bVi === rawQuery);
+        const aEn = a.en.toLowerCase(), bEn = b.en.toLowerCase();
+        const aVi = a.vi.toLowerCase(), bVi = b.vi.toLowerCase();
+        const aExact  = (aEn === rawQuery || aVi === rawQuery);
+        const bExact  = (bEn === rawQuery || bVi === rawQuery);
         if (aExact && !bExact) return -1;
         if (!aExact && bExact) return 1;
-
         const aStarts = (aEn.startsWith(rawQuery) || aVi.startsWith(rawQuery));
         const bStarts = (bEn.startsWith(rawQuery) || bVi.startsWith(rawQuery));
         if (aStarts && !bStarts) return -1;
         if (!aStarts && bStarts) return 1;
-
         return 0;
     });
 
@@ -285229,6 +285381,38 @@ function showExamInfoModal() {
 
             <button class="submit-btn" onclick="closeExamInfoModal()" style="width:100%; background:#4f46e5;">Đã Hiểu - Trở Lại Luyện Thi IELTS</button>
         `;
+    } else if (currentCEFRLevel === 'IT') {
+        htmlContent = `
+            <div class="result-title" style="text-align:center;">ℹ️ Hướng Dẫn Luyện Từ Vựng 💻 CNTT Chuyên Ngành</div>
+            <p style="font-size:0.85rem; color:#475569; margin-bottom:12px; text-align:center;">Kho 1,486 thuật ngữ CNTT chuyên ngành — luyện tập theo 5 chế độ tích hợp:</p>
+
+            <div style="background:#f0fdfa; padding:10px 14px; border-radius:14px; margin-bottom:10px; border-left:4px solid #0d9488;">
+                <div style="font-weight:800; color:#0d9488;">📝 1. Word Quiz — Nhận Diện Thuật Ngữ</div>
+                <div style="font-size:0.8rem; color:#334155; margin-top:2px;">Xem nghĩa tiếng Việt và chọn đúng tên kỹ thuật tiếng Anh. Rèn phản xạ nhận diện thuật ngữ chuyên ngành nhanh chóng.</div>
+            </div>
+
+            <div style="background:#f0fdf4; padding:10px 14px; border-radius:14px; margin-bottom:10px; border-left:4px solid #16a34a;">
+                <div style="font-weight:800; color:#16a34a;">🧩 2. Sentence Quiz — Điền Thuật Ngữ Vào Ngữ Cảnh</div>
+                <div style="font-size:0.8rem; color:#334155; margin-top:2px;">Đọc câu ví dụ kỹ thuật thực tế và điền đúng thuật ngữ còn thiếu. Giúp hiểu cách dùng từ trong tài liệu chuyên ngành.</div>
+            </div>
+
+            <div style="background:#f0f9ff; padding:10px 14px; border-radius:14px; margin-bottom:10px; border-left:4px solid #0284c7;">
+                <div style="font-weight:800; color:#0284c7;">🎧 3. Listening — Nghe & Nhận Diện Thuật Ngữ</div>
+                <div style="font-size:0.8rem; color:#334155; margin-top:2px;">Nghe phát âm chuẩn của thuật ngữ CNTT và chọn đúng từ được đọc. Luyện tai nghe kỹ thuật chuyên ngành.</div>
+            </div>
+
+            <div style="background:#fff7ed; padding:10px 14px; border-radius:14px; margin-bottom:10px; border-left:4px solid #f97316;">
+                <div style="font-weight:800; color:#c2410c;">✍️ 4. Reading & Writing — Đọc Hiểu Kỹ Thuật</div>
+                <div style="font-size:0.8rem; color:#334155; margin-top:2px;">Điền đúng thuật ngữ vào câu ví dụ kỹ thuật. Luyện kỹ năng đọc tài liệu công nghệ &amp; viết báo cáo chuyên ngành.</div>
+            </div>
+
+            <div style="background:#fef2f2; padding:10px 14px; border-radius:14px; margin-bottom:12px; border-left:4px solid #ef4444;">
+                <div style="font-weight:800; color:#ef4444;">🗣️ 5. Speaking — Phát Âm Thuật Ngữ Kỹ Thuật</div>
+                <div style="font-size:0.8rem; color:#334155; margin-top:2px;">Phát âm trực tiếp thuật ngữ CNTT vào Micro để luyện khẩu hình chuẩn xác — thiết yếu cho thuyết trình &amp; phỏng vấn IT.</div>
+            </div>
+
+            <button class="submit-btn" onclick="closeExamInfoModal()" style="width:100%; background:#0d9488;">Đã Hiểu - Trở Lại Luyện CNTT</button>
+        `;
     } else {
         htmlContent = `
             <div class="result-title" style="text-align:center;">ℹ️ Cấu Trúc Bài Thi A2 Flyers (CEFR)</div>
@@ -285250,10 +285434,8 @@ function showExamInfoModal() {
             </div>
 
             <div style="background:#fff7ed; padding:10px 14px; border-radius:14px; margin-bottom:12px; border-left:4px solid #f97316;">
-                <div style="font-weight:800; color:#c2410c;">💡 Mẹo Lưu Quyền Micro 100% trên PC & Mobile/Tablet:</div>
-                <div style="font-size:0.8rem; color:#431407; margin-top:2px;">
-                    Trình duyệt thường chặn hoặc hỏi lại Micro khi mở file cục bộ. Hãy chạy file <b>python3 start_server.py</b> và truy cập <b>http://localhost:8000</b> để trình duyệt nhớ quyền Micro vĩnh viễn và phát âm mượt mà 100%!
-                </div>
+                <div style="font-weight:800; color:#334155;">💡 Mẹo Luyện Thi A2 Flyers Thành Công:</div>
+                <div style="font-size:0.8rem; color:#475569; margin-top:2px;">Nắm vững 1,100+ từ vựng A2 Flyers &amp; các cấu trúc ngữ pháp thiết yếu (Present Perfect, Comparative/Superlative, Modal Verbs) kết hợp luyện tập thẻ học và bài thi thử mỗi ngày.</div>
             </div>
 
             <button class="submit-btn" onclick="closeExamInfoModal()" style="width:100%;">Đã Hiểu - Trở Lại Bài Học</button>
@@ -285354,7 +285536,13 @@ const cefrLevelConfig = {
 };
 
 function switchCEFRLevel(level) {
+    // Save old level scores before switching (skip on initial load: same level)
+    if (level !== currentCEFRLevel) saveUserData();
+
     currentCEFRLevel = level;
+
+    // Load per-level scores from localStorage
+    loadLevelScores(level);
     
     // 1. Update vocabulary dataset pointer
     if (level === 'Daily') vocabularyData = databaseDaily;
@@ -285406,6 +285594,7 @@ function switchCEFRLevel(level) {
 
     updateWeakCategory();
     updateFavoriteCategory();
+    updateStats(); // Cập nhật stat bar ngay khi chuyển trình độ (IELTS ↔ CEFR)
 
     const categories = Object.keys(vocabularyData);
     if (categories.length > 0) {
@@ -285588,6 +285777,25 @@ function loadCard() {
     document.getElementById('textGrammar').innerText = `[${item.grammar || 'Vocabulary'}]`;
     document.getElementById('textExample').innerText = item.example || "";
     document.getElementById('textExampleVi').innerText = item.exampleVi || "";
+
+    // Hiển thị badge trình độ nếu đang search-all và item có _level
+    const badgeEl = document.getElementById('searchLevelBadge');
+    if (badgeEl) {
+        const lv = item._level || '';
+        const lvLabels = {
+            'PreA1': 'Pre-A1', 'A1': 'A1 Movers', 'A2': 'A2 Flyers',
+            'B1': 'B1 PET', 'B2': 'B2 FCE', 'IELTS': 'IELTS',
+            'Daily': 'Giao Tiếp', 'IT': 'CNTT'
+        };
+        if (lv && document.getElementById('chkSearchAll')?.checked) {
+            badgeEl.innerText = lvLabels[lv] || lv;
+            badgeEl.className = `badge-${lv}`;
+            badgeEl.style.display = 'inline-block';
+        } else {
+            badgeEl.style.display = 'none';
+        }
+    }
+
     updateProgress();
     updateStarButton();
 }
@@ -285705,62 +285913,9 @@ function updateStarButton() {
     }
 }
 
-function handleSearch(query) {
-    const rawQuery = query ? query.trim().toLowerCase() : '';
-    if (!rawQuery) {
-        currentCardList = [...vocabularyData[currentCategory]];
-        currentIndex = 0;
-        switchMode(currentMode);
-        return;
-    }
-
-    let results = [];
-    Object.keys(vocabularyData).forEach(cat => {
-        if (cat === "⭐ Từ Vựng Yêu Thích" || cat === "⚠️ Từ Cần Ôn Lại") return;
-        vocabularyData[cat].forEach(item => {
-            const enText = item.en ? item.en.toLowerCase().trim() : '';
-            const viText = item.vi ? item.vi.toLowerCase().trim() : '';
-
-            // Match strictly on English vocabulary word or Vietnamese translation (NO item.example matching)
-            const isEnMatch = enText.includes(rawQuery);
-            const isViMatch = viText.includes(rawQuery);
-
-            if (isEnMatch || isViMatch) {
-                if (!results.some(r => r.en.toLowerCase() === item.en.toLowerCase())) {
-                    results.push(item);
-                }
-            }
-        });
-    });
-
-    // Intelligent Sorting:
-    // Priority 1: Exact Match (en or vi === rawQuery)
-    // Priority 2: Starts with rawQuery (en or vi startsWith rawQuery)
-    // Priority 3: Contains rawQuery
-    results.sort((a, b) => {
-        const aEn = a.en.toLowerCase();
-        const bEn = b.en.toLowerCase();
-        const aVi = a.vi.toLowerCase();
-        const bVi = b.vi.toLowerCase();
-
-        const aExact = (aEn === rawQuery || aVi === rawQuery);
-        const bExact = (bEn === rawQuery || bVi === rawQuery);
-        if (aExact && !bExact) return -1;
-        if (!aExact && bExact) return 1;
-
-        const aStarts = (aEn.startsWith(rawQuery) || aVi.startsWith(rawQuery));
-        const bStarts = (bEn.startsWith(rawQuery) || bVi.startsWith(rawQuery));
-        if (aStarts && !bStarts) return -1;
-        if (!aStarts && bStarts) return 1;
-
-        return 0;
-    });
-
-    currentCardList = results.length > 0 ? results : [...vocabularyData[currentCategory]];
-    currentIndex = 0;
-    switchMode(currentMode);
-}
-
+// handleSearch thứ 2 (alias — giữ đồng bộ với hàm trên)
+// Hàm này được định nghĩa lại ở trên, không cần duplicate.
+// Giữ lại comment để đánh dấu vùng code.
 function filterByTag(tag) {
     document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
     if (tag === 'all') {
@@ -285967,6 +286122,39 @@ function showExamInfoModal() {
 
             <button class="submit-btn" onclick="closeExamInfoModal()" style="width:100%; background:#4f46e5;">Đã Hiểu - Trở Lại Luyện Thi IELTS</button>
         `;
+    } else if (currentCEFRLevel === 'IT') {
+        htmlContent = `
+            <div class="result-title" style="text-align:center;">ℹ️ Hướng Dẫn Luyện Từ Vựng 💻 CNTT Chuyên Ngành</div>
+            <p style="font-size:0.85rem; color:#475569; margin-bottom:12px; text-align:center;">Kho 1,486 thuật ngữ CNTT chuyên ngành — luyện tập theo 5 chế độ tích hợp:</p>
+
+            <div style="background:#f0fdfa; padding:10px 14px; border-radius:14px; margin-bottom:10px; border-left:4px solid #0d9488;">
+                <div style="font-weight:800; color:#0d9488;">📝 1. Word Quiz — Nhận Diện Thuật Ngữ</div>
+                <div style="font-size:0.8rem; color:#334155; margin-top:2px;">Xem nghĩa tiếng Việt và chọn đúng tên kỹ thuật tiếng Anh. Rèn phản xạ nhận diện thuật ngữ chuyên ngành nhanh chóng.</div>
+            </div>
+
+            <div style="background:#f0fdf4; padding:10px 14px; border-radius:14px; margin-bottom:10px; border-left:4px solid #16a34a;">
+                <div style="font-weight:800; color:#16a34a;">🧩 2. Sentence Quiz — Điền Thuật Ngữ Vào Ngữ Cảnh</div>
+                <div style="font-size:0.8rem; color:#334155; margin-top:2px;">Đọc câu ví dụ kỹ thuật thực tế và điền đúng thuật ngữ còn thiếu. Giúp hiểu cách dùng từ trong tài liệu chuyên ngành.</div>
+            </div>
+
+            <div style="background:#f0f9ff; padding:10px 14px; border-radius:14px; margin-bottom:10px; border-left:4px solid #0284c7;">
+                <div style="font-weight:800; color:#0284c7;">🎧 3. Listening — Nghe & Nhận Diện Thuật Ngữ</div>
+                <div style="font-size:0.8rem; color:#334155; margin-top:2px;">Nghe phát âm chuẩn của thuật ngữ CNTT và chọn đúng từ được đọc. Luyện tai nghe kỹ thuật chuyên ngành.</div>
+            </div>
+
+            <div style="background:#fff7ed; padding:10px 14px; border-radius:14px; margin-bottom:10px; border-left:4px solid #f97316;">
+                <div style="font-weight:800; color:#c2410c;">✍️ 4. Reading & Writing — Đọc Hiểu Kỹ Thuật</div>
+                <div style="font-size:0.8rem; color:#334155; margin-top:2px;">Điền đúng thuật ngữ vào câu ví dụ kỹ thuật. Luyện kỹ năng đọc tài liệu công nghệ &amp; viết báo cáo chuyên ngành.</div>
+            </div>
+
+            <div style="background:#fef2f2; padding:10px 14px; border-radius:14px; margin-bottom:12px; border-left:4px solid #ef4444;">
+                <div style="font-weight:800; color:#ef4444;">🗣️ 5. Speaking — Phát Âm Thuật Ngữ Kỹ Thuật</div>
+                <div style="font-size:0.8rem; color:#334155; margin-top:2px;">Phát âm trực tiếp thuật ngữ CNTT vào Micro để luyện khẩu hình chuẩn xác — thiết yếu cho thuyết trình &amp; phỏng vấn IT.</div>
+            </div>
+
+            <button class="submit-btn" onclick="closeExamInfoModal()" style="width:100%; background:#0d9488;">Đã Hiểu - Trở Lại Luyện CNTT</button>
+        `;
+
     } else {
         htmlContent = `
             <div class="result-title" style="text-align:center;">ℹ️ Cấu Trúc Bài Thi A2 Flyers (CEFR)</div>
@@ -285988,10 +286176,8 @@ function showExamInfoModal() {
             </div>
 
             <div style="background:#fff7ed; padding:10px 14px; border-radius:14px; margin-bottom:12px; border-left:4px solid #f97316;">
-                <div style="font-weight:800; color:#c2410c;">💡 Mẹo Lưu Quyền Micro 100% trên PC & Mobile/Tablet:</div>
-                <div style="font-size:0.8rem; color:#431407; margin-top:2px;">
-                    Trình duyệt thường chặn hoặc hỏi lại Micro khi mở file cục bộ. Hãy chạy file <b>python3 start_server.py</b> và truy cập <b>http://localhost:8000</b> để trình duyệt nhớ quyền Micro vĩnh viễn và phát âm mượt mà 100%!
-                </div>
+                <div style="font-weight:800; color:#334155;">💡 Mẹo Luyện Thi A2 Flyers Thành Công:</div>
+                <div style="font-size:0.8rem; color:#475569; margin-top:2px;">Nắm vững 1,100+ từ vựng A2 Flyers &amp; các cấu trúc ngữ pháp thiết yếu (Present Perfect, Comparative/Superlative, Modal Verbs) kết hợp luyện tập thẻ học và bài thi thử mỗi ngày.</div>
             </div>
 
             <button class="submit-btn" onclick="closeExamInfoModal()" style="width:100%;">Đã Hiểu - Trở Lại Bài Học</button>
@@ -286208,7 +286394,7 @@ function renderVoiceList() {
     refreshHeader.style.cssText = `display:flex; align-items:center; justify-content:space-between; padding:8px 10px; margin-bottom:8px; background:#f8fafc; border-radius:10px; font-size:0.76rem; font-weight:600; color:#475569; border:1px solid #cbd5e1; gap:6px;`;
     refreshHeader.innerHTML = `
         <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">📱 Tìm thấy ${uniqueEnVoices.length} giọng đọc</span>
-        <button onclick="reloadSystemVoices(this)" style="background:#8b5cf6; color:#ffffff; border:none; padding:4px 8px; border-radius:6px; font-size:0.72rem; cursor:pointer; font-weight:700; flex-shrink:0; white-space:nowrap;">
+        <button onclick="reloadSystemVoices(this)" class="voice-action-btn" style="background:#8b5cf6; color:#ffffff; border:none; padding:4px 8px; border-radius:6px; font-size:0.72rem; cursor:pointer; font-weight:700; flex-shrink:0; white-space:nowrap;">
             🔄 Tải lại
         </button>
     `;
@@ -286217,6 +286403,7 @@ function renderVoiceList() {
     // Option 1: System Auto Default
     const isAutoChecked = (currentSaved === 'AUTO_SYSTEM');
     const autoDiv = document.createElement('div');
+    autoDiv.className = 'voice-row-item';
     autoDiv.style.cssText = `display:flex; align-items:center; justify-content:space-between; padding:8px 10px; border:2px solid ${isAutoChecked ? '#8b5cf6' : '#cbd5e1'}; border-radius:10px; background:${isAutoChecked ? '#f3e8ff' : '#ffffff'}; cursor:pointer; margin-bottom:6px; gap:6px;`;
     autoDiv.id = 'voice_row_AUTO_SYSTEM';
     autoDiv.onclick = () => selectVoiceRow('AUTO_SYSTEM');
@@ -286227,7 +286414,7 @@ function renderVoiceList() {
                 <span>🌐 Auto (System Default)</span>
             </div>
         </div>
-        <button onclick="previewVoice(event, 'AUTO_SYSTEM')" style="background:#8b5cf6; color:#ffffff; border:none; padding:5px 8px; border-radius:6px; font-size:0.72rem; font-weight:700; cursor:pointer; flex-shrink:0; white-space:nowrap;">
+        <button onclick="previewVoice(event, 'AUTO_SYSTEM')" class="voice-action-btn" style="background:#8b5cf6; color:#ffffff; border:none; padding:5px 8px; border-radius:6px; font-size:0.72rem; font-weight:700; cursor:pointer; flex-shrink:0; white-space:nowrap;">
             ▶️ Nghe thử
         </button>
     `;
@@ -286245,6 +286432,7 @@ function renderVoiceList() {
         else if (lang.includes('za')) badgeAccent = '🇿🇦 ZA';
 
         const row = document.createElement('div');
+        row.className = 'voice-row-item';
         row.style.cssText = `display:flex; align-items:center; justify-content:space-between; padding:8px 10px; border:2px solid ${isChecked ? '#8b5cf6' : '#e2e8f0'}; border-radius:10px; background:${isChecked ? '#f3e8ff' : '#ffffff'}; cursor:pointer; margin-top:4px; gap:6px;`;
         row.id = 'voice_row_' + idx;
         row.onclick = () => selectVoiceRow(v.name);
@@ -286259,7 +286447,7 @@ function renderVoiceList() {
                     <span style="font-size:0.72rem; flex-shrink:0;">${badgeAccent}</span>
                 </div>
             </div>
-            <button onclick="previewVoice(event, '${safeVoiceName}')" style="background:#8b5cf6; color:#ffffff; border:none; padding:5px 8px; border-radius:6px; font-size:0.72rem; font-weight:700; cursor:pointer; flex-shrink:0; white-space:nowrap;">
+            <button onclick="previewVoice(event, '${safeVoiceName}')" class="voice-action-btn" style="background:#8b5cf6; color:#ffffff; border:none; padding:5px 8px; border-radius:6px; font-size:0.72rem; font-weight:700; cursor:pointer; flex-shrink:0; white-space:nowrap;">
                 ▶️ Nghe thử
             </button>
         `;
@@ -286335,6 +286523,15 @@ function saveSelectedVoice() {
     
     // Speak immediate feedback in the newly saved offline voice
     speakText(null, "Voice setting updated successfully!");
+}
+
+function toggleIosTip() {
+    const body    = document.getElementById('iosTipBody');
+    const chevron = document.getElementById('iosTipChevron');
+    if (!body) return;
+    const isOpen  = body.style.display !== 'none';
+    body.style.display      = isOpen ? 'none' : 'block';
+    chevron.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
 }
 
 function stopSpeechAudio() {
@@ -287819,15 +288016,43 @@ function updateWeakCategory() {
 }
 
 function saveUserData() {
-    localStorage.setItem('flyers_score', score);
-    localStorage.setItem('flyers_streak', streak);
-    localStorage.setItem('flyers_total', totalAnswered);
-    localStorage.setItem('flyers_correct', correctAnswers);
-    localStorage.setItem('flyers_l_score', listeningScore);
-    localStorage.setItem('flyers_r_score', readingScore);
-    localStorage.setItem('flyers_s_score', speakingScore);
+    const pfx = `em_${currentCEFRLevel}_`;
+    localStorage.setItem(pfx + 'score',   score);
+    localStorage.setItem(pfx + 'streak',  streak);
+    localStorage.setItem(pfx + 'total',   totalAnswered);
+    localStorage.setItem(pfx + 'correct', correctAnswers);
+    localStorage.setItem(pfx + 'l_score', listeningScore);
+    localStorage.setItem(pfx + 'r_score', readingScore);
+    localStorage.setItem(pfx + 's_score', speakingScore);
     localStorage.setItem('flyers_weakWords', JSON.stringify(weakWords));
     localStorage.setItem('flyers_favoriteWords', JSON.stringify(favoriteWords));
+}
+
+// Load score variables from localStorage for a given level.
+// Migrates legacy flyers_ keys → em_PreA1_ on first run.
+function loadLevelScores(level) {
+    const pfx = `em_${level}_`;
+    const newKeyExists = localStorage.getItem(pfx + 'score') !== null;
+    const oldKeyExists = localStorage.getItem('flyers_score') !== null;
+
+    if (!newKeyExists && oldKeyExists && level === 'PreA1') {
+        // One-time migration: flyers_ → em_PreA1_
+        score          = parseInt(localStorage.getItem('flyers_score'))   || 0;
+        streak         = parseInt(localStorage.getItem('flyers_streak'))  || 0;
+        totalAnswered  = parseInt(localStorage.getItem('flyers_total'))   || 0;
+        correctAnswers = parseInt(localStorage.getItem('flyers_correct')) || 0;
+        listeningScore = parseInt(localStorage.getItem('flyers_l_score')) || 0;
+        readingScore   = parseInt(localStorage.getItem('flyers_r_score')) || 0;
+        speakingScore  = parseInt(localStorage.getItem('flyers_s_score')) || 0;
+    } else {
+        score          = parseInt(localStorage.getItem(pfx + 'score'))   || 0;
+        streak         = parseInt(localStorage.getItem(pfx + 'streak'))  || 0;
+        totalAnswered  = parseInt(localStorage.getItem(pfx + 'total'))   || 0;
+        correctAnswers = parseInt(localStorage.getItem(pfx + 'correct')) || 0;
+        listeningScore = parseInt(localStorage.getItem(pfx + 'l_score')) || 0;
+        readingScore   = parseInt(localStorage.getItem(pfx + 'r_score')) || 0;
+        speakingScore  = parseInt(localStorage.getItem(pfx + 's_score')) || 0;
+    }
 }
 
 function updateStats() {
@@ -287852,13 +288077,13 @@ function updateStats() {
         let rBand = convertSectionToIELTSBand(rShield);
         let sBand = convertSectionToIELTSBand(sShield);
 
-        if (statLabelEl) statLabelEl.innerText = "🎓 Band IELTS:";
-        if (shieldsVal) shieldsVal.innerText = `Band ${ieltsInfo.band}`;
+        if (statLabelEl) statLabelEl.innerText = "🎓 IELTS: ";
+        if (shieldsVal) shieldsVal.innerText = `Band ${ieltsInfo.band} / 9`;
         if (lShields) lShields.innerText = `Band ${lBand}`;
         if (rShields) rShields.innerText = `Band ${rBand}`;
         if (sShields) sShields.innerText = `Band ${sBand}`;
     } else {
-        if (statLabelEl) statLabelEl.innerText = "🛡️ Khiên:";
+        if (statLabelEl) statLabelEl.innerText = "🛡️ Khiên: ";
         if (shieldsVal) shieldsVal.innerText = `${totalShields}/15`;
         if (lShields) lShields.innerText = `${lShield}/5`;
         if (rShields) rShields.innerText = `${rShield}/5`;
@@ -287869,6 +288094,134 @@ function updateStats() {
     if (streakVal) streakVal.innerText = streak;
     if (accuracyVal) accuracyVal.innerText = `${acc}%`;
 }
+
+
+// ════════════════════════════════════════════════════════════════════
+// TIMEOUT CONFIG — GUI save/load/reset
+// ════════════════════════════════════════════════════════════════════
+
+// Default hardcoded values (không bao giờ thay đổi)
+const QUIZ_TIMEOUT_DEFAULTS = {
+    wordQuiz:            10,
+    sentenceQuiz:        12,
+    listening:           12,
+    readingWriting:      15,
+    speaking:            12,
+    mockListening:       30,
+    mockReadingWriting:  45,
+    mockSpeaking:        30,
+    nextCorrect:          5,
+    nextWrongHighLevel:   9,
+    nextWrongLowLevel:    8,
+};
+
+// Load saved config từ localStorage (nếu có), merge với default
+function loadTimeoutConfigFromStorage() {
+    try {
+        const saved = localStorage.getItem('em_timeout_config');
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            Object.keys(QUIZ_TIMEOUT_DEFAULTS).forEach(k => {
+                if (typeof parsed[k] === 'number' && parsed[k] >= 1) {
+                    QUIZ_TIMEOUT_CONFIG[k] = parsed[k];
+                }
+            });
+        }
+    } catch(e) {}
+}
+
+function showTimeoutConfigModal() {
+    // Sync UI inputs với giá trị QUIZ_TIMEOUT_CONFIG hiện tại
+    const map = {
+        cfgWordQuiz:       'wordQuiz',
+        cfgSentenceQuiz:   'sentenceQuiz',
+        cfgListening:      'listening',
+        cfgReadingWriting: 'readingWriting',
+        cfgSpeaking:       'speaking',
+        cfgMockListening:  'mockListening',
+        cfgMockRW:         'mockReadingWriting',
+        cfgMockSpeaking:   'mockSpeaking',
+        cfgNextCorrect:    'nextCorrect',
+        cfgNextWrongH:     'nextWrongHighLevel',
+        cfgNextWrongL:     'nextWrongLowLevel',
+    };
+    Object.entries(map).forEach(([inputId, key]) => {
+        const el = document.getElementById(inputId);
+        if (el) el.value = QUIZ_TIMEOUT_CONFIG[key];
+    });
+    const saveMsg = document.getElementById('timeoutSaveMsg');
+    if (saveMsg) saveMsg.style.display = 'none';
+    const modal = document.getElementById('timeoutConfigModal');
+    if (modal) modal.style.display = 'flex';
+}
+
+function closeTimeoutConfigModal() {
+    const modal = document.getElementById('timeoutConfigModal');
+    if (modal) modal.style.display = 'none';
+}
+
+function tcStep(inputId, delta) {
+    const el = document.getElementById(inputId);
+    if (!el) return;
+    const min = parseInt(el.min) || 1;
+    const max = parseInt(el.max) || 180;
+    el.value = Math.min(max, Math.max(min, (parseInt(el.value) || 0) + delta));
+}
+
+function saveTimeoutConfig() {
+    const map = {
+        cfgWordQuiz:       'wordQuiz',
+        cfgSentenceQuiz:   'sentenceQuiz',
+        cfgListening:      'listening',
+        cfgReadingWriting: 'readingWriting',
+        cfgSpeaking:       'speaking',
+        cfgMockListening:  'mockListening',
+        cfgMockRW:         'mockReadingWriting',
+        cfgMockSpeaking:   'mockSpeaking',
+        cfgNextCorrect:    'nextCorrect',
+        cfgNextWrongH:     'nextWrongHighLevel',
+        cfgNextWrongL:     'nextWrongLowLevel',
+    };
+    Object.entries(map).forEach(([inputId, key]) => {
+        const el = document.getElementById(inputId);
+        if (el) {
+            const val = parseInt(el.value);
+            if (!isNaN(val) && val >= 1) QUIZ_TIMEOUT_CONFIG[key] = val;
+        }
+    });
+    try {
+        localStorage.setItem('em_timeout_config', JSON.stringify(QUIZ_TIMEOUT_CONFIG));
+    } catch(e) {}
+
+    // Flash success message
+    const msg = document.getElementById('timeoutSaveMsg');
+    if (msg) {
+        msg.style.display = 'block';
+        setTimeout(() => { msg.style.display = 'none'; }, 2000);
+    }
+}
+
+function resetTimeoutConfig() {
+    // Reset QUIZ_TIMEOUT_CONFIG về default
+    Object.assign(QUIZ_TIMEOUT_CONFIG, QUIZ_TIMEOUT_DEFAULTS);
+    try { localStorage.removeItem('em_timeout_config'); } catch(e) {}
+    // Re-populate form
+    showTimeoutConfigModal();
+    const msg = document.getElementById('timeoutSaveMsg');
+    if (msg) {
+        msg.innerText = '↺ Đã khôi phục về mặc định!';
+        msg.style.color = '#0369a1';
+        msg.style.display = 'block';
+        setTimeout(() => {
+            msg.style.display = 'none';
+            msg.innerText = '✅ Đã lưu cấu hình!';
+            msg.style.color = '#059669';
+        }, 2000);
+    }
+}
+
+// Khởi tạo: load config từ localStorage ngay khi app load
+loadTimeoutConfigFromStorage();
 
 function resetStats() {
     const modal = document.getElementById('resetConfirmModal');
@@ -287890,13 +288243,20 @@ function executeResetStats() {
     listeningScore = 0; readingScore = 0; speakingScore = 0;
     weakWords = []; favoriteWords = [];
 
+    // Reset timeout config về default
+    if (typeof resetTimeoutConfig === 'function') resetTimeoutConfig();
+
     try {
-        localStorage.removeItem('flyers_score');
-        localStorage.removeItem('flyers_streak');
-        localStorage.removeItem('flyers_weakWords');
-        localStorage.removeItem('flyers_favoriteWords');
-        localStorage.removeItem('flyers_totalAnswered');
-        localStorage.removeItem('flyers_correctAnswers');
+        // Xóa dữ liệu riêng của level hiện tại
+        const pfx = `em_${currentCEFRLevel}_`;
+        ['score','streak','total','correct','l_score','r_score','s_score'].forEach(k =>
+            localStorage.removeItem(pfx + k));
+        // Xóa legacy keys (nếu còn)
+        ['flyers_score','flyers_streak','flyers_total','flyers_correct',
+         'flyers_l_score','flyers_r_score','flyers_s_score',
+         'flyers_weakWords','flyers_favoriteWords',
+         'flyers_totalAnswered','flyers_correctAnswers',
+         'em_timeout_config'].forEach(k => localStorage.removeItem(k));
     } catch(e) {}
 
     updateWeakCategory();
@@ -287944,19 +288304,33 @@ function showDashboard() {
         let rBand = convertSectionToIELTSBand(rShield);
         let sBand = convertSectionToIELTSBand(sShield);
 
-        if (dashTitle) dashTitle.innerText = `Báo Cáo Kết Quả Thi Thử ${levelLabel}`;
+        if (dashTitle) dashTitle.innerText = `📊 Kết Quả Thi Thử IELTS`;
+
+        // Rich band score badge thay cho emoji shields
+        if (shieldIconsEl) shieldIconsEl.innerHTML = `
+            <div style="display:inline-flex; flex-direction:column; align-items:center; background:linear-gradient(135deg,#1e40af,#0ea5e9); border-radius:18px; padding:14px 28px; margin:4px 0; box-shadow:0 4px 16px rgba(14,165,233,0.35);">
+                <div style="font-size:0.7rem; color:#bae6fd; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:2px;">🎓 IELTS ACADEMIC</div>
+                <div style="font-size:2.6rem; font-weight:900; color:#ffffff; line-height:1.1; letter-spacing:2px;">Band ${ieltsInfo.band}</div>
+                <div style="font-size:0.85rem; color:#e0f2fe; font-weight:700; margin-top:3px;">${ieltsInfo.title}</div>
+            </div>`;
+
+        // Stat boxes — ngắn gọn, không wrap
         if (totalShieldsLabelEl) totalShieldsLabelEl.innerText = "Overall Band";
-        if (totalShieldsEl) totalShieldsEl.innerText = `Band ${ieltsInfo.band} / 9.0`;
-        if (dashLShieldsEl) dashLShieldsEl.innerText = `Band ${lBand} (${lShield}/5 câu)`;
-        if (dashRShieldsEl) dashRShieldsEl.innerText = `Band ${rBand} (${rShield}/5 câu)`;
-        if (dashSShieldsEl) dashSShieldsEl.innerText = `Band ${sBand} (${sShield}/5 câu)`;
+        if (totalShieldsEl) totalShieldsEl.innerText = `${ieltsInfo.band} / 9.0`;
+        if (dashLShieldsEl) dashLShieldsEl.innerText = `${lShield}/5 → ${lBand}`;
+        if (dashRShieldsEl) dashRShieldsEl.innerText = `${rShield}/5 → ${rBand}`;
+        if (dashSShieldsEl) dashSShieldsEl.innerText = `${sShield}/5 → ${sBand}`;
 
-        if (shieldIconsEl) shieldIconsEl.innerText = `🎓 OVERALL BAND ${ieltsInfo.band} - ${ieltsInfo.title.toUpperCase()}`;
-
+        // Certificate — súc tích
         if (certBadgeIconEl) certBadgeIconEl.innerText = "🎓";
-        if (certHeaderTitleEl) certHeaderTitleEl.innerText = "IELTS ACADEMIC TEST REPORT FORM";
-        if (certTitleEl) certTitleEl.innerText = `PHÍẾU BÁO ĐIỂM CHÍNH THỨC - BẰNG CHỨNG NHẬN ĐẠT BAND ${ieltsInfo.band} IELTS ACADEMIC`;
-        if (certDetailEl) certDetailEl.innerText = `🎧 Listening: Band ${lBand} | 📖 Reading & Writing: Band ${rBand} | 🗣️ Speaking: Band ${sBand}`;
+        if (certHeaderTitleEl) certHeaderTitleEl.innerText = "IELTS ACADEMIC — SCORE REPORT";
+        if (certTitleEl) certTitleEl.innerText = `Band ${ieltsInfo.band} / 9.0 — ${ieltsInfo.title}`;
+        if (certDetailEl) certDetailEl.innerHTML = `
+            <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:4px;">
+                <span style="background:#fef3c7; border-radius:8px; padding:2px 8px;">🎧 <b>${lBand}</b></span>
+                <span style="background:#fef3c7; border-radius:8px; padding:2px 8px;">📖 <b>${rBand}</b></span>
+                <span style="background:#fef3c7; border-radius:8px; padding:2px 8px;">🗣️ <b>${sBand}</b></span>
+            </div>`;
 
         if (certBoxEl) certBoxEl.style.display = 'block';
         if (parseFloat(ieltsInfo.band) >= 6.0) triggerConfetti();
@@ -287968,15 +288342,16 @@ function showDashboard() {
         if (dashRShieldsEl) dashRShieldsEl.innerText = `${rShield} / 5 Khiên`;
         if (dashSShieldsEl) dashSShieldsEl.innerText = `${sShield} / 5 Khiên`;
 
+        // Restore plain emoji shields (no leftover HTML from IELTS)
         let shieldIcons = "";
         for (let i = 0; i < totalShields; i++) shieldIcons += "🛡️";
         if (totalShields === 0) shieldIcons = "🛡️ 0 Khiên";
-        if (shieldIconsEl) shieldIconsEl.innerText = shieldIcons;
+        if (shieldIconsEl) { shieldIconsEl.innerHTML = ''; shieldIconsEl.innerText = shieldIcons; }
 
         if (certBadgeIconEl) certBadgeIconEl.innerText = "👑";
         if (certHeaderTitleEl) certHeaderTitleEl.innerText = "ENGLISH MASTER — STATEMENT OF RESULTS";
         if (certTitleEl) certTitleEl.innerText = `BẰNG CHỨNG NHẬN ĐẠT 15 KHIÊN ${levelLabel.toUpperCase()}`;
-        if (certDetailEl) certDetailEl.innerText = `🎧 Listening: ${lShield}/5 Khiên | 📖 Reading & Writing: ${rShield}/5 Khiên | 🗣️ Speaking: ${sShield}/5 Khiên`;
+        if (certDetailEl) certDetailEl.innerText = `🎧 Listening: ${lShield}/5 | 📖 Reading & Writing: ${rShield}/5 | 🗣️ Speaking: ${sShield}/5`;
 
         if (certBoxEl) certBoxEl.style.display = 'block';
         if (totalShields >= 15) triggerConfetti();
@@ -288027,11 +288402,9 @@ window.onload = () => {
         </div>
 
         
-        <div style="background:#fff7ed; padding:10px 14px; border-radius:14px; margin-bottom:12px; border-left:4px solid #f97316;">
-            <div style="font-weight:800; color:#c2410c;">💡 Mẹo Lưu Quyền Micro 100% trên PC & Mobile/Tablet:</div>
-            <div style="font-size:0.8rem; color:#431407; margin-top:2px;">
-                Trình duyệt thường chặn hoặc hỏi lại Micro khi mở file cục bộ. Hãy chạy file <b>python3 start_server.py</b> và truy cập <b>http://localhost:8000</b> để trình duyệt nhớ quyền Micro vĩnh viễn và phát âm mượt mà 100%!
-            </div>
+        <div style="background:#f8fafc; padding:10px 14px; border-radius:14px; margin-bottom:12px; border-left:4px solid #64748b;">
+            <div style="font-weight:800; color:#334155;">💡 Mẹo Luyện Thi A2 Flyers Thành Công:</div>
+            <div style="font-size:0.8rem; color:#475569; margin-top:2px;">Nắm vững 1,100+ từ vựng A2 Flyers &amp; các cấu trúc ngữ pháp thiết yếu (Present Perfect, Comparative/Superlative, Modal Verbs) kết hợp luyện tập thẻ học và bài thi thử mỗi ngày.</div>
         </div>
 
 <button class="submit-btn" style="width:100%;" onclick="closeExamInfoModal()">Đã Rõ! Bắt Đầu Luyện Thi</button>
@@ -288052,6 +288425,152 @@ window.onload = () => {
     </div>
 </div>
 
+
+<!-- TIMEOUT CONFIG MODAL -->
+<div class="overlay" id="timeoutConfigModal" style="display:none; z-index:99999;">
+    <div class="result-card" style="max-width:490px; width:96%; text-align:left; padding:16px 12px 18px 12px; max-height:92vh; overflow-y:auto; box-shadow:0 20px 40px -5px rgba(0,0,0,0.35); border-radius:18px;">
+
+        <!-- HEADER -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; border-bottom:2px solid #e2e8f0; padding-bottom:11px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:1.4rem;">⏱️</span>
+                <div>
+                    <div class="result-title" style="color:#0369a1; font-size:1.05rem; margin:0; font-weight:800; line-height:1.2;">Cấu Hình Thời Gian Đếm Ngược</div>
+                </div>
+            </div>
+            <button onclick="closeTimeoutConfigModal()" style="background:none; border:none; font-size:1.3rem; color:#94a3b8; cursor:pointer; font-weight:800; padding:0 4px; line-height:1;">✕</button>
+        </div>
+
+        <!-- ZONE 1: LUYỆN TẬP -->
+        <div class="tc-zone tc-zone-practice">
+            <div class="tc-zone-header">
+                <span class="tc-zone-icon">📝</span>
+                <span>Chế Độ Luyện Tập</span>
+                <span class="tc-zone-unit">giây / câu</span>
+            </div>
+            <div id="timeoutConfigBody" class="tc-zone-grid tc-grid-3">
+                <div class="tc-field">
+                    <label class="tc-label">📝 Từ Vựng</label>
+                    <div class="tc-input-row">
+                        <button class="tc-step" onclick="tcStep('cfgWordQuiz',-1)">−</button>
+                        <input type="number" id="cfgWordQuiz" class="tc-input" min="3" max="120">
+                        <button class="tc-step" onclick="tcStep('cfgWordQuiz',1)">+</button>
+                    </div>
+                </div>
+                <div class="tc-field">
+                    <label class="tc-label">🧩 Ngữ Pháp</label>
+                    <div class="tc-input-row">
+                        <button class="tc-step" onclick="tcStep('cfgSentenceQuiz',-1)">−</button>
+                        <input type="number" id="cfgSentenceQuiz" class="tc-input" min="3" max="120">
+                        <button class="tc-step" onclick="tcStep('cfgSentenceQuiz',1)">+</button>
+                    </div>
+                </div>
+                <div class="tc-field">
+                    <label class="tc-label">🎧 Luyện Nghe</label>
+                    <div class="tc-input-row">
+                        <button class="tc-step" onclick="tcStep('cfgListening',-1)">−</button>
+                        <input type="number" id="cfgListening" class="tc-input" min="3" max="120">
+                        <button class="tc-step" onclick="tcStep('cfgListening',1)">+</button>
+                    </div>
+                </div>
+                <div class="tc-field">
+                    <label class="tc-label">✍️ Đọc &amp; Viết</label>
+                    <div class="tc-input-row">
+                        <button class="tc-step" onclick="tcStep('cfgReadingWriting',-1)">−</button>
+                        <input type="number" id="cfgReadingWriting" class="tc-input" min="3" max="120">
+                        <button class="tc-step" onclick="tcStep('cfgReadingWriting',1)">+</button>
+                    </div>
+                </div>
+                <div class="tc-field">
+                    <label class="tc-label">🗣️ Luyện Nói</label>
+                    <div class="tc-input-row">
+                        <button class="tc-step" onclick="tcStep('cfgSpeaking',-1)">−</button>
+                        <input type="number" id="cfgSpeaking" class="tc-input" min="3" max="120">
+                        <button class="tc-step" onclick="tcStep('cfgSpeaking',1)">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ZONE 2: THI THỬ -->
+        <div class="tc-zone tc-zone-mock">
+            <div class="tc-zone-header">
+                <span class="tc-zone-icon">🏆</span>
+                <span>Thi Thử</span>
+                <span class="tc-zone-unit">giây / câu</span>
+            </div>
+            <div class="tc-zone-grid tc-grid-3">
+                <div class="tc-field">
+                    <label class="tc-label">🎧 Thi Nghe</label>
+                    <div class="tc-input-row">
+                        <button class="tc-step" onclick="tcStep('cfgMockListening',-1)">−</button>
+                        <input type="number" id="cfgMockListening" class="tc-input" min="5" max="180">
+                        <button class="tc-step" onclick="tcStep('cfgMockListening',1)">+</button>
+                    </div>
+                </div>
+                <div class="tc-field">
+                    <label class="tc-label">✍️ Đọc &amp; Viết</label>
+                    <div class="tc-input-row">
+                        <button class="tc-step" onclick="tcStep('cfgMockRW',-1)">−</button>
+                        <input type="number" id="cfgMockRW" class="tc-input" min="5" max="180">
+                        <button class="tc-step" onclick="tcStep('cfgMockRW',1)">+</button>
+                    </div>
+                </div>
+                <div class="tc-field">
+                    <label class="tc-label">🗣️ Thi Nói</label>
+                    <div class="tc-input-row">
+                        <button class="tc-step" onclick="tcStep('cfgMockSpeaking',-1)">−</button>
+                        <input type="number" id="cfgMockSpeaking" class="tc-input" min="5" max="180">
+                        <button class="tc-step" onclick="tcStep('cfgMockSpeaking',1)">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ZONE 3: CHUYỂN CÂU TỰ ĐỘNG -->
+        <div class="tc-zone tc-zone-next">
+            <div class="tc-zone-header">
+                <span class="tc-zone-icon">⏭️</span>
+                <span>Chuyển Câu Tự Động Sau</span>
+                <span class="tc-zone-unit">giây</span>
+            </div>
+            <div class="tc-zone-grid tc-grid-3">
+                <div class="tc-field">
+                    <label class="tc-label">✅ Đúng</label>
+                    <div class="tc-input-row">
+                        <button class="tc-step" onclick="tcStep('cfgNextCorrect',-1)">−</button>
+                        <input type="number" id="cfgNextCorrect" class="tc-input" min="1" max="30">
+                        <button class="tc-step" onclick="tcStep('cfgNextCorrect',1)">+</button>
+                    </div>
+                </div>
+                <div class="tc-field">
+                    <label class="tc-label">❌ Sai (A2-)</label>
+                    <div class="tc-input-row">
+                        <button class="tc-step" onclick="tcStep('cfgNextWrongL',-1)">−</button>
+                        <input type="number" id="cfgNextWrongL" class="tc-input" min="1" max="30">
+                        <button class="tc-step" onclick="tcStep('cfgNextWrongL',1)">+</button>
+                    </div>
+                </div>
+                <div class="tc-field">
+                    <label class="tc-label">❌ Sai (B1+)</label>
+                    <div class="tc-input-row">
+                        <button class="tc-step" onclick="tcStep('cfgNextWrongH',-1)">−</button>
+                        <input type="number" id="cfgNextWrongH" class="tc-input" min="1" max="30">
+                        <button class="tc-step" onclick="tcStep('cfgNextWrongH',1)">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER ACTIONS -->
+        <div style="display:flex; gap:10px; justify-content:center; margin-top:4px;">
+            <button class="submit-btn" style="background:#0369a1; flex:1; max-width:160px;" onclick="saveTimeoutConfig()">💾 Lưu</button>
+            <button class="submit-btn" style="background:#1e40af; flex:1; max-width:160px;" onclick="resetTimeoutConfig()">↺ Về mặc định</button>
+            <button class="submit-btn" style="background:#94a3b8; flex:1; max-width:120px;" onclick="closeTimeoutConfigModal()">Đóng</button>
+        </div>
+        <div id="timeoutSaveMsg" style="display:none; text-align:center; color:#059669; font-weight:700; font-size:0.82rem; margin-top:10px;">✅ Đã lưu cấu hình!</div>
+    </div>
+</div>
 <!-- VOICE SETTINGS MODAL -->
 <div class="overlay" id="voiceSettingsModal" style="display:none; z-index:99999;">
     <div class="result-card" style="max-width:440px; width:92%; text-align:left; padding:18px 16px; max-height:85vh; overflow-y:auto; box-shadow:0 20px 25px -5px rgba(0,0,0,0.3); border-radius:16px;">
@@ -288061,8 +288580,116 @@ window.onload = () => {
         </div>
 
         <p style="color:#475569; font-size:0.8rem; margin-bottom:10px; line-height:1.35;">
-            Danh sách giọng đọc khả dụng trên thiết bị. Bạn có thể chọn giọng nói mong muốn và bấm <b>▶️ Nghe thử</b> để lưu lại.
+            Danh sách giọng đọc khả dụng trên thiết bị. Bạn có thể chọn giọng nói mong muốn và bấm <b>▶️ Nghe thử</b> rồi lưu lại.
         </p>
+
+        <!-- iOS Voice Quality Tip — luôn hiển thị, collapsible -->
+        <div id="iosTipBanner" style="
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1.5px solid #7dd3fc; border-radius: 10px;
+            padding: 10px 12px; margin-bottom: 10px; cursor: pointer;
+        " onclick="toggleIosTip()">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+                <div style="display:flex; align-items:center; gap:7px;">
+                    <span style="font-size:1.1rem;">🍎</span>
+                    <span style="font-size:0.76rem; font-weight:800; color:#0369a1;">
+                        Giọng đọc trên iPhone / iPad
+                    </span>
+                </div>
+                <span id="iosTipChevron" style="font-size:0.75rem; color:#0369a1; transition:transform 0.2s; display:inline-block;">▼</span>
+            </div>
+            <div id="iosTipBody" style="display:none; margin-top:9px; border-top:1px solid #bae6fd; padding-top:9px;">
+
+                <!-- 1. Enhanced là gì -->
+                <div style="background:#fff8f1; border:1px solid #fed7aa; border-radius:8px; padding:8px 10px; margin-bottom:8px;">
+                    <div style="font-size:0.73rem; font-weight:800; color:#c2410c; margin-bottom:4px;">📖 Giọng Enhanced là gì?</div>
+                    <div style="font-size:0.71rem; color:#7c2d12; line-height:1.6;">
+                        • Giọng <b>Standard</b>: công nghệ cũ, ghép âm — phát âm đúng nhưng hơi đều, ít ngữ điệu.<br>
+                        • Giọng <b>Enhanced</b>: AI neural — tự nhiên hơn, ngữ điệu lên xuống, mượt mà hơn.<br>
+                        • Nhược điểm: mỗi giọng Enhanced chiếm <b>200 – 400 MB</b> dung lượng máy.
+                    </div>
+                </div>
+
+                <!-- 2. iOS nào cần / không cần -->
+                <div style="background:#fff; border:1px solid #e2e8f0; border-radius:8px; padding:8px 10px; margin-bottom:8px;">
+                    <div style="font-size:0.73rem; font-weight:800; color:#334155; margin-bottom:6px;">📱 Bạn có cần tải Enhanced không?</div>
+
+                    <div style="display:flex; gap:8px; align-items:flex-start; background:#f0fdf4; border-radius:6px; padding:6px 8px; margin-bottom:5px;">
+                        <span style="font-size:1rem; flex-shrink:0; margin-top:1px;">✅</span>
+                        <div style="font-size:0.71rem; color:#14532d; line-height:1.55;">
+                            <b>iOS 17 trở lên → Không cần tải thêm</b><br>
+                            Apple đã nâng giọng Standard sang neural engine từ iOS 17. Chất lượng đủ tốt để luyện phát âm, sự khác biệt với Enhanced rất nhỏ — nhất là khi nghe từng từ ngắn.
+                        </div>
+                    </div>
+
+                    <div style="display:flex; gap:8px; align-items:flex-start; background:#fef2f2; border-radius:6px; padding:6px 8px;">
+                        <span style="font-size:1rem; flex-shrink:0; margin-top:1px;">⚠️</span>
+                        <div style="font-size:0.71rem; color:#7f1d1d; line-height:1.55;">
+                            <b>iOS 16 trở xuống → Nên tải Enhanced</b><br>
+                            Giọng Standard cũ nghe cứng và thiếu tự nhiên. Tải Enhanced sẽ cải thiện đáng kể chất lượng khi luyện phát âm.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Cảnh báo Enhanced không hiện tên -->
+                <div style="background:#fffbeb; border:1px solid #fcd34d; border-radius:8px; padding:8px 10px; margin-bottom:8px; display:flex; gap:8px; align-items:flex-start;">
+                    <span style="font-size:1rem; flex-shrink:0; margin-top:1px;">⚠️</span>
+                    <div style="font-size:0.71rem; color:#78350f; line-height:1.55;">
+                        <b>Đã tải Enhanced nhưng không thấy chữ "Enhanced" trong danh sách?</b><br>
+                        Bình thường — iOS không hiện nhãn "Enhanced" qua API trình duyệt. Tên vẫn chỉ hiện là <i>Samantha</i>, <i>Daniel</i>… nhưng iOS <b>đã tự dùng bản Enhanced</b> ngầm bên dưới, không cần chọn lại.
+                    </div>
+                </div>
+
+                <!-- 4. Hướng dẫn tải -->
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:8px 10px; margin-bottom:8px;">
+                    <div style="font-size:0.73rem; font-weight:800; color:#334155; margin-bottom:5px;">⬇️ Cách tải Enhanced (nếu muốn)</div>
+                    <div style="font-size:0.71rem; color:#475569; line-height:2.0;">
+                        <span>⚙️ <b>Settings</b> (Cài đặt)</span><br>
+                        <span style="padding-left:14px;">→ ♿ <b>Accessibility</b> (Trợ năng)</span><br>
+                        <span style="padding-left:14px;">→ 💬 <b>Spoken Content</b> (Nội dung đọc to)</span><br>
+                        <span style="padding-left:14px;">→ 🗣️ <b>Voices</b> (Giọng đọc)</span><br>
+                        <span style="padding-left:14px;">→ 🇬🇧 <b>English</b> → <b>Voice</b> → chọn giọng muốn tải</span><br>
+                        <span style="padding-left:14px;">→ Nhấn biểu tượng <b>⬇️</b> bên cạnh chữ <b>Enhanced</b></span>
+                    </div>
+                </div>
+
+                <!-- 5. Tại sao không phải giọng nào cũng xuất hiện -->
+                <div style="background:#f1f5f9; border:1px solid #e2e8f0; border-radius:8px; padding:8px 10px; margin-bottom:8px;">
+                    <div style="font-size:0.73rem; font-weight:800; color:#334155; margin-bottom:4px;">❓ Tại sao có giọng tải về nhưng không thấy trong danh sách?</div>
+                    <div style="font-size:0.71rem; color:#475569; line-height:1.6;">
+                        iOS cung cấp nhiều loại giọng khác nhau (tiếng Việt, Trung, Nhật…), nhưng ứng dụng này <b>chỉ hiển thị giọng tiếng Anh</b> và lọc bỏ các giọng chất lượng thấp (giọng robot, giọng tổng hợp lỗi thời).<br>
+                        Nếu giọng bạn tải không phải tiếng Anh hoặc không đạt tiêu chuẩn chất lượng → sẽ không xuất hiện trong danh sách. Đây là hoàn toàn bình thường.
+                    </div>
+                </div>
+
+                <!-- 6. Khuyến nghị -->
+                <div style="background:linear-gradient(135deg,#f0f9ff,#e0f2fe); border:1.5px solid #7dd3fc; border-radius:8px; padding:8px 10px; margin-bottom:8px;">
+                    <div style="font-size:0.73rem; font-weight:800; color:#0369a1; margin-bottom:5px;">⭐ Khuyến nghị: 2 giọng tốt nhất trên iPhone / iPad</div>
+                    <div style="display:flex; flex-direction:column; gap:5px;">
+                        <div style="display:flex; gap:8px; align-items:flex-start; background:#fff; border-radius:6px; padding:6px 8px;">
+                            <span style="font-size:0.9rem; flex-shrink:0;">🇺🇸</span>
+                            <div style="font-size:0.71rem; color:#0c4a6e; line-height:1.5;">
+                                <b>Samantha</b> — Giọng Anh-Mỹ (American English)<br>
+                                Phổ biến, rõ ràng, phù hợp luyện thi chuẩn Mỹ. Giọng mặc định trên nhiều iPhone tại Việt Nam.
+                            </div>
+                        </div>
+                        <div style="display:flex; gap:8px; align-items:flex-start; background:#fff; border-radius:6px; padding:6px 8px;">
+                            <span style="font-size:0.9rem; flex-shrink:0;">🇬🇧</span>
+                            <div style="font-size:0.71rem; color:#0c4a6e; line-height:1.5;">
+                                <b>Daniel</b> — Giọng Anh-Anh (British English)<br>
+                                Giọng chuẩn Anh-Anh, phù hợp luyện thi A2 Flyers / B1 PET / B2 First (chuẩn UK).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Ghi chú Siri -->
+                <div style="font-size:0.7rem; color:#94a3b8; line-height:1.6; padding:0 2px;">
+                    🚫 <b>Siri</b> bị iOS chặn trên trình duyệt nên chỉ hoạt động trong app hệ thống của Apple, không thể dùng trong Web app.
+                </div>
+
+            </div>
+        </div>
 
         <div id="voiceListContainer" style="display:flex; flex-direction:column; gap:6px; margin-bottom:14px; max-height:320px; overflow-y:auto; padding-right:2px;">
             <!-- Voices dynamically rendered here -->
@@ -288088,7 +288715,7 @@ window.onload = () => {
                 <div>
                     <h3 style="margin:0; font-size:1.25rem; font-weight:800; color:#0f172a; line-height:1.2;">English Master</h3>
                     <div style="display:flex; align-items:center; gap:6px; margin-top:4px;">
-                        <span style="background:#fce7f3; color:#be185d; font-size:0.72rem; font-weight:800; padding:2px 8px; border-radius:12px;">3.5.0</span>
+                        <span style="background:#fce7f3; color:#be185d; font-size:0.72rem; font-weight:800; padding:2px 8px; border-radius:12px;">3.5.1</span>
                         <span style="color:#64748b; font-size:0.75rem; font-weight:600;">📅 Oct 2026</span>
                     </div>
                 </div>
@@ -288100,6 +288727,44 @@ window.onload = () => {
         <p style="color:#334155; font-size:0.85rem; line-height:1.5; margin-bottom:14px;">
             Ứng dụng tự học tiếng Anh toàn diện, chạy Offline chỉ với một file HTML duy nhất trên mọi thiết bị.
         </p>
+
+        <!-- ★ Home Page Link Card ★ -->
+        <a href="https://thinhpdq.github.io/english_master/version" target="_blank" rel="noopener noreferrer"
+           id="aboutHomepageBtn"
+           style="display:block; width:100%; max-width:100%; text-decoration:none; background:linear-gradient(135deg, #cbe5fe 0%, #e0f2fe 50%, #bae6fd 100%); border-radius:16px; padding:12px 10px; margin-bottom:16px; position:relative; overflow:hidden; border:1px solid #7dd3fc; cursor:pointer; box-shadow:0 8px 22px rgba(2, 132, 199, 0.12); transition:all 0.25s ease; box-sizing:border-box;"
+           onmouseover="this.style.transform='translateY(-3px)'; this.style.borderColor='#0284c7'; this.style.boxShadow='0 12px 28px rgba(2, 132, 199, 0.22)';"
+           onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='#7dd3fc'; this.style.boxShadow='0 8px 22px rgba(2, 132, 199, 0.12)';">
+            <!-- Decorative glow blobs -->
+            <div style="pointer-events:none; position:absolute; top:-24px; right:-16px; width:90px; height:90px; background:radial-gradient(circle, rgba(56, 189, 248, 0.35) 0%, transparent 70%); border-radius:50%;"></div>
+            <div style="pointer-events:none; position:absolute; bottom:-20px; left:20px; width:70px; height:70px; background:radial-gradient(circle, rgba(2, 132, 199, 0.25) 0%, transparent 70%); border-radius:50%;"></div>
+            <!-- Top shine line -->
+            <div style="pointer-events:none; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent);"></div>
+
+            <div style="position:relative; display:flex; align-items:center; gap:8px; width:100%; box-sizing:border-box;">
+                <!-- Icon Block -->
+                <div style="width:36px; height:36px; background:linear-gradient(135deg, #0284c7, #38bdf8); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0;">
+                    🌐
+                </div>
+                <!-- Text block -->
+                <div style="flex:1; min-width:0; overflow:hidden; box-sizing:border-box;">
+                    <div style="font-size:0.6rem; font-weight:800; color:#0369a1; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:1px; line-height:1.1; word-break:break-word;">English Master Online</div>
+                    <div style="font-size:0.8rem; font-weight:800; color:#0c4a6e; margin-bottom:3px; line-height:1.2; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">Trang Chủ &amp; Phiên Bản Mới Nhất</div>
+                    <div style="display:inline-block; max-width:100%; background:rgba(2, 132, 199, 0.12); border:1px solid rgba(2, 132, 199, 0.25); border-radius:20px; padding:1px 6px; box-sizing:border-box; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <span style="font-size:0.55rem; color:#075985; font-family:monospace; font-weight:700; display:block; overflow:hidden; text-overflow:ellipsis;">thinhpdq.github.io/english_master</span>
+                    </div>
+                </div>
+                <!-- Arrow / Action -->
+                <div style="flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:2px;">
+                    <div style="width:26px; height:26px; background:linear-gradient(135deg, #0284c7, #38bdf8); border-radius:50%; display:flex; align-items:center; justify-content:center;">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </div>
+                    <span style="font-size:0.5rem; color:#0369a1; font-weight:700; white-space:nowrap;">Mở link</span>
+                </div>
+            </div>
+        </a>
 
         <!-- Feature Grid Cards -->
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px;">
@@ -288159,6 +288824,21 @@ window.onload = () => {
             </div>
             
             <div style="max-height:180px; overflow-y:auto; padding-right:4px; display:flex; flex-direction:column; gap:10px;">
+                <!-- Version 3.5.1 -->
+                <div style="border-left: 3px solid #2563eb; padding-left: 10px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-weight:800; font-size:0.82rem; color:#0f172a;">3.5.1 — Enhance application with advanced features</span>
+                        <span style="font-size:0.72rem; color:#94a3b8; font-weight:600;">10/2026</span>
+                    </div>
+                    <ul style="margin:4px 0 0 0; padding-left:16px; font-size:0.78rem; color:#475569; line-height:1.4;">
+                        <li>Cho phép mở rộng tra cứu từ trên tất cả các trình độ.</li>
+                        <li>Cho phép cấu hình thời gian đếm ngược (Timeout).</li>
+                        <li>Hướng dẫn cài đặt giọng đọc chất lượng cao trên iPhone / iPad.</li>
+                        <li>Bổ sung phần Hướng Dẫn Kỹ Năng Thi. Tổ chức lại phần Bảng Kết Quả.</li>
+                        <li>Sửa một số lỗi.</li>
+                    </ul>
+                </div>
+
                 <!-- Version 3.5.0 -->
                 <div style="border-left:3px solid #ec4899; padding-left:10px;">
                     <div style="display:flex; justify-content:space-between; align-items:center;">

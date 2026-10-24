@@ -1345,7 +1345,7 @@
         <!-- STATS OVERVIEW -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-number">3.5.0</div>
+                <div class="stat-number">3.5.1</div>
                 <div class="stat-label">Latest Release</div>
             </div>
             <div class="stat-card">
@@ -1370,8 +1370,8 @@
             </div>
             <div class="filter-tags">
                 <button class="tag-btn active" onclick="setFilter('all', this)">All Versions</button>
-                <button class="tag-btn" onclick="setFilter('latest', this)">✨ Latest (3.5.0)</button>
-                <button class="tag-btn" onclick="setFilter('stable', this)">🛡️ Stable (3.2.0 - 3.0.0)</button>
+                <button class="tag-btn" onclick="setFilter('latest', this)">✨ Latest (3.5.1)</button>
+                <button class="tag-btn" onclick="setFilter('stable', this)">🛡️ Stable (3.5.0 - 3.0.0)</button>
                 <button class="tag-btn" onclick="setFilter('archive', this)">📜 Archive (2.0.0 - 1.0.0)</button>
             </div>
         </div>
@@ -1379,12 +1379,46 @@
         <!-- VERSION CARDS LIST -->
         <div class="version-grid" id="versionGrid">
 
-            <!-- VERSION 3.5.0 (LATEST BUILD) -->
-            <div class="version-card latest" data-category="latest" data-keywords="3.5.0 ios audio wav timeout ui polish about offline single file">
+            <!-- VERSION 3.5.1 (LATEST BUILD) -->
+            <div class="version-card latest" data-category="latest" data-keywords="3.5.1 Enhance application with advanced features">
+                <div class="card-header">
+                    <div class="version-title-group">
+                        <div class="version-title">english_master_3_5_1.html</div>
+                        <span class="status-badge badge-latest">✨ Latest Release</span>
+                    </div>
+                    <div class="meta-info">
+                        <span>📅 10/2026</span>
+                        <span>📦 ~12.3 MB</span>
+                    </div>
+                </div>
+
+                <div class="release-notes-box">
+                    <div class="release-notes-title">📋 3.5.1 — Enhance application with advanced features:</div>
+                    <ul class="release-notes-list">
+                        <li>Cho phép mở rộng tra cứu từ trên tất cả các trình độ.</li>
+                        <li>Cho phép cấu hình thời gian đếm ngược (Timeout).</li>
+                        <li>Hướng dẫn cài đặt giọng đọc chất lượng cao trên iPhone / iPad.</li>
+                        <li>Bổ sung phần Hướng Dẫn Kỹ Năng Thi. Tổ chức lại phần Bảng Kết Quả.</li>
+                        <li>Sửa một số lỗi.</li>
+                    </ul>
+                </div>
+
+                <div class="card-actions">
+                    <button onclick="downloadVersionFile('./release/english_master_3_5_1.html', 'english_master_3_5_1.html', event)" class="btn btn-download">
+                        📥 Tải File HTML (3.5.1)
+                    </button>
+                    <a href="./release/english_master_3_5_1.html" target="_blank" rel="noopener" class="btn btn-launch">
+                        🚀 Chạy Trực Tiếp
+                    </a>
+                </div>
+            </div>
+
+            <!-- VERSION 3.5.0 (stable) -->
+            <div class="version-card" data-category="stable" data-keywords="3.5.0 ios audio wav timeout ui polish about offline single file">
                 <div class="card-header">
                     <div class="version-title-group">
                         <div class="version-title">english_master_3_5_0.html</div>
-                        <span class="status-badge badge-latest">✨ Latest Release</span>
+                        <span class="status-badge badge-stable">🛡️ Stable</span>
                     </div>
                     <div class="meta-info">
                         <span>📅 10/2026</span>
@@ -1787,7 +1821,7 @@
                 file: 'screenshot_02.png',
                 altFile: 'screenshot_02.webp',
                 title: 'Phòng Thi Thử Đa Trình Độ (Mock Exam)',
-                category: 'Cambridge Exam',
+                category: 'Mock Exam',
                 desc: 'Hệ thống thi thử chuẩn hóa (A2 Flyers • B1 PET • B2 First) gồm đầy đủ 3 phần thi Listening, Reading & Writing, Speaking với đồng hồ đếm ngược SVG.'
             },
             {
@@ -1796,7 +1830,7 @@
                 altFile: 'screenshot_03.webp',
                 title: 'Bằng Chứng Nhận Động (Dynamic Certificate)',
                 category: 'Graduation Certificate',
-                desc: 'Tự động vinh danh và cấp Bằng Khen Cambridge danh dự theo điểm số đạt được, hiển thị họ tên học viên, ngày thi và hỗ trợ lưu ảnh/in ấn.'
+                desc: 'Tự động vinh danh và cấp Bằng Khen CEFR quốc tế danh dự theo điểm số đạt được, hiển thị họ tên học viên, ngày thi và hỗ trợ lưu ảnh/in ấn.'
             },
             {
                 id: 4,

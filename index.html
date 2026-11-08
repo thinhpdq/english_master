@@ -247,6 +247,222 @@ canvas#confettiCanvas { position: fixed; top: 0; left: 0; width: 100vw; height: 
 .cert-title { font-size: 1.1rem; color: #854d0e; font-weight: 800; }
 .cert-desc { font-size: 0.8rem; color: #a16207; margin-top: 4px; }
 
+/* ── PARENT DASHBOARD CSS ─────────────────────────────────── */
+#parentPinOverlay, #parentDashOverlay {
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55);
+    z-index:3200; justify-content:center; align-items:center; padding:12px;
+}
+.parent-pin-box {
+    background:#fff; border-radius:20px; padding:28px 24px 20px;
+    max-width:320px; width:100%; text-align:center;
+    box-shadow:0 20px 60px rgba(0,0,0,0.25); animation:fadeInUp .22s ease;
+}
+.parent-pin-title { font-size:1.15rem; font-weight:800; color:#1e293b; margin-bottom:4px; }
+.parent-pin-sub   { font-size:0.82rem; color:#64748b; margin-bottom:18px; }
+.pin-dots { display:flex; justify-content:center; gap:10px; margin-bottom:18px; }
+.pin-dot {
+    width:44px; height:52px; border:2px solid #cbd5e1; border-radius:10px;
+    font-size:1.5rem; font-weight:800; color:#1e293b; background:#f8fafc;
+    display:flex; align-items:center; justify-content:center; transition:border-color .15s;
+}
+.pin-dot.active { border-color:#6366f1; background:#eef2ff; }
+.pin-numpad { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:14px; }
+.pin-key {
+    height:46px; border:none; border-radius:10px; background:#f1f5f9;
+    font-size:1.1rem; font-weight:700; color:#1e293b; cursor:pointer;
+    transition:background .12s, transform .1s;
+}
+.pin-key:hover  { background:#e2e8f0; }
+.pin-key:active { transform:scale(0.94); background:#dde3ef; }
+.pin-key.pin-del { background:#fee2e2; color:#dc2626; }
+.pin-error { color:#dc2626; font-size:0.82rem; font-weight:700; min-height:18px; margin-bottom:6px; }
+
+/* Parent Dashboard Panel */
+.parent-dash-panel {
+    background:#fff; border-radius:20px; width:100%; max-width:520px;
+    max-height:92vh; overflow-y:auto; padding:0;
+    box-shadow:0 24px 72px rgba(0,0,0,0.28); animation:fadeInUp .22s ease;
+}
+.pdash-header {
+    background:linear-gradient(135deg,#6366f1,#8b5cf6); color:#fff;
+    padding:16px 18px 14px; border-radius:20px 20px 0 0;
+    display:flex; justify-content:space-between; align-items:center;
+}
+.pdash-header h2 { margin:0; font-size:1rem; font-weight:800; }
+.pdash-header-btns { display:flex; gap:8px; }
+.pdash-hbtn {
+    background:rgba(255,255,255,0.18); border:none; color:#fff;
+    border-radius:8px; padding:5px 10px; font-size:0.75rem; font-weight:700; cursor:pointer;
+    transition:background .15s;
+}
+.pdash-hbtn { transition:background .15s, transform .15s, box-shadow .15s; }
+.pdash-hbtn:hover { background:rgba(255,255,255,0.32); transform:translateY(-3px); box-shadow:0 6px 16px rgba(0,0,0,0.22); }
+.pdash-hbtn.danger { background:#dc2626 !important; color:#fff !important; font-weight:800; }
+.pdash-hbtn.danger:hover { background:#b91c1c !important; transform:translateY(-3px); box-shadow:0 6px 18px rgba(220,38,38,0.5); }
+.pdash-body { padding:16px; display:flex; flex-direction:column; gap:14px; }
+.pdash-section {
+    background:#f8fafc; border-radius:14px; padding:14px;
+    border:1px solid #e2e8f0;
+}
+.pdash-section-title {
+    font-size:0.78rem; font-weight:800; color:#64748b;
+    text-transform:uppercase; letter-spacing:.6px; margin-bottom:10px;
+}
+.pdash-stat-row { display:flex; gap:8px; }
+.pdash-stat-card {
+    flex:1; background:#fff; border-radius:12px; padding:10px 8px;
+    text-align:center; border:1px solid #e2e8f0;
+}
+.pdash-stat-val { font-size:1.4rem; font-weight:900; color:#6366f1; line-height:1.1; }
+.pdash-stat-lbl { font-size:0.68rem; color:#94a3b8; font-weight:700; margin-top:2px; }
+/* Bar chart SVG wrapper */
+.pdash-chart-wrap {
+    position:relative; width:100%; overflow:hidden;
+}
+.pdash-chart-svg {
+    width:100%; display:block; overflow:visible;
+}
+/* Chart controls */
+.pdash-chart-controls {
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:8px;
+}
+.pdash-chart-tabs { display:flex; gap:4px; }
+.pdash-chart-tab {
+    padding:3px 10px; border-radius:8px; border:none; font-size:0.7rem;
+    font-weight:700; cursor:pointer; background:#f1f5f9; color:#64748b;
+    transition:all .15s;
+}
+.pdash-chart-tab.active { background:#6366f1; color:#fff; }
+/* Day detail panel */
+.pdash-day-detail {
+    background:#f8faff; border-radius:10px; padding:10px 12px;
+    border:1.5px solid #e0e7ff; margin-top:8px; font-size:0.75rem;
+    animation:fadeInUp .15s ease;
+}
+.pdash-day-detail-title { font-weight:800; color:#3730a3; margin-bottom:6px; font-size:0.78rem; }
+.pdash-day-session-row {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:4px 0; border-bottom:1px solid #e8eeff;
+}
+.pdash-day-session-row:last-child { border-bottom:none; }
+.pdash-day-session-mode { font-weight:700; color:#4338ca; }
+.pdash-day-session-stat { color:#64748b; font-size:0.7rem; }
+.pdash-day-fc-words { display:flex; flex-wrap:wrap; gap:4px; margin-top:6px; }
+.pdash-day-fc-chip { background:#ede9fe; color:#5b21b6; border-radius:8px; padding:3px 9px; font-size:0.67rem; font-weight:600; cursor:pointer; transition:background .12s, transform .12s, box-shadow .12s; user-select:none; }
+.pdash-day-fc-chip:hover { background:#ddd6fe; transform:translateY(-2px); box-shadow:0 3px 8px rgba(99,102,241,.18); }
+/* Strong/Weak category */
+.pdash-sw-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.pdash-sw-card { background:#fff; border-radius:10px; padding:8px; border:1px solid #e2e8f0; }
+.pdash-sw-card h4 { font-size:0.72rem; font-weight:800; margin:0 0 6px; }
+.pdash-sw-row { display:flex; justify-content:space-between; align-items:center; font-size:0.72rem; padding:2px 0; border-bottom:1px solid #f1f5f9; }
+.pdash-sw-row:last-child { border-bottom:none; }
+.pdash-acc { font-weight:800; }
+.acc-good { color:#16a34a; }
+.acc-bad  { color:#dc2626; }
+/* Word errors */
+.pdash-word-row {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:5px 0; border-bottom:1px solid #f1f5f9; font-size:0.75rem;
+}
+.pdash-word-row:last-child { border-bottom:none; }
+.pdash-word-en { font-weight:800; color:#1e293b; }
+.pdash-word-vi { color:#64748b; font-size:0.68rem; }
+.pdash-word-err { background:#fee2e2; color:#dc2626; border-radius:6px; padding:1px 6px; font-size:0.65rem; font-weight:800; }
+/* Recommendation box */
+.pdash-rec {
+    background:linear-gradient(135deg,#eff6ff,#e0e7ff); border-radius:12px;
+    padding:12px 14px; border-left:4px solid #6366f1; font-size:0.78rem;
+    color:#1e293b; line-height:1.5;
+}
+.pdash-rec-title { font-weight:800; color:#4338ca; margin-bottom:4px; font-size:0.8rem; }
+
+/* ── Daily Flashcard Words ──────────────────────────────── */
+.pdash-fcwords-grid {
+    display:flex; flex-wrap:wrap; gap:5px; margin-top:6px;
+}
+.pdash-fcword-chip {
+    background:#ede9fe; color:#5b21b6; border-radius:8px;
+    padding:3px 9px; font-size:0.72rem; font-weight:600;
+    cursor:pointer; transition:background .12s, transform .12s;
+}
+.pdash-fcword-chip:hover { background:#ddd6fe; transform:translateY(-1px); }
+.pdash-fc-toggle {
+    background:none; border:none; color:#6366f1; font-size:0.72rem;
+    font-weight:700; cursor:pointer; padding:2px 0; margin-top:4px;
+    text-decoration:underline;
+}
+
+/* ── Progress Dashboard ─────────────────────────────────── */
+.pdash-progress-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:8px;
+}
+.pdash-prog-card {
+    background:linear-gradient(135deg,#f8faff 0%,#f0f4ff 100%);
+    border-radius:12px; padding:10px 12px;
+    border:1.5px solid #e0e7ff;
+    display:flex; flex-direction:column; gap:2px;
+}
+.pdash-prog-val {
+    font-size:1.35rem; font-weight:900; color:#3730a3;
+    line-height:1.1;
+}
+.pdash-prog-lbl { font-size:0.68rem; color:#64748b; font-weight:600; }
+.pdash-prog-trend {
+    font-size:0.75rem; font-weight:800; margin-top:2px;
+}
+.trend-up   { color:#16a34a; }
+.trend-down { color:#dc2626; }
+.trend-flat { color:#94a3b8; }
+
+/* ── Storage Info Footer ────────────────────────────────── */
+.pdash-storage-bar {
+    height:5px; border-radius:4px; background:#e2e8f0;
+    overflow:hidden; margin-top:6px;
+}
+.pdash-storage-fill {
+    height:100%; border-radius:4px;
+    background:linear-gradient(90deg,#6366f1,#a78bfa);
+    transition:width .4s ease;
+}
+.pdash-storage-lbl {
+    font-size:0.65rem; color:#94a3b8; margin-top:3px; text-align:right;
+}
+
+/* ── Custom Dialog & Toast ───────────────────────── */
+#customDialogOverlay {
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5);
+    z-index:9000; justify-content:center; align-items:center; padding:16px;
+}
+.custom-dialog-box {
+    background:#fff; border-radius:18px; padding:26px 22px 18px;
+    max-width:340px; width:100%; text-align:center;
+    box-shadow:0 20px 60px rgba(0,0,0,0.28); animation:fadeInUp .2s ease;
+}
+.custom-dialog-icon  { font-size:2rem; margin-bottom:8px; }
+.custom-dialog-title { font-size:1rem; font-weight:800; color:#1e293b; margin-bottom:6px; }
+.custom-dialog-body  { font-size:0.82rem; color:#475569; line-height:1.55; margin-bottom:18px; }
+.custom-dialog-btns  { display:flex; gap:10px; justify-content:center; }
+.cdlg-btn {
+    flex:1; max-width:140px; padding:10px 0; border-radius:10px; border:none;
+    font-size:0.85rem; font-weight:700; cursor:pointer; transition:all .15s;
+}
+.cdlg-cancel  { background:#f1f5f9; color:#64748b; }
+.cdlg-cancel:hover  { background:#e2e8f0; transform:translateY(-1px); }
+.cdlg-confirm { background:#6366f1; color:#fff; }
+.cdlg-confirm:hover { background:#4f46e5; transform:translateY(-1px); box-shadow:0 4px 12px rgba(99,102,241,.35); }
+.cdlg-confirm.danger { background:#dc2626; }
+.cdlg-confirm.danger:hover { background:#b91c1c; box-shadow:0 4px 12px rgba(220,38,38,.35); }
+.cdlg-confirm.success { background:#16a34a; }
+.cdlg-confirm.success:hover { background:#15803d; }
+/* Toast */
+#parentToast {
+    display:none; position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+    background:#1e293b; color:#fff; padding:10px 20px; border-radius:12px;
+    font-size:0.82rem; font-weight:700; z-index:9100;
+    box-shadow:0 8px 24px rgba(0,0,0,0.25); animation:fadeInUp .2s ease;
+    white-space:nowrap;
+}
 
 /* ELEGANT LIGHT SKY BLUE THEME */
 body { font-family: 'Outfit', 'Inter', sans-serif !important; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%) !important; color: #0f172a !important; min-height: 100vh; padding: 16px; }
@@ -199806,7 +200022,7 @@ window.databaseB2["🎯 B2 Use of English: Key Word Transformations"] = [
 </script>
 <!-- END B2 FIRST DATA SCRIPTS -->
 <!-- A2 FLYERS DATA SCRIPTS -->
-<!-- Embedded Data: data/part1_space.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part01_space.js -->
 <script>
 // part1_space.js - 🚀 Vũ Trụ & Khoa Học
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -200695,7 +200911,7 @@ window.databaseA2["🚀 Vũ Trụ & Khoa Học"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/part2_nature.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part02_nature.js -->
 <script>
 // part2_nature.js - 🌿 Thiên Nhiên & Môi Trường
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -201584,7 +201800,7 @@ window.databaseA2["🌿 Thiên Nhiên & Môi Trường"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/part3_jobs.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part03_jobs.js -->
 <script>
 // part3_jobs.js - 💼 Nghề Nghiệp & Công Việc
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -202473,7 +202689,7 @@ window.databaseA2["💼 Nghề Nghiệp & Công Việc"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/part4_school.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part04_school.js -->
 <script>
 // part4_school.js - 🎓 Trường Học & Giáo Dục
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -203362,7 +203578,7 @@ window.databaseA2["🎓 Trường Học & Giáo Dục"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/part5_health.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part05_health.js -->
 <script>
 // part5_health.js - 🏥 Sức Khỏe & Y Tế
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -204251,7 +204467,7 @@ window.databaseA2["🏥 Sức Khỏe & Y Tế"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/part6_city.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part06_city.js -->
 <script>
 // part6_city.js - 🏙️ Thành Phố & Địa Điểm
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -205140,7 +205356,7 @@ window.databaseA2["🏙️ Thành Phố & Địa Điểm"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/part7_transport.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part07_transport.js -->
 <script>
 // part7_transport.js - 🚗 Giao Thông & Phương Tiện
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -206029,7 +206245,7 @@ window.databaseA2["🚗 Giao Thông & Phương Tiện"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/part8_sports.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part08_sports.js -->
 <script>
 // part8_sports.js - ⚽ Thể Thao & Giải Trí
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -206918,7 +207134,7 @@ window.databaseA2["⚽ Thể Thao & Giải Trí"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/part9_food.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part09_food.js -->
 <script>
 // part9_food.js - 🍎 Thức Ăn & Nấu Nướng
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -207807,7 +208023,7 @@ window.databaseA2["🍎 Thức Ăn & Nấu Nướng"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/part10_home.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part10_home.js -->
 <script>
 // part10_home.js - 🏠 Nhà Cửa & Nội Thất
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -208696,7 +208912,7 @@ window.databaseA2["🏠 Nhà Cửa & Nội Thất"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/part11_clothes.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part11_clothes.js -->
 <script>
 // part11_clothes.js - 👕 Trang Phục & Phụ Kiện
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -209585,7 +209801,7 @@ window.databaseA2["👕 Trang Phục & Phụ Kiện"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/part12_animals.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part12_animals.js -->
 <script>
 // part12_animals.js - 🦁 Động Vật & Sinh Vật
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -210554,7 +210770,7 @@ window.databaseA2["🦁 Động Vật & Sinh Vật"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/part13_tech_media.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part13_tech_media.js -->
 <script>
 // part13_tech_media.js - 💻 Công Nghệ & Truyền Thông
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -211443,7 +211659,7 @@ window.databaseA2["💻 Công Nghệ & Truyền Thông"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/part14_time_calendar.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part14_time_calendar.js -->
 <script>
 // part14_time_calendar.js - ⏰ Thời Gian & Lịch
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -212332,7 +212548,7 @@ window.databaseA2["⏰ Thời Gian & Lịch"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/part15_actions_verbs.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part15_actions_verbs.js -->
 <script>
 // part15_actions_verbs.js - 🏃 Động Từ & Hành Động
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -213301,7 +213517,7 @@ window.databaseA2["🏃 Động Từ & Hành Động"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/part16_adjectives.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part16_adjectives.js -->
 <script>
 // part16_adjectives.js - 🌟 Tính Từ & Miêu Tả
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -214270,7 +214486,7 @@ window.databaseA2["🌟 Tính Từ & Miêu Tả"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/part17_feelings_mind.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part17_feelings_mind.js -->
 <script>
 // part17_feelings_mind.js - 🧠 Cảm Xúc & Giác Quan
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -215159,7 +215375,7 @@ window.databaseA2["🧠 Cảm Xúc & Giác Quan"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/part18_travel_geography.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part18_travel_geography.js -->
 <script>
 // part18_travel_geography.js - 🗺️ Du Lịch & Địa Lý
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -216048,7 +216264,7 @@ window.databaseA2["🗺️ Du Lịch & Địa Lý"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/part19_shopping_materials.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part19_shopping_materials.js -->
 <script>
 // part19_shopping_materials.js - 🛍️ Mua Sắm & Chất Liệu
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -216937,7 +217153,7 @@ window.databaseA2["🛍️ Mua Sắm & Chất Liệu"] = [
 ];
 
 </script>
-<!-- Embedded Data: data/part20_grammar_structures.js -->
+<!-- Embedded Data: data/a2_flyers/a2_part20_grammar_structures.js -->
 <script>
 // part20_grammar_structures.js - 📚 Cấu Trúc Ngữ Pháp Flyers
 if (typeof window.databaseA2 === 'undefined') { window.databaseA2 = {}; }
@@ -266031,7 +266247,7 @@ window.databaseB1["✍️ B1 Use of English: Word Formation"] = [
 <header>
     <h1 style="margin:0; font-size:1.6rem; font-weight:800; color:#0f172a; display:flex; align-items:center; gap:8px;">
         🎓 English Master
-        <span style="background: linear-gradient(135deg, #0284c7, #2563eb); color: #ffffff; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.5px; box-shadow: 0 2px 6px rgba(2,132,199,0.25);">3.5.1</span>
+        <span style="background: linear-gradient(135deg, #0284c7, #2563eb); color: #ffffff; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.5px; box-shadow: 0 2px 6px rgba(2,132,199,0.25);">3.5.2</span>
     </h1>
     <div class="subtitle">Tích hợp Nghe, Nói, Đọc, Viết với 15,000+ từ vựng chuẩn CEFR quốc tế & IELTS Academic</div>
 </header>
@@ -266057,6 +266273,7 @@ window.databaseB1["✍️ B1 Use of English: Word Formation"] = [
     <button class="mode-btn" style="border-color:#0284c7; color:#0284c7;" onclick="showExamInfoModal()">ℹ️ Hướng Dẫn Kỹ Năng Thi</button>
     <button class="mode-btn" style="border-color:#16a34a; color:#16a34a;" onclick="showDashboard()">📊 Bảng Kết Quả</button>
     <button class="mode-btn" style="border-color:#8b5cf6; color:#8b5cf6;" onclick="showVoiceSettingsModal()">⚙️ Giọng Đọc</button>
+    <button class="mode-btn" id="btnParentDash" style="border-color:#6366f1; color:#6366f1; font-weight:800;" onclick="showParentPin()">📊 Theo Dõi Học Tập</button>
     <button class="mode-btn" style="border-color:#ec4899; color:#ec4899;" onclick="showAboutModal()">ℹ️ About</button>
 </div>
 
@@ -266195,7 +266412,6 @@ window.databaseB1["✍️ B1 Use of English: Word Formation"] = [
 
         <div style="display: flex; gap: 8px; margin-bottom: 8px; justify-content: center; flex-wrap: wrap;">
             <button class="tool-btn" onclick="shuffleCards()">🔀 Trộn bài</button>
-            <button class="tool-btn" onclick="speakText(null, currentCardList[currentIndex].en)">🔁 Phát âm UK</button>
             <button class="tool-btn" style="border-color:#0369a1; color:#0369a1;" onclick="showTimeoutConfigModal()">⏱️ Timeout</button>
             <button class="tool-btn" style="border-color:#dc2626; color:#dc2626;" onclick="resetStats()">🔄 Đặt lại điểm</button>
         </div>
@@ -285683,6 +285899,7 @@ function selectCategory(cat) {
     currentCategory = cat;
     currentCardList = [...vocabularyData[cat]];
     currentIndex = 0;
+    if (typeof resetFlashcardLog === 'function') resetFlashcardLog();
 
     document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
     const chipAll = document.getElementById('chipAll');
@@ -285694,6 +285911,8 @@ function selectCategory(cat) {
 
 
 function switchMode(mode) {
+    // Flush stats của mode cũ trước khi chuyển (flushSessionLog tự reset _sessionStart)
+    if (typeof flushSessionLog === 'function') flushSessionLog();
     currentMode = mode;
     stopAllQuizTimers();
     stopSpeechAudio();
@@ -285707,6 +285926,7 @@ function switchMode(mode) {
     document.getElementById('mockExamArea').style.display = 'none';
 
     if (mode === 'card') {
+        if (typeof resetFlashcardLog === 'function') resetFlashcardLog();
         document.getElementById('btnModeCard').classList.add('active');
         document.getElementById('cardArea').style.display = 'block';
         loadCard();
@@ -285798,6 +286018,12 @@ function loadCard() {
 
     updateProgress();
     updateStarButton();
+    // Track word for daily flashcard stats
+    if (typeof trackDailyFlashcard === 'function') {
+        trackDailyFlashcard(currentCardList[currentIndex]);
+    }
+    // Lưu vị trí hiện tại để hỗ trợ "Học Tiếp"
+    saveResumeState();
 }
 
 function flipCard() {
@@ -285816,13 +286042,31 @@ function shuffleArray(arr) {
 }
 
 function prevCard() { if (currentIndex > 0) { currentIndex--; loadCard(); } }
-function nextCard() { if (currentIndex < currentCardList.length - 1) { currentIndex++; loadCard(); } }
+function nextCard() { if (currentIndex < currentCardList.length - 1) { currentIndex++; loadCard(); logFlashcardView(); } }
 function shuffleCards() { shuffleArray(currentCardList); currentIndex = 0; loadCard(); }
+
+// ── Resume Flashcard ─────────────────────────────────────────────
+// Lưu trạng thái (level + category + index) sau mỗi lần hiển thị thẻ
+function saveResumeState() {
+    if (!currentCEFRLevel || !currentCategory || currentIndex < 0) return;
+    // Chỉ lưu khi đang ở mode thẻ học (card)
+    if (currentMode !== 'card') return;
+    try {
+        localStorage.setItem('em_fc_resume', JSON.stringify({
+            level:    currentCEFRLevel,
+            category: currentCategory,
+            index:    currentIndex
+        }));
+    } catch(e) {}
+}
+
+
 
 function markCard(e, isEasy) {
     e.stopPropagation();
     const item = currentCardList[currentIndex];
-    if (!isEasy) { addWeakWord(item); currentCardList.push(item); } else { removeWeakWord(item); }
+    if (!isEasy) { addWeakWord(item); currentCardList.push(item); if (item) trackWordError(item); } else { removeWeakWord(item); }
+    logFlashcardView(isEasy);
     if (currentIndex < currentCardList.length - 1) { nextCard(); } else { loadCard(); }
 }
 
@@ -286220,19 +286464,31 @@ function getSystemDefaultVoice() {
         const voices = window.speechSynthesis.getVoices() || [];
         if (voices.length === 0) return null;
 
-        // 1. Look for OS marked default English voice (v.default === true)
+        // Ưu tiên voice offline (localService === true) — quan trọng để phát âm khi không có mạng trên Desktop
+        // 1. Local default English voice
+        let localDefault = voices.find(v => v.default === true && isEnglishVoice(v) && v.localService !== false);
+        if (localDefault) return localDefault;
+
+        // 2. Local UK/US English voice
+        let localUkUs = voices.find(v => isEnglishVoice(v) && v.localService !== false && v.lang && /en[-_](gb|us|uk)/i.test(v.lang));
+        if (localUkUs) return localUkUs;
+
+        // 3. Any local English voice
+        let localEn = voices.find(v => isEnglishVoice(v) && v.localService !== false);
+        if (localEn) return localEn;
+
+        // 4. Fallback: OS marked default English voice (may require internet)
         let sysDefault = voices.find(v => v.default === true && isEnglishVoice(v));
         if (sysDefault) return sysDefault;
 
-        // 2. Look for preferred UK / US English voice
+        // 5. Any UK/US English voice
         let ukUsMatch = voices.find(v => isEnglishVoice(v) && v.lang && /en[-_](gb|us|uk)/i.test(v.lang));
         if (ukUsMatch) return ukUsMatch;
 
-        // 3. Fallback to any available English voice
+        // 6. Any English voice
         let enVoices = voices.filter(v => isEnglishVoice(v));
         if (enVoices.length > 0) return enVoices[0];
 
-        // Do NOT return non-English voice (e.g. vi-VN) for English text!
         return null;
     } catch(e) {
         return null;
@@ -286355,9 +286611,14 @@ function getVoicePriorityScore(v) {
     const name = (v.name || '').toLowerCase();
     const uri = (v.voiceURI || '').toLowerCase();
 
+    // Ưu tiên mạnh voice offline (localService === true) — FIX lỗi không phát âm khi offline trên Desktop
+    if (v.localService === true)  score += 4000;
+    if (v.localService === false) score -= 2000;  // phạt voice online
+
     if (v.default) score += 5000;
     if (checkIsSiriVoice(v)) score += 2000;
-    if (/natural|neural|enhanced|premium|online/i.test(name) || /natural|neural|enhanced|premium/i.test(uri)) score += 1000;
+    // Loại bỏ 'online' khỏi danh sách tăng điểm — trước đây 'online' được cộng +1000 làm cho voice online được chọn
+    if (/natural|neural|enhanced|premium/i.test(name) || /natural|neural|enhanced|premium/i.test(uri)) score += 1000;
     if (/samantha|serena|ava|daniel|karen|oliver|victoria|allison|tom|susan|katherine|nathan|zoe|google|microsoft/i.test(name)) score += 200;
     if (v.lang && (v.lang.toLowerCase().includes('us') || v.lang.toLowerCase().includes('gb') || v.lang.toLowerCase().includes('uk'))) score += 100;
 
@@ -286553,11 +286814,36 @@ function speakText(e, text, targetRate) {
     stopSpeechAudio();
 
     if (!isIOSDevice) {
-        // ANDROID & LAPTOP DESKTOP (100% OFFLINE SpeechSynthesis, supports user chosen voice)
+        // ═══════════════════════════════════════════════════════════
+        // DESKTOP & ANDROID TTS — 3-tầng fallback
+        // Vấn đề Linux/Chrome offline: Chrome trên Linux không có built-in
+        // offline TTS voice. Khi mất mạng → getVoices()=[] → speak() bị
+        // drop silently (không onerror, không onstart).
+        //
+        // Pipeline:
+        //   A) Nếu có voices load rồi → thử speechSynthesis (Attempt 1)
+        //      → nếu fail → tìm local offline voice (Attempt 2)
+        //      → nếu fail → Google TTS (Attempt 3, cần internet)
+        //   B) Nếu voices chưa load (empty) → thử Google TTS luôn vì
+        //      speechSynthesis sẽ silent-fail không có cách xử lý
+        // ═══════════════════════════════════════════════════════════
         try {
             if ('speechSynthesis' in window) {
                 if (window.speechSynthesis.paused) window.speechSynthesis.resume();
                 window.speechSynthesis.cancel();
+
+                // Kiểm tra voice list đã load chưa
+                const voicesLoaded = window.speechSynthesis.getVoices() || [];
+                const hasAnyVoice = voicesLoaded.length > 0;
+
+                if (!hasAnyVoice) {
+                    // Voices chưa load → speechSynthesis sẽ silent-fail
+                    // Dùng Google TTS ngay (nếu online) hoặc thông báo offline
+                    playTTSFallback(text, null, rate);
+                    return;
+                }
+
+                // Có voices → Attempt 1: dùng voice đã chọn
                 const utterance = new SpeechSynthesisUtterance(text);
                 const voice = getBestEnglishVoice();
                 if (voice && isEnglishVoice(voice)) {
@@ -286570,25 +286856,63 @@ function speakText(e, text, targetRate) {
                 utterance.pitch = 1.0;
 
                 let spoke = false;
+                let retried = false;
                 let fallbackTriggered = false;
-                utterance.onstart = () => { spoke = true; };
-                utterance.onerror = (err) => {
-                    if (!spoke && !fallbackTriggered) {
+
+                // Attempt 2: tìm VÀ GÁN RÕ local offline voice
+                // (không set lang không thôi → Chrome vẫn chọn Google online voice)
+                const retryWithOfflineVoice = () => {
+                    if (retried || fallbackTriggered) return;
+                    retried = true;
+                    try { window.speechSynthesis.cancel(); } catch(_) {}
+
+                    const allVoices = window.speechSynthesis.getVoices() || [];
+                    // Ưu tiên: English offline > bất kỳ offline > Google TTS
+                    const localVoice = allVoices.find(v => isEnglishVoice(v) && v.localService === true)
+                                   || allVoices.find(v => v.localService === true);
+
+                    if (!localVoice) {
+                        // Không có voice offline nào → đi thẳng Google TTS
                         fallbackTriggered = true;
                         playTTSFallback(text, null, rate);
+                        return;
                     }
+
+                    const retryUtt = new SpeechSynthesisUtterance(text);
+                    retryUtt.rate  = rate;
+                    retryUtt.pitch = 1.0;
+                    retryUtt.voice = localVoice;
+                    if (localVoice.lang) retryUtt.lang = localVoice.lang;
+
+                    let retrySpeaking = false;
+                    retryUtt.onstart = () => { retrySpeaking = true; };
+                    retryUtt.onerror = () => {
+                        if (!fallbackTriggered) {
+                            fallbackTriggered = true;
+                            playTTSFallback(text, null, rate); // Attempt 3
+                        }
+                    };
+                    window.speechSynthesis.speak(retryUtt);
+                    setTimeout(() => {
+                        if (!retrySpeaking && !fallbackTriggered) {
+                            fallbackTriggered = true;
+                            try { window.speechSynthesis.cancel(); } catch(_) {}
+                            playTTSFallback(text, null, rate);
+                        }
+                    }, 900);
+                };
+
+                utterance.onstart = () => { spoke = true; };
+                utterance.onerror = () => {
+                    if (!spoke && !fallbackTriggered) retryWithOfflineVoice();
                 };
                 window.speechSynthesis.speak(utterance);
                 setTimeout(() => {
                     if (!spoke && !fallbackTriggered) {
                         const isSpeakingOrPending = window.speechSynthesis.speaking || window.speechSynthesis.pending;
-                        if (!isSpeakingOrPending) {
-                            fallbackTriggered = true;
-                            try { window.speechSynthesis.cancel(); } catch(e) {}
-                            playTTSFallback(text, null, rate);
-                        }
+                        if (!isSpeakingOrPending) retryWithOfflineVoice(); // Attempt 2
                     }
-                }, 700);
+                }, 800);
                 return;
             }
         } catch(err) {}
@@ -286656,7 +286980,22 @@ function stopSpeechAudio() {
     }
 }
 
+// Hiển thị thông báo khi không phát âm được (tránh im lặng hoàn toàn gây bối rối)
+let _ttsOfflineToastShown = false;
+function _showTTSOfflineNotice() {
+    // Chỉ hiện 1 lần mỗi 30 giây để không làm phiền
+    if (_ttsOfflineToastShown) return;
+    _ttsOfflineToastShown = true;
+    setTimeout(() => { _ttsOfflineToastShown = false; }, 30000);
+    // Dùng toast có sẵn của ứng dụng
+    if (typeof showParentToast === 'function') {
+        showParentToast('🔇 Không thể phát âm: mất kết nối Internet. Trên máy tính cần có mạng để nghe giọng đọc.', 4000);
+    }
+}
+
 function playTTSFallback(text, langCode, targetRate) {
+    // Dùng Google TTS (chất lượng tốt khi online)
+    // Nếu fail (mất mạng) → hiện thông báo thay vì im lặng
     try {
         if (currentTTSAudio) {
             try { currentTTSAudio.pause(); currentTTSAudio.currentTime = 0; } catch(e) {}
@@ -286669,8 +287008,9 @@ function playTTSFallback(text, langCode, targetRate) {
         if (typeof targetRate === 'number' && targetRate > 0) {
             currentTTSAudio.playbackRate = targetRate;
         }
-        currentTTSAudio.play().catch(e => console.warn("Fallback audio blocked:", e));
-    } catch(e) {}
+        currentTTSAudio.onerror = () => { _showTTSOfflineNotice(); };
+        currentTTSAudio.play().catch(() => { _showTTSOfflineNotice(); });
+    } catch(e) { _showTTSOfflineNotice(); }
 }
 
 function startTimer(seconds, textId, progressId, onTimeout) {
@@ -286796,7 +287136,7 @@ function checkWordAnswer(selected, correct, btn, item) {
                 if (b.innerText === correct) b.classList.add('correct');
             });
         }
-        streak = 0; addWeakWord(item);
+        streak = 0; addWeakWord(item); if (item) trackWordError(item);
     }
     saveUserData(); updateStats();
     scheduleQuizNext(() => {
@@ -286981,7 +287321,7 @@ function checkSentenceAnswer(selected, correct, btn) {
             });
         }
         streak = 0;
-        if (item) addWeakWord(item);
+        if (item) { addWeakWord(item); trackWordError(item); }
     }
     saveUserData(); updateStats();
     scheduleQuizNext(() => {
@@ -287955,6 +288295,8 @@ function finishMockExam() {
     readingScore += rShieldsWon * 20;
     speakingScore += sShieldsWon * 20;
     score += (lShieldsWon + rShieldsWon + sShieldsWon) * 20;
+    // Flush TRƯỚC khi cộng vào totalAnswered để mock exam time được ghi đúng
+    if (typeof flushSessionLog === 'function') flushSessionLog();
     totalAnswered += 15;
     correctAnswers += totalCorrectInExam;
 
@@ -288026,6 +288368,7 @@ function saveUserData() {
     localStorage.setItem(pfx + 's_score', speakingScore);
     localStorage.setItem('flyers_weakWords', JSON.stringify(weakWords));
     localStorage.setItem('flyers_favoriteWords', JSON.stringify(favoriteWords));
+    // Note: flushSessionLog() is called in switchMode(), not here, to avoid double-counting
 }
 
 // Load score variables from localStorage for a given level.
@@ -288044,6 +288387,8 @@ function loadLevelScores(level) {
         listeningScore = parseInt(localStorage.getItem('flyers_l_score')) || 0;
         readingScore   = parseInt(localStorage.getItem('flyers_r_score')) || 0;
         speakingScore  = parseInt(localStorage.getItem('flyers_s_score')) || 0;
+        _lastFlushedAnswered = totalAnswered;
+        _lastFlushedCorrect  = correctAnswers;
     } else {
         score          = parseInt(localStorage.getItem(pfx + 'score'))   || 0;
         streak         = parseInt(localStorage.getItem(pfx + 'streak'))  || 0;
@@ -288053,6 +288398,11 @@ function loadLevelScores(level) {
         readingScore   = parseInt(localStorage.getItem(pfx + 'r_score')) || 0;
         speakingScore  = parseInt(localStorage.getItem(pfx + 's_score')) || 0;
     }
+    // Sync delta baseline so flushSessionLog() treats loaded values as already-flushed
+    // (prevents phantom entries on page refresh)
+    _lastFlushedAnswered = totalAnswered;
+    _lastFlushedCorrect  = correctAnswers;
+    _sessionStart = Date.now();
 }
 
 function updateStats() {
@@ -288240,6 +288590,7 @@ function closeResetModal() {
 function executeResetStats() {
     closeResetModal();
     score = 0; streak = 0; totalAnswered = 0; correctAnswers = 0;
+    _lastFlushedAnswered = 0; _lastFlushedCorrect = 0; _sessionStart = Date.now();
     listeningScore = 0; readingScore = 0; speakingScore = 0;
     weakWords = []; favoriteWords = [];
 
@@ -288367,7 +288718,29 @@ function closeDashboard() {
 
 window.onload = () => {
     syncLevelDatabases();
-    switchCEFRLevel(currentCEFRLevel || 'PreA1');
+
+    // Đọc resume state trước khi switch level
+    let _resume = null;
+    try {
+        const _raw = localStorage.getItem('em_fc_resume');
+        if (_raw) {
+            const _s = JSON.parse(_raw);
+            if (_s && _s.level && _s.category) _resume = _s;
+        }
+    } catch(e) {}
+
+    // Khởi động ứng dụng với level từ resume (hoặc PreA1 mặc định)
+    const _startLevel = (_resume && _resume.level) ? _resume.level : (currentCEFRLevel || 'PreA1');
+    switchCEFRLevel(_startLevel);
+
+    // Nếu có resume state: override category + index sau khi switchCEFRLevel đã load xong
+    if (_resume && vocabularyData && vocabularyData[_resume.category]) {
+        currentCategory = _resume.category;
+        currentCardList = [...vocabularyData[_resume.category]];
+        currentIndex = Math.min(typeof _resume.index === 'number' ? _resume.index : 0, currentCardList.length - 1);
+        renderCategories();
+        switchMode(currentMode); // render lại thẻ với index đã khôi phục
+    }
 
     if (typeof checkMobileDevice === 'function') {
         checkMobileDevice();
@@ -288377,6 +288750,11 @@ window.onload = () => {
     updateWeakCategory();
     updateFavoriteCategory();
 };
+
+// Flush khi user đóng tab / refresh — không để mất thời gian học
+window.addEventListener('beforeunload', () => {
+    if (typeof flushSessionLog === 'function') flushSessionLog();
+});
 
 </script>
 
@@ -288715,8 +289093,8 @@ window.onload = () => {
                 <div>
                     <h3 style="margin:0; font-size:1.25rem; font-weight:800; color:#0f172a; line-height:1.2;">English Master</h3>
                     <div style="display:flex; align-items:center; gap:6px; margin-top:4px;">
-                        <span style="background:#fce7f3; color:#be185d; font-size:0.72rem; font-weight:800; padding:2px 8px; border-radius:12px;">3.5.1</span>
-                        <span style="color:#64748b; font-size:0.75rem; font-weight:600;">📅 Oct 2026</span>
+                        <span style="background:#fce7f3; color:#be185d; font-size:0.72rem; font-weight:800; padding:2px 8px; border-radius:12px;">3.5.2</span>
+                        <span style="color:#64748b; font-size:0.75rem; font-weight:600;">📅 Nov 2026</span>
                     </div>
                 </div>
             </div>
@@ -288824,6 +289202,20 @@ window.onload = () => {
             </div>
             
             <div style="max-height:180px; overflow-y:auto; padding-right:4px; display:flex; flex-direction:column; gap:10px;">
+
+                <!-- Version 3.5.2 -->
+                <div style="border-left: 3px solid #ea580c; padding-left: 10px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-weight:800; font-size:0.82rem; color:#0f172a;">3.5.2 — Enhance application with advanced features</span>
+                        <span style="font-size:0.72rem; color:#94a3b8; font-weight:600;">11/2026</span>
+                    </div>
+                    <ul style="margin:4px 0 0 0; padding-left:16px; font-size:0.78rem; color:#475569; line-height:1.4;">
+                        <li>Tính năng Theo Dõi Học Tập giúp bạn dễ dàng nắm bắt tiến độ, thói quen học daily, phân tích chi tiết điểm mạnh - điểm yếu theo từng chủ đề và tự động gợi ý lộ trình cải thiện từ vựng lẫn ngữ pháp hiệu quả. Đồng thời hệ thống tự động dọn dẹp nhật ký sau 60 ngày hoặc cho phép bạn chủ động xóa dữ liệu bất cứ lúc nào.</li>
+                        <li>Ghi nhớ tiến độ: Ứng dụng tự động lưu lại thẻ học bạn đang xem dở và hiển thị ngay khi bạn mở lại app, giúp bạn học tiếp không gián đoạn.</li>
+                        <li>Sửa một số lỗi.</li>
+                    </ul>
+                </div>
+
                 <!-- Version 3.5.1 -->
                 <div style="border-left: 3px solid #2563eb; padding-left: 10px;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -288911,5 +289303,1259 @@ window.onload = () => {
     </div>
 </div>
 
+
+<!-- ══════════════════════════════════════════════════════
+     PARENT PIN MODAL
+══════════════════════════════════════════════════════ -->
+<div id="parentPinOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:3200; justify-content:center; align-items:center; padding:12px;">
+  <div class="parent-pin-box">
+    <div style="font-size:2rem; margin-bottom:6px;">🔐</div>
+    <div class="parent-pin-title">Bảng Theo Dõi Học Tập</div>
+    <div class="parent-pin-sub">Nhập mã PIN 4 chữ số để truy cập</div>
+    <div class="parent-pin-sub" style="font-size:0.7rem; color:#a5b4fc; margin-top:4px; letter-spacing:0.02em;">Mặc định: <strong style="color:#818cf8;">1234</strong></div>
+    <div class="pin-dots" id="pinDots">
+      <div class="pin-dot" id="pd0"></div>
+      <div class="pin-dot" id="pd1"></div>
+      <div class="pin-dot" id="pd2"></div>
+      <div class="pin-dot" id="pd3"></div>
+    </div>
+    <div class="pin-error" id="pinError"></div>
+    <div class="pin-numpad">
+      <button class="pin-key" onclick="pinInput('1')">1</button>
+      <button class="pin-key" onclick="pinInput('2')">2</button>
+      <button class="pin-key" onclick="pinInput('3')">3</button>
+      <button class="pin-key" onclick="pinInput('4')">4</button>
+      <button class="pin-key" onclick="pinInput('5')">5</button>
+      <button class="pin-key" onclick="pinInput('6')">6</button>
+      <button class="pin-key" onclick="pinInput('7')">7</button>
+      <button class="pin-key" onclick="pinInput('8')">8</button>
+      <button class="pin-key" onclick="pinInput('9')">9</button>
+      <button class="pin-key pin-del" onclick="pinDel()">⌫</button>
+      <button class="pin-key" onclick="pinInput('0')">0</button>
+      <button class="pin-key" onclick="closeParentPin()" style="background:#f1f5f9; color:#64748b; font-size:0.75rem;">Hủy</button>
+    </div>
+    <div style="margin-top:10px;">
+      <button onclick="forgotPin()" style="background:none; border:none; color:#6366f1; font-size:0.75rem; font-weight:700; cursor:pointer; text-decoration:underline; padding:4px 8px; border-radius:6px; transition:color .15s;" onmouseover="this.style.color='#4338ca'" onmouseout="this.style.color='#6366f1'">🔓 Quên PIN?</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PARENT DASHBOARD MODAL
+══════════════════════════════════════════════════════ -->
+<div id="parentDashOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:3200; justify-content:center; align-items:flex-start; padding:12px; overflow-y:auto;">
+  <div class="parent-dash-panel" style="margin:auto;">
+    <!-- Header -->
+    <div class="pdash-header">
+      <div>
+        <h2 style="margin:0 0 2px;">📊 Theo Dõi Học Tập</h2>
+        <div style="font-size:0.72rem; opacity:0.85;">Trình độ đang học: <span id="pdCurrentLevel" style="font-weight:900; background:rgba(255,255,255,0.22); padding:1px 8px; border-radius:8px;">—</span></div>
+      </div>
+      <div class="pdash-header-btns">
+        <button class="pdash-hbtn" onclick="showChangePinModal()">🔑 Đổi PIN</button>
+        <button class="pdash-hbtn danger" onclick="confirmResetParentData()">🗑️ Reset</button>
+        <button class="pdash-hbtn" onclick="closeParentDash()">✕ Đóng</button>
+      </div>
+    </div>
+    <div class="pdash-body">
+
+      <!-- Tiến độ học tập -->
+      <div class="pdash-section">
+        <div class="pdash-section-title">📈 Tiến Độ Học Tập</div>
+        <div class="pdash-progress-grid" id="pdProgressGrid"></div>
+      </div>
+
+      <!-- Hôm nay -->
+      <div class="pdash-section">
+        <div class="pdash-section-title">📅 Hôm Nay — <span id="pdTodayDate"></span></div>
+        <div class="pdash-stat-row">
+          <div class="pdash-stat-card">
+            <div class="pdash-stat-val" id="pdTodayMin">0</div>
+            <div class="pdash-stat-lbl">⏱️ Phút học</div>
+          </div>
+          <div class="pdash-stat-card">
+            <div class="pdash-stat-val" id="pdTodayQ">0</div>
+            <div class="pdash-stat-lbl">📝 Thẻ/Câu đã làm</div>
+          </div>
+          <div class="pdash-stat-card">
+            <div class="pdash-stat-val" id="pdTodayAcc">—</div>
+            <div class="pdash-stat-lbl">✅ Chính xác</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Biểu đồ lịch sử -->
+      <div class="pdash-section">
+        <div class="pdash-chart-controls">
+          <div class="pdash-section-title" style="margin-bottom:0;">📊 Lịch Sử Học Tập</div>
+          <div class="pdash-chart-tabs">
+            <button class="pdash-chart-tab active" id="chartTab7"  onclick="switchChartRange(7)">7 ngày</button>
+            <button class="pdash-chart-tab"        id="chartTab30" onclick="switchChartRange(30)">30 ngày</button>
+          </div>
+        </div>
+        <div class="pdash-chart-wrap">
+          <div id="pdChart"></div>
+        </div>
+        <div id="pdDayDetail" style="display:none;"></div>
+      </div>
+
+      <!-- Chủ đề mạnh / yếu -->
+      <div class="pdash-section">
+        <div class="pdash-section-title">🏅 Phân Tích Theo Chủ Đề</div>
+        <div class="pdash-sw-grid">
+          <div class="pdash-sw-card">
+            <h4 style="color:#16a34a;">💪 Chủ Đề Mạnh</h4>
+            <div id="pdStrongCats"><div style="color:#94a3b8; font-size:0.72rem;">Chưa có dữ liệu</div></div>
+          </div>
+          <div class="pdash-sw-card">
+            <h4 style="color:#dc2626;">⚠️ Cần Cải Thiện</h4>
+            <div id="pdWeakCats"><div style="color:#94a3b8; font-size:0.72rem;">Chưa có dữ liệu</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top 10 từ hay sai -->
+      <div class="pdash-section">
+        <div class="pdash-section-title">📋 Từ Hay Sai Nhất (Top 10)</div>
+        <div id="pdWordErrors"><div style="color:#94a3b8; font-size:0.75rem; padding:4px 0;">Chưa có dữ liệu — hãy làm quiz để xem thống kê.</div></div>
+      </div>
+
+      <!-- Từ đã học hôm nay (Thẻ Học) -->
+      <div class="pdash-section">
+        <div class="pdash-section-title">📖 Từ Đã Học Hôm Nay (Thẻ Học)</div>
+        <div id="pdFcToday"></div>
+      </div>
+
+      <!-- Gợi ý -->
+      <div class="pdash-section">
+        <div class="pdash-section-title">💡 Gợi Ý Tuần Này</div>
+        <div id="pdRecs"></div>
+      </div>
+
+      <!-- Bộ nhớ sử dụng -->
+      <div class="pdash-section" style="padding-bottom:4px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div class="pdash-section-title" style="margin-bottom:4px;">💾 Bộ Nhớ Theo Dõi</div>
+          <div id="pdStorageLbl" class="pdash-storage-lbl"></div>
+        </div>
+        <div class="pdash-storage-bar"><div class="pdash-storage-fill" id="pdStorageFill" style="width:0%"></div></div>
+        <div class="pdash-storage-lbl" style="text-align:left; margin-top:3px; font-size:0.62rem; color:#cbd5e1;">Tự động xóa dữ liệu cũ hơn 60 ngày. Nhấn Reset để xóa trình độ này.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Change PIN modal -->
+<div id="changePinOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:3300; justify-content:center; align-items:center; padding:12px;">
+  <div class="parent-pin-box">
+    <div style="font-size:2rem; margin-bottom:6px;">🔑</div>
+    <div class="parent-pin-title">Đổi Mã PIN</div>
+    <div class="parent-pin-sub" id="changePinSub">Nhập PIN mới (4 chữ số)</div>
+    <div class="pin-dots" id="newPinDots">
+      <div class="pin-dot" id="npd0"></div>
+      <div class="pin-dot" id="npd1"></div>
+      <div class="pin-dot" id="npd2"></div>
+      <div class="pin-dot" id="npd3"></div>
+    </div>
+    <div class="pin-error" id="changePinError"></div>
+    <div class="pin-numpad">
+      <button class="pin-key" onclick="newPinInput('1')">1</button>
+      <button class="pin-key" onclick="newPinInput('2')">2</button>
+      <button class="pin-key" onclick="newPinInput('3')">3</button>
+      <button class="pin-key" onclick="newPinInput('4')">4</button>
+      <button class="pin-key" onclick="newPinInput('5')">5</button>
+      <button class="pin-key" onclick="newPinInput('6')">6</button>
+      <button class="pin-key" onclick="newPinInput('7')">7</button>
+      <button class="pin-key" onclick="newPinInput('8')">8</button>
+      <button class="pin-key" onclick="newPinInput('9')">9</button>
+      <button class="pin-key pin-del" onclick="newPinDel()">⌫</button>
+      <button class="pin-key" onclick="newPinInput('0')">0</button>
+      <button class="pin-key" onclick="closeChangePinModal()" style="background:#f1f5f9; color:#64748b; font-size:0.75rem;">Hủy</button>
+    </div>
+  </div>
+</div>
+<!-- Custom Confirm Dialog -->
+<div id="customDialogOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9000; justify-content:center; align-items:center; padding:16px;">
+  <div class="custom-dialog-box">
+    <div class="custom-dialog-icon" id="cdlgIcon">u26a0ufe0f</div>
+    <div class="custom-dialog-title" id="cdlgTitle"></div>
+    <div class="custom-dialog-body"  id="cdlgBody"></div>
+    <div class="custom-dialog-btns">
+      <button class="cdlg-btn cdlg-cancel"  id="cdlgCancelBtn"  onclick="_cdlgCancel()">Hu1ee7y</button>
+      <button class="cdlg-btn cdlg-confirm" id="cdlgConfirmBtn" onclick="_cdlgConfirm()">Xu00e1c nhu1eadn</button>
+    </div>
+  </div>
+</div>
+<!-- Toast notification -->
+<div id="parentToast"></div>
 </body>
+<script>
+// ══════════════════════════════════════════════════════════════
+// PARENT DASHBOARD — JavaScript Engine
+// ══════════════════════════════════════════════════════════════
+
+// ── Custom Dialog & Toast Engine ────────────────────────
+let _cdlgCallback = null;
+
+function showCustomDialog({ icon='⚠️', title='', body='', confirmText='Xác nhận', cancelText='Hủy', confirmClass='', onConfirm=null, onCancel=null, hideCancel=false }) {
+    _cdlgCallback = { onConfirm, onCancel };
+    const ov = document.getElementById('customDialogOverlay');
+    document.getElementById('cdlgIcon').innerText       = icon;
+    document.getElementById('cdlgTitle').innerText      = title;
+    document.getElementById('cdlgBody').innerHTML       = body;
+    document.getElementById('cdlgConfirmBtn').innerText = confirmText;
+    document.getElementById('cdlgCancelBtn').innerText  = cancelText;
+    const confirmBtn = document.getElementById('cdlgConfirmBtn');
+    confirmBtn.className = 'cdlg-btn cdlg-confirm' + (confirmClass ? ' ' + confirmClass : '');
+    document.getElementById('cdlgCancelBtn').style.display = hideCancel ? 'none' : '';
+    if (ov) ov.style.display = 'flex';
+}
+
+function _cdlgConfirm() {
+    document.getElementById('customDialogOverlay').style.display = 'none';
+    if (_cdlgCallback && _cdlgCallback.onConfirm) _cdlgCallback.onConfirm();
+    _cdlgCallback = null;
+}
+
+function _cdlgCancel() {
+    document.getElementById('customDialogOverlay').style.display = 'none';
+    if (_cdlgCallback && _cdlgCallback.onCancel) _cdlgCallback.onCancel();
+    _cdlgCallback = null;
+}
+
+function showParentToast(msg, durationMs=2600) {
+    const t = document.getElementById('parentToast');
+    if (!t) return;
+    t.innerText = msg;
+    t.style.display = 'block';
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => { t.style.display = 'none'; }, durationMs);
+}
+
+// ── Session Log ─────────────────────────────────────────────
+// Rolling daily log stored as JSON array in localStorage.
+// Each entry: { date, level, category, mode, answered, correct, duration, ts }
+// Maximum 90 days retained.
+
+let _sessionStart = Date.now();     // dùng bởi flushSessionLog (quiz / mock exam)
+let _fcSessionStart = Date.now();   // dùng bởi logFlashcardView (flashcard)
+let _lastFlushedAnswered = 0;  // snapshot tại lần flush trước
+let _lastFlushedCorrect  = 0;
+let _sessionAnswered = 0;
+let _sessionCorrect  = 0;
+let _lastFlushDate   = '';
+let _flashcardViewed = 0;
+let _flashcardEasy   = 0;
+
+// ── Daily Flashcard Word Tracker ─────────────────────────
+// Storage: em_fc_daily_${level} = { "YYYY-MM-DD": [{en,vi}, ...], ... }
+// Retained 30 days, pruned on each write.
+function trackDailyFlashcard(item) {
+    if (!item || !item.en) return;
+    const levelNow  = (typeof currentCEFRLevel !== 'undefined') ? currentCEFRLevel : 'PreA1';
+    const storageKey = 'em_fc_daily_' + levelNow;
+    const today     = _todayStr();
+    let data = JSON.parse(localStorage.getItem(storageKey) || '{}');
+
+    // Init today's list
+    if (!data[today]) data[today] = [];
+    // Add if not already present today
+    const alreadyIn = data[today].some(w => w.en === item.en);
+    if (!alreadyIn) data[today].push({ en: item.en, vi: item.vi || '' });
+
+    // Prune to last 30 days
+    const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 30);
+    const cutStr = _dateStr(cutoff);
+    Object.keys(data).forEach(k => { if (k < cutStr) delete data[k]; });
+
+    localStorage.setItem(storageKey, JSON.stringify(data));
+}
+
+function _dateStr(d) {
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+// Track flashcard views for parent dashboard
+function logFlashcardView(isEasy) {
+    _flashcardViewed++;
+    if (isEasy === true) _flashcardEasy++;
+    const today = _todayStr();
+    const levelNow = (typeof currentCEFRLevel !== 'undefined') ? currentCEFRLevel : 'PreA1';
+    const catNow   = (typeof currentCategory  !== 'undefined') ? currentCategory  : '';
+    const durSec   = Math.round((Date.now() - _fcSessionStart) / 1000);
+
+    let log = JSON.parse(localStorage.getItem('em_session_log') || '[]');
+    let entry = log.find(e => e.date === today && e.level === levelNow && e.mode === 'flashcard' && e.category === catNow);
+    if (entry) {
+        entry.answered = _flashcardViewed;
+        entry.correct  = _flashcardEasy;
+        entry.duration = durSec;    // durSec tính từ _fcSessionStart (reset khi vào flashcard mode)
+        entry.ts       = Date.now();
+    } else {
+        log.push({ date: today, level: levelNow, category: catNow, mode: 'flashcard',
+                   answered: _flashcardViewed, correct: _flashcardEasy, duration: durSec, ts: Date.now() });
+    }
+    // Prune 60 days
+    const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 60);
+    const cutStr = `${cutoff.getFullYear()}-${String(cutoff.getMonth()+1).padStart(2,'0')}-${String(cutoff.getDate()).padStart(2,'0')}`;
+    log = log.filter(e => e.date >= cutStr);
+    localStorage.setItem('em_session_log', JSON.stringify(log));
+}
+
+// Reset _flashcardViewed when switching category or level
+function resetFlashcardLog() { _flashcardViewed = 0; _flashcardEasy = 0; _fcSessionStart = Date.now(); }
+
+// Reset all parent tracking data
+function confirmResetParentData() {
+    const levelNow = (typeof currentCEFRLevel !== 'undefined') ? currentCEFRLevel : 'PreA1';
+    const LEVEL_LABELS = {
+        PreA1:'Pre-A1 Starters', A1:'A1 Movers', A2:'A2 Flyers',
+        B1:'B1 KET', B2:'B2 FCE', IELTS:'IELTS Academic',
+        DailyCommunication:'Giao Tiếp Hàng Ngày', ITSoftware:'IT Software'
+    };
+    const lbl = LEVEL_LABELS[levelNow] || levelNow;
+    showCustomDialog({
+        icon: '🗑️',
+        title: 'Xóa dữ liệu theo dõi?',
+        body: 'Toàn bộ lịch sử theo dõi của trình độ <strong>"' + lbl + '"</strong> sẽ bị xóa vĩnh viễn.<br><br>Hành động này không thể hoàn tác.',
+        confirmText: 'Xóa',
+        cancelText: 'Hủy',
+        confirmClass: 'danger',
+        onConfirm: () => {
+            let log = JSON.parse(localStorage.getItem('em_session_log') || '[]');
+            log = log.filter(e => e.level !== levelNow);
+            localStorage.setItem('em_session_log', JSON.stringify(log));
+            localStorage.removeItem('em_word_errors_' + levelNow);
+            localStorage.removeItem('em_fc_daily_' + levelNow);
+            _flashcardViewed = 0; _flashcardEasy = 0; _sessionStart = Date.now();
+            buildParentDashboard();
+            showParentToast('✅ Đã xóa dữ liệu theo dõi cho trình độ "' + lbl + '".');
+        }
+    });
+}
+
+function _todayStr() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function flushSessionLog() {
+    const today    = _todayStr();
+    const modeNow  = (typeof currentMode !== 'undefined') ? currentMode : 'unknown';
+    const catNow   = (typeof currentCategory !== 'undefined') ? currentCategory : '';
+    const levelNow = (typeof currentCEFRLevel !== 'undefined') ? currentCEFRLevel : 'PreA1';
+
+    // Thời gian (giây) đã trôi qua từ lần reset _sessionStart gần nhất
+    const deltaSec      = Math.max(0, Math.round((Date.now() - _sessionStart) / 1000));
+    const deltaAnswered = totalAnswered - _lastFlushedAnswered;
+    const deltaCorrect  = correctAnswers - _lastFlushedCorrect;
+
+    // Chỉ bỏ qua nếu không có cả thời gian lẫn câu trả lời mới
+    if (deltaSec <= 0 && deltaAnswered <= 0) return;
+
+    let log = JSON.parse(localStorage.getItem('em_session_log') || '[]');
+
+    // Tìm entry hôm nay cùng level+mode+category → cộng dồn
+    let entry = log.find(e => e.date === today && e.level === levelNow && e.mode === modeNow && e.category === catNow);
+    if (entry) {
+        entry.answered += deltaAnswered;
+        entry.correct  += deltaCorrect;
+        entry.duration += deltaSec;      // ← cộng dồn thay vì Math.max
+        entry.ts        = Date.now();
+    } else {
+        log.push({ date: today, level: levelNow, category: catNow, mode: modeNow,
+                   answered: deltaAnswered, correct: deltaCorrect, duration: deltaSec, ts: Date.now() });
+    }
+
+    // Cập nhật snapshot
+    _lastFlushedAnswered = totalAnswered;
+    _lastFlushedCorrect  = correctAnswers;
+    // Reset session start để lần flush tiếp theo chỉ tính thời gian từ đây
+    _sessionStart = Date.now();
+
+    // Prune entries older than 60 days
+    const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 60);
+    const cutStr = `${cutoff.getFullYear()}-${String(cutoff.getMonth()+1).padStart(2,'0')}-${String(cutoff.getDate()).padStart(2,'0')}`;
+    log = log.filter(e => e.date >= cutStr);
+
+    localStorage.setItem('em_session_log', JSON.stringify(log));
+}
+
+// ── Word Error Tracker ───────────────────────────────────────
+function trackWordError(item) {
+    if (!item || !item.en) return;
+    const levelNow = (typeof currentCEFRLevel !== 'undefined') ? currentCEFRLevel : 'PreA1';
+    const storageKey = 'em_word_errors_' + levelNow;
+    let errors = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    const key = item.en.toLowerCase().trim();
+    if (!errors[key]) errors[key] = { en: item.en, vi: item.vi || '', count: 0 };
+    errors[key].count++;
+    errors[key].ts = Date.now();
+    localStorage.setItem(storageKey, JSON.stringify(errors));
+}
+
+// ── PIN Logic ────────────────────────────────────────────────
+let _pinBuffer = '';
+
+function showParentPin() {
+    _pinBuffer = '';
+    renderPinDots('pinDots', 'pd', 0);
+    const el = document.getElementById('pinError');
+    if (el) el.innerText = '';
+    const ov = document.getElementById('parentPinOverlay');
+    if (ov) { ov.style.display = 'flex'; }
+}
+
+function closeParentPin() {
+    _pinBuffer = '';
+    const ov = document.getElementById('parentPinOverlay');
+    if (ov) ov.style.display = 'none';
+}
+
+function forgotPin() {
+    showCustomDialog({
+        icon: '🔓',
+        title: 'Quên mã PIN?',
+        body: 'Bấm <strong>Đặt lại</strong> để reset PIN về mặc định: <strong>1234</strong><br><br>Sau khi vào được, hãy đổi PIN mới ngay.',
+        confirmText: 'Đặt lại PIN',
+        cancelText: 'Hủy',
+        onConfirm: () => {
+            localStorage.removeItem('em_parent_pin');
+            _pinBuffer = '';
+            renderPinDots('pinDots', 'pd', 0);
+            const errEl = document.getElementById('pinError');
+            if (errEl) errEl.innerText = '';
+            showParentToast('✅ PIN đã đặt lại về: 1234');
+        }
+    });
+}
+
+function pinInput(digit) {
+    if (_pinBuffer.length >= 4) return;
+    _pinBuffer += digit;
+    renderPinDots('pinDots', 'pd', _pinBuffer.length);
+    if (_pinBuffer.length === 4) {
+        setTimeout(() => validatePin(), 180);
+    }
+}
+
+function pinDel() {
+    if (_pinBuffer.length > 0) {
+        _pinBuffer = _pinBuffer.slice(0, -1);
+        renderPinDots('pinDots', 'pd', _pinBuffer.length);
+    }
+}
+
+function renderPinDots(containerId, prefix, filled) {
+    for (let i = 0; i < 4; i++) {
+        const dot = document.getElementById(prefix + i);
+        if (!dot) continue;
+        dot.innerText = i < filled ? '●' : '';
+        dot.classList.toggle('active', i < filled);
+    }
+}
+
+function validatePin() {
+    const savedPin = localStorage.getItem('em_parent_pin') || '1234';
+    if (_pinBuffer === savedPin) {
+        closeParentPin();
+        showParentDashboard();
+    } else {
+        const el = document.getElementById('pinError');
+        if (el) el.innerText = '❌ Mã PIN không đúng. Thử lại.';
+        _pinBuffer = '';
+        renderPinDots('pinDots', 'pd', 0);
+    }
+}
+
+// ── Change PIN ───────────────────────────────────────────────
+let _newPinStep   = 'enter';   // 'enter' | 'confirm'
+let _newPinFirst  = '';
+let _newPinBuffer = '';
+
+function showChangePinModal() {
+    _newPinStep   = 'enter';
+    _newPinFirst  = '';
+    _newPinBuffer = '';
+    renderPinDots('newPinDots', 'npd', 0);
+    const sub = document.getElementById('changePinSub');
+    if (sub) sub.innerText = 'Nhập PIN mới (4 chữ số)';
+    const err = document.getElementById('changePinError');
+    if (err) err.innerText = '';
+    const ov = document.getElementById('changePinOverlay');
+    if (ov) ov.style.display = 'flex';
+}
+
+function closeChangePinModal() {
+    const ov = document.getElementById('changePinOverlay');
+    if (ov) ov.style.display = 'none';
+}
+
+function newPinInput(digit) {
+    if (_newPinBuffer.length >= 4) return;
+    _newPinBuffer += digit;
+    renderPinDots('newPinDots', 'npd', _newPinBuffer.length);
+    if (_newPinBuffer.length === 4) {
+        setTimeout(() => {
+            if (_newPinStep === 'enter') {
+                _newPinFirst  = _newPinBuffer;
+                _newPinBuffer = '';
+                _newPinStep   = 'confirm';
+                renderPinDots('newPinDots', 'npd', 0);
+                const sub = document.getElementById('changePinSub');
+                if (sub) sub.innerText = 'Nhập lại PIN để xác nhận';
+            } else {
+                if (_newPinBuffer === _newPinFirst) {
+                    localStorage.setItem('em_parent_pin', _newPinBuffer);
+                    closeChangePinModal();
+                    showParentToast('✅ Đổi PIN thành công!');
+                } else {
+                    const err = document.getElementById('changePinError');
+                    if (err) err.innerText = '❌ PIN không khớp. Thử lại.';
+                    _newPinStep   = 'enter';
+                    _newPinFirst  = '';
+                    _newPinBuffer = '';
+                    renderPinDots('newPinDots', 'npd', 0);
+                    const sub = document.getElementById('changePinSub');
+                    if (sub) sub.innerText = 'Nhập PIN mới (4 chữ số)';
+                }
+            }
+        }, 180);
+    }
+}
+
+function newPinDel() {
+    if (_newPinBuffer.length > 0) {
+        _newPinBuffer = _newPinBuffer.slice(0, -1);
+        renderPinDots('newPinDots', 'npd', _newPinBuffer.length);
+    }
+}
+
+// ── Parent Dashboard Builder ─────────────────────────────────
+function showParentDashboard() {
+    // Flush session hiện tại trước khi hiển thị để tính đủ thời gian
+    if (typeof flushSessionLog === 'function') flushSessionLog();
+    buildParentDashboard();
+    const ov = document.getElementById('parentDashOverlay');
+    if (ov) ov.style.display = 'flex';
+}
+
+function closeParentDash() {
+    const ov = document.getElementById('parentDashOverlay');
+    if (ov) ov.style.display = 'none';
+}
+
+function buildParentDashboard() {
+    const activeLevel = (typeof currentCEFRLevel !== 'undefined') ? currentCEFRLevel : 'PreA1';
+    // Show current level in header
+    const LEVEL_LABELS = {
+        PreA1:'🟣 Pre-A1 Starters', A1:'🔵 A1 Movers', A2:'🟢 A2 Flyers',
+        B1:'🟡 B1 KET', B2:'🟠 B2 FCE', IELTS:'🔴 IELTS Academic',
+        DailyCommunication:'💬 Giao Tiếp Hàng Ngày', ITSoftware:'💻 IT Software'
+    };
+    const el_lvl = document.getElementById('pdCurrentLevel');
+    if (el_lvl) el_lvl.innerText = LEVEL_LABELS[activeLevel] || activeLevel;
+    const log = JSON.parse(localStorage.getItem('em_session_log') || '[]')
+                .filter(e => e.level === activeLevel);
+
+    // Today's date display
+    const now = new Date();
+    const todayStr = _todayStr();
+    const dateDisp = now.toLocaleDateString('vi-VN', { weekday:'long', day:'numeric', month:'numeric', year:'numeric' });
+    const el_date = document.getElementById('pdTodayDate');
+    if (el_date) el_date.innerText = dateDisp;
+
+    // ── Today stats ─────────────────────────────────────────
+    const todayEntries = log.filter(e => e.date === todayStr);
+    const todayAnswered = todayEntries.reduce((s, e) => s + e.answered, 0);
+    const todayCorrect  = todayEntries.reduce((s, e) => s + e.correct, 0);
+    const todayDurSec   = todayEntries.reduce((s, e) => s + e.duration, 0);
+    const todayMin      = Math.round(todayDurSec / 60);
+    const todayAcc      = todayAnswered > 0 ? Math.round(todayCorrect / todayAnswered * 100) : null;
+
+    const el_min = document.getElementById('pdTodayMin');
+    const el_q   = document.getElementById('pdTodayQ');
+    const el_acc = document.getElementById('pdTodayAcc');
+    if (el_min) el_min.innerText = todayMin;
+    if (el_q)   el_q.innerText   = todayAnswered;
+    if (el_acc) el_acc.innerText  = todayAcc !== null ? `${todayAcc}%` : '—';
+
+    // ── History bar chart (7 or 30 days) ────────────────────
+    // Declare fcData early so chart and detail can use it
+    const fcKey  = 'em_fc_daily_' + activeLevel;
+    const fcData = JSON.parse(localStorage.getItem(fcKey) || '{}');
+
+    window._pdLog    = log;
+    window._pdFcData = fcData;
+    window._pdActiveLevel = activeLevel;
+    buildHistoryChart(7);
+    // ── Category analysis (last 14 days) ────────────────────
+    const d14 = new Date(); d14.setDate(d14.getDate() - 14);
+    const d14Str = `${d14.getFullYear()}-${String(d14.getMonth()+1).padStart(2,'0')}-${String(d14.getDate()).padStart(2,'0')}`;
+    const recentLog = log.filter(e => e.date >= d14Str && e.answered > 0 && e.category);
+
+    const catStats = {};
+    recentLog.forEach(e => {
+        if (!catStats[e.category]) catStats[e.category] = { answered: 0, correct: 0 };
+        catStats[e.category].answered += e.answered;
+        catStats[e.category].correct  += e.correct;
+    });
+
+    const catList = Object.entries(catStats)
+        .map(([cat, s]) => ({ cat, acc: Math.round(s.correct / s.answered * 100) }))
+        .sort((a, b) => b.acc - a.acc);
+
+    const strong = catList.filter(c => c.acc >= 75).slice(0, 3);
+    const weak   = catList.filter(c => c.acc < 65).slice(-3).reverse();
+
+    const el_strong = document.getElementById('pdStrongCats');
+    const el_weak   = document.getElementById('pdWeakCats');
+
+    const noLogData = log.length === 0;
+    if (el_strong) {
+        el_strong.innerHTML = noLogData ? '<div style="color:#94a3b8; font-size:0.72rem;">Chưa có dữ liệu ở trình độ này.</div>'
+            : strong.length > 0
+                ? strong.map(c => `<div class="pdash-sw-row"><span>${c.cat}</span><span class="pdash-acc acc-good">${c.acc}% ✅</span></div>`).join('')
+                : '<div style="color:#94a3b8; font-size:0.72rem;">Chưa đủ dữ liệu</div>';
+    }
+    if (el_weak) {
+        el_weak.innerHTML = noLogData ? '<div style="color:#94a3b8; font-size:0.72rem;">Chưa có dữ liệu ở trình độ này.</div>'
+            : weak.length > 0
+                ? weak.map(c => `<div class="pdash-sw-row"><span>${c.cat}</span><span class="pdash-acc acc-bad">${c.acc}% ⚠️</span></div>`).join('')
+                : '<div style="color:#94a3b8; font-size:0.72rem;">Chưa có chủ đề yếu 👏</div>';
+    }
+
+    // ── Word errors top 10 (per-level) ──────────────────────────
+    const errors = JSON.parse(localStorage.getItem('em_word_errors_' + activeLevel) || '{}');
+    const errList = Object.values(errors).sort((a, b) => b.count - a.count).slice(0, 10);
+    const el_words = document.getElementById('pdWordErrors');
+    if (el_words) {
+        if (errList.length === 0) {
+            el_words.innerHTML = '<div style="color:#94a3b8; font-size:0.75rem; padding:4px 0;">Chưa có dữ liệu — hãy làm quiz để xem thống kê.</div>';
+        } else {
+            el_words.innerHTML = errList.map((w, i) =>
+                `<div class="pdash-word-row">
+                    <div>
+                        <span class="pdash-word-en">${i+1}. ${w.en}</span>
+                        <span class="pdash-word-vi"> — ${w.vi}</span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                        <span class="pdash-word-err">sai ${w.count} lần</span>
+                        <button onclick="speakText(null,'${w.en.replace(/'/g,"\\'")}',0.8)" style="background:none; border:none; cursor:pointer; font-size:0.9rem;" title="Nghe phát âm">🔊</button>
+                    </div>
+                </div>`
+            ).join('');
+        }
+    }
+
+    // ── Daily Flashcard Words ────────────────────────────────
+    // (fcKey and fcData already declared above)
+    const fcToday = fcData[todayStr] || [];
+    const el_fcToday = document.getElementById('pdFcToday');
+    if (el_fcToday) {
+        if (fcToday.length === 0) {
+            el_fcToday.innerHTML = '<div style="color:#94a3b8; font-size:0.75rem;">Chưa học thẻ nào hôm nay.</div>';
+        } else {
+            const MAX_SHOW = 15;
+            const visibleChips = fcToday.slice(0, MAX_SHOW).map(w =>
+                `<span class="pdash-fcword-chip" title="${w.vi}" onclick="speakText(null,'${w.en.replace(/'/g,"\\'")}',0.8)">🔊 ${w.en}</span>`
+            ).join('');
+            const hiddenChips = fcToday.slice(MAX_SHOW).map(w =>
+                `<span class="pdash-fcword-chip" title="${w.vi}" onclick="speakText(null,'${w.en.replace(/'/g,"\\'")}',0.8)" style="display:none" data-fc-extra>🔊 ${w.en}</span>`
+            ).join('');
+            const moreBtn = fcToday.length > MAX_SHOW
+                ? `<button class="pdash-fc-toggle" id="fcExpandBtn" onclick="document.querySelectorAll('[data-fc-extra]').forEach(function(el){el.style.display='inline-flex'});document.getElementById('fcExpandBtn').style.display='none';">▼ Xem thêm ${fcToday.length - MAX_SHOW} từ nữa</button>`
+                : '';
+            el_fcToday.innerHTML = `
+                <div style="font-size:0.72rem; color:#64748b; margin-bottom:4px;">Đã xem <strong style="color:#3730a3">${fcToday.length}</strong> từ. Bấm vào để nghe phát âm:</div>
+                <div class="pdash-fcwords-grid">${visibleChips}${hiddenChips}</div>
+                ${moreBtn}`;
+        }
+    }
+
+    // ── Progress Dashboard ────────────────────────────────────
+    // Streak: consecutive study days
+    let streak = 0;
+    for (let i = 0; i < 60; i++) {
+        const dd = new Date(); dd.setDate(dd.getDate() - i);
+        const ds = _dateStr(dd);
+        const hasQuiz = log.some(e => e.date === ds && e.answered > 0);
+        const hasFc   = fcData[ds] && fcData[ds].length > 0;
+        if (hasQuiz || hasFc) streak++;
+        else if (i > 0) break; // gap found
+    }
+
+    // Accuracy trend: last 7 vs previous 7
+    const last7 = log.filter(e => {
+        const d = new Date(); d.setDate(d.getDate() - 7);
+        return e.date > _dateStr(d) && e.answered > 0;
+    });
+    const prev7 = log.filter(e => {
+        const d1 = new Date(); d1.setDate(d1.getDate() - 14);
+        const d2 = new Date(); d2.setDate(d2.getDate() - 7);
+        return e.date > _dateStr(d1) && e.date <= _dateStr(d2) && e.answered > 0;
+    });
+    const accLast = last7.length > 0 ? Math.round(last7.reduce((s,e)=>s+e.correct,0) / last7.reduce((s,e)=>s+e.answered,0) * 100) : null;
+    const accPrev = prev7.length > 0 ? Math.round(prev7.reduce((s,e)=>s+e.correct,0) / prev7.reduce((s,e)=>s+e.answered,0) * 100) : null;
+    let trendIcon = '';
+    if (accLast !== null && accPrev !== null) {
+        if (accLast > accPrev + 3)      trendIcon = `<span class="trend-up">↑ +${accLast - accPrev}% so tuần trước</span>`;
+        else if (accLast < accPrev - 3) trendIcon = `<span class="trend-down">↓ ${accLast - accPrev}% so tuần trước</span>`;
+        else                            trendIcon = '<span class="trend-flat">→ Ổn định</span>';
+    } else if (accLast !== null) {
+        trendIcon = '<span class="trend-flat" style="font-size:0.65rem;">Chưa đủ dữ liệu so sánh</span>';
+    }
+
+    // Total unique flashcard words seen (all time for this level)
+    const allFcWords = new Set();
+    Object.values(fcData).forEach(arr => arr.forEach(w => allFcWords.add(w.en)));
+
+    // Days active last 30 days
+    const daysActive30 = new Set();
+    log.filter(e => {
+        const d = new Date(); d.setDate(d.getDate() - 30);
+        return e.date > _dateStr(d);
+    }).forEach(e => daysActive30.add(e.date));
+    Object.keys(fcData).forEach(k => {
+        const d = new Date(); d.setDate(d.getDate() - 30);
+        if (k > _dateStr(d)) daysActive30.add(k);
+    });
+
+    const el_prog = document.getElementById('pdProgressGrid');
+    if (el_prog) {
+        if (log.length === 0 && allFcWords.size === 0) {
+            el_prog.innerHTML = '<div style="color:#94a3b8; font-size:0.75rem; grid-column:1/-1;">Chưa có dữ liệu ở trình độ này.</div>';
+        } else {
+            el_prog.innerHTML = `
+                <div class="pdash-prog-card">
+                    <div class="pdash-prog-val">🔥 ${streak}</div>
+                    <div class="pdash-prog-lbl">Ngày học liên tiếp</div>
+                </div>
+                <div class="pdash-prog-card">
+                    <div class="pdash-prog-val">📅 ${daysActive30.size}</div>
+                    <div class="pdash-prog-lbl">Ngày học / 30 ngày qua</div>
+                </div>
+                <div class="pdash-prog-card">
+                    <div class="pdash-prog-val">📚 ${allFcWords.size}</div>
+                    <div class="pdash-prog-lbl">Từ đã xem qua Thẻ Học</div>
+                </div>
+                <div class="pdash-prog-card">
+                    <div class="pdash-prog-val">${accLast !== null ? accLast + '%' : '—'}</div>
+                    <div class="pdash-prog-lbl">Độ chính xác 7 ngày</div>
+                    <div class="pdash-prog-trend">${trendIcon}</div>
+                </div>`;
+        }
+    }
+
+    // ── Storage Usage ─────────────────────────────────────────
+    const el_fill = document.getElementById('pdStorageFill');
+    const el_lbl  = document.getElementById('pdStorageLbl');
+    try {
+        let totalBytes = 0;
+        ['em_session_log', 'em_fc_daily_'+activeLevel, 'em_word_errors_'+activeLevel].forEach(k => {
+            const v = localStorage.getItem(k);
+            if (v) totalBytes += v.length * 2; // UTF-16 approx
+        });
+        const kb = Math.round(totalBytes / 1024);
+        const maxKb = 512; // soft cap display at 512 KB
+        const pct = Math.min(Math.round(kb / maxKb * 100), 100);
+        if (el_fill) el_fill.style.width = pct + '%';
+        if (el_lbl)  el_lbl.innerText = `${kb} KB đang dùng`;
+        if (pct > 70 && el_fill) el_fill.style.background = 'linear-gradient(90deg,#f59e0b,#ef4444)';
+    } catch(e) {}
+
+    // ── Recommendations ──────────────────────────────────────
+    const recs = generateRecommendations(log, todayMin, todayAnswered, weak, errList);
+    const el_recs = document.getElementById('pdRecs');
+    if (el_recs) {
+        if (recs.length === 0) {
+            el_recs.innerHTML = '<div class="pdash-rec"><div class="pdash-rec-title">🌟 Tuyệt vời!</div>Đang học rất tốt. Hãy tiếp tục duy trì phong độ này!</div>';
+        } else {
+            el_recs.innerHTML = recs.map(r => `<div class="pdash-rec" style="margin-bottom:8px;"><div class="pdash-rec-title">${r.title}</div>${r.body}</div>`).join('');
+        }
+    }
+}
+
+// ─────────────────────────────────────────────────────────
+// Chart range switch
+// Lưu ngày đang chọn để khôi phục khi đổi range
+let _selectedHistoryDate = null;
+
+function switchChartRange(n) {
+    ['7','30'].forEach(x => {
+        const t = document.getElementById('chartTab' + x);
+        if (t) t.className = 'pdash-chart-tab' + (x == n ? ' active' : '');
+    });
+    buildHistoryChart(n);
+    // Không ẩn pdDayDetail ở đây — buildHistoryChart đã tự xử lý auto-open
+}
+
+// Build chart for N days
+function buildHistoryChart(nDays) {
+    const log    = window._pdLog    || [];
+    const fcData = window._pdFcData || {};
+    const todayStr = _todayStr();
+    const chartEl  = document.getElementById('pdChart');
+    if (!chartEl) return;
+    chartEl.innerHTML = '';
+
+    // ── Collect days ──────────────────────────────────────────
+    const days = [];
+    for (let i = nDays - 1; i >= 0; i--) {
+        const d  = new Date(); d.setDate(d.getDate() - i);
+        const ds = _dateStr(d);
+        const entries = log.filter(e => e.date === ds);
+        const fcWords = (fcData[ds] || []).length;
+        const minVal  = Math.round(entries.reduce((s,e) => s + e.duration, 0) / 60);
+        const dayNames = ['CN','T2','T3','T4','T5','T6','T7'];
+        const label = nDays <= 7
+            ? dayNames[d.getDay()]
+            : (i === 0 || d.getDate() === 1 || d.getDate() % 7 === 0 ? String(d.getDate()) : '');
+        days.push({ ds, label, min: minVal, fcWords, today: ds === todayStr, entries });
+    }
+
+    const hasAnyData = days.some(d => d.min > 0 || d.fcWords > 0);
+    if (!hasAnyData) {
+        chartEl.innerHTML = '<div style="color:#94a3b8; font-size:0.75rem; text-align:center; width:100%; padding:20px 0;">Chưa có dữ liệu học tập ở trình độ này.</div>';
+        return;
+    }
+
+    // ── SVG dimensions ────────────────────────────────────────
+    const MAX_MIN   = 30;          // trục Y cố định 30 phút
+    const CHART_H   = 110;         // chiều cao vùng cột (px SVG)
+    const AXIS_L    = 26;          // lề trục Y (px)
+    const AXIS_B    = 18;          // lề trục X (px)
+    const GRID_VALS = [10, 20, 30];
+    const barGap    = nDays <= 7 ? 6 : 3;
+    const totalW    = 320;         // viewport SVG (co giãn bằng viewBox)
+    const plotW     = totalW - AXIS_L;
+    const barW      = Math.max(1, (plotW - barGap * (nDays + 1)) / nDays);
+
+    const CHART_PAD_T = 14;         // padding trên để nhãn 30p không bị khuất
+
+    // ── Build SVG ─────────────────────────────────────────────
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg   = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('viewBox', `0 0 ${totalW} ${CHART_PAD_T + CHART_H + AXIS_B + 4}`);
+    svg.setAttribute('class', 'pdash-chart-svg');
+    svg.style.maxHeight = '170px';
+
+    // defs: gradients
+    const defs = document.createElementNS(svgNS, 'defs');
+
+    function makeGrad(id, c1, c2) {
+        const g = document.createElementNS(svgNS, 'linearGradient');
+        g.setAttribute('id', id);
+        g.setAttribute('x1','0'); g.setAttribute('y1','0');
+        g.setAttribute('x2','0'); g.setAttribute('y2','1');
+        const s1 = document.createElementNS(svgNS, 'stop');
+        s1.setAttribute('offset','0%');   s1.setAttribute('stop-color', c1);
+        const s2 = document.createElementNS(svgNS, 'stop');
+        s2.setAttribute('offset','100%'); s2.setAttribute('stop-color', c2);
+        g.appendChild(s1); g.appendChild(s2);
+        defs.appendChild(g);
+    }
+    makeGrad('barGradNormal',  '#818cf8', '#6366f1');  // quiz có dữ liệu
+    makeGrad('barGradToday',   '#a78bfa', '#7c3aed');  // hôm nay
+    makeGrad('barGradFcOnly',  '#c4b5fd', '#a78bfa');  // chỉ thẻ học
+    svg.appendChild(defs);
+
+    // ── Grid lines & Y-axis labels ─────────────────────────────
+    GRID_VALS.forEach(v => {
+        const y = CHART_PAD_T + CHART_H - Math.round((v / MAX_MIN) * CHART_H);
+        // đường kẻ ngang
+        const line = document.createElementNS(svgNS, 'line');
+        line.setAttribute('x1', AXIS_L); line.setAttribute('x2', totalW);
+        line.setAttribute('y1', y);      line.setAttribute('y2', y);
+        line.setAttribute('stroke', v === MAX_MIN ? '#c7d2fe' : '#e2e8f0');
+        line.setAttribute('stroke-width', v === MAX_MIN ? '1.2' : '0.7');
+        line.setAttribute('stroke-dasharray', v === MAX_MIN ? 'none' : '3,3');
+        svg.appendChild(line);
+        // nhãn trục Y
+        const txt = document.createElementNS(svgNS, 'text');
+        txt.setAttribute('x', AXIS_L - 3); txt.setAttribute('y', y + 3);
+        txt.setAttribute('text-anchor','end');
+        txt.setAttribute('font-size','7'); txt.setAttribute('fill','#94a3b8');
+        txt.setAttribute('font-weight','700');
+        txt.textContent = v + 'p';
+        svg.appendChild(txt);
+    });
+    // Đường base y=0
+    const baseLine = document.createElementNS(svgNS, 'line');
+    baseLine.setAttribute('x1', AXIS_L); baseLine.setAttribute('x2', totalW);
+    baseLine.setAttribute('y1', CHART_PAD_T + CHART_H); baseLine.setAttribute('y2', CHART_PAD_T + CHART_H);
+    baseLine.setAttribute('stroke','#cbd5e1'); baseLine.setAttribute('stroke-width','1');
+    svg.appendChild(baseLine);
+
+    // ── Bars ──────────────────────────────────────────────────
+    const barGroups = []; // lưu để gắn click
+    days.forEach((day, idx) => {
+        const x = AXIS_L + barGap + idx * (barW + barGap);
+
+        // Xác định loại cột
+        const hasQuiz = day.min > 0;
+        const hasFc   = day.fcWords > 0;
+        const isEmpty = !hasQuiz && !hasFc;
+
+        // chiều cao cột: quiz min → full scale; chỉ thẻ → 4px cố định
+        const barH = hasQuiz
+            ? Math.max(4, Math.round((Math.min(day.min, MAX_MIN) / MAX_MIN) * CHART_H))
+            : (hasFc ? 4 : 2);
+        const barY = CHART_PAD_T + CHART_H - barH;
+
+        const fillGrad = day.today ? 'url(#barGradToday)'
+            : (hasQuiz ? 'url(#barGradNormal)' : 'url(#barGradFcOnly)');
+        const fillEmpty = '#e2e8f0';
+
+        // Nhóm cột (clickable)
+        const g = document.createElementNS(svgNS, 'g');
+        g.setAttribute('cursor','pointer');
+        g.style.transition = 'opacity .15s';
+
+        // Hover overlay
+        const hoverRect = document.createElementNS(svgNS, 'rect');
+        hoverRect.setAttribute('x', x - 1);
+        hoverRect.setAttribute('y', CHART_PAD_T + 2);
+        hoverRect.setAttribute('width', barW + 2);
+        hoverRect.setAttribute('height', CHART_H - 2);
+        hoverRect.setAttribute('rx', '3');
+        hoverRect.setAttribute('fill', day.today ? 'rgba(124,58,237,0.08)' : 'rgba(99,102,241,0.07)');
+        hoverRect.setAttribute('opacity','0');
+        hoverRect.style.transition = 'opacity .15s';
+        g.appendChild(hoverRect);
+
+        // Bar rect
+        const bar = document.createElementNS(svgNS, 'rect');
+        bar.setAttribute('x', x);
+        bar.setAttribute('y', barY);
+        bar.setAttribute('width', barW);
+        bar.setAttribute('height', barH);
+        bar.setAttribute('rx', '3');
+        bar.setAttribute('ry', '3');
+        bar.setAttribute('fill', isEmpty ? fillEmpty : fillGrad);
+        if (day.today && !isEmpty) {
+            bar.setAttribute('filter', 'drop-shadow(0 2px 4px rgba(124,58,237,.35))');
+        }
+        g.appendChild(bar);
+
+        // Nhãn phút trên đầu cột (chỉ khi có quiz)
+        if (hasQuiz) {
+            const valTxt = document.createElementNS(svgNS, 'text');
+            valTxt.setAttribute('x', x + barW / 2);
+            valTxt.setAttribute('y', barY - 2);
+            valTxt.setAttribute('text-anchor','middle');
+            valTxt.setAttribute('font-size', nDays <= 7 ? '7.5' : '6');
+            valTxt.setAttribute('font-weight','800');
+            valTxt.setAttribute('fill', day.today ? '#7c3aed' : '#6366f1');
+            valTxt.textContent = day.min + 'p';
+            g.appendChild(valTxt);
+        } else if (hasFc) {
+            // Chấm nhỏ cho ngày chỉ thẻ
+            const dot = document.createElementNS(svgNS, 'text');
+            dot.setAttribute('x', x + barW / 2);
+            dot.setAttribute('y', barY - 2);
+            dot.setAttribute('text-anchor','middle');
+            dot.setAttribute('font-size','7');
+            dot.setAttribute('fill','#a78bfa');
+            dot.textContent = '🎴';
+            g.appendChild(dot);
+        }
+
+        // Nhãn trục X
+        if (day.label) {
+            const lbl = document.createElementNS(svgNS, 'text');
+            lbl.setAttribute('x', x + barW / 2);
+            lbl.setAttribute('y', CHART_PAD_T + CHART_H + AXIS_B - 2);
+            lbl.setAttribute('text-anchor','middle');
+            lbl.setAttribute('font-size', nDays <= 7 ? '7.5' : '6.5');
+            lbl.setAttribute('font-weight', day.today ? '900' : '700');
+            lbl.setAttribute('fill', day.today ? '#6366f1' : '#94a3b8');
+            lbl.textContent = day.label;
+            svg.appendChild(lbl);
+        }
+
+        // Hover interactions
+        g.addEventListener('mouseenter', () => { hoverRect.setAttribute('opacity','1'); });
+        g.addEventListener('mouseleave', () => { hoverRect.setAttribute('opacity','0'); });
+
+        // Click: show detail
+        g.addEventListener('click', () => showDayDetail(day, g));
+
+        svg.appendChild(g);
+        barGroups.push({ day, g });
+    });
+
+    chartEl.appendChild(svg);
+
+    // Tooltip SVG nổi (dùng foreignObject)
+    const tooltip = document.createElement('div');
+    tooltip.id = '_chartTooltip';
+    tooltip.style.cssText = 'position:absolute;display:none;background:rgba(30,27,75,.88);color:#fff;'
+        + 'font-size:0.65rem;font-weight:700;padding:4px 8px;border-radius:6px;'
+        + 'pointer-events:none;white-space:nowrap;z-index:9;box-shadow:0 2px 8px rgba(0,0,0,.2);';
+    chartEl.style.position = 'relative';
+    chartEl.appendChild(tooltip);
+
+    barGroups.forEach(({ day, g }) => {
+        g.addEventListener('mouseenter', e => {
+            const parts = [];
+            if (day.min > 0) parts.push(`⏱ ${day.min} phút học`);
+            if (day.fcWords > 0) parts.push(`🎴 ${day.fcWords} thẻ`);
+            if (parts.length === 0) parts.push('Chưa học');
+            tooltip.textContent = parts.join('  |  ');
+            tooltip.style.display = 'block';
+        });
+        g.addEventListener('mousemove', e => {
+            const rect = chartEl.getBoundingClientRect();
+            const tipW  = tooltip.offsetWidth || 140;
+            const localX = e.clientX - rect.left;
+            // Flip sang trái nếu còn ít hơn tipW+16px bên phải
+            if (localX + tipW + 16 > rect.width) {
+                tooltip.style.left = (localX - tipW - 8) + 'px';
+            } else {
+                tooltip.style.left = (localX + 8) + 'px';
+            }
+            tooltip.style.top  = (e.clientY - rect.top - 32) + 'px';
+        });
+        g.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+    });
+
+    // ── Active state & auto-open ───────────────────────────────
+    // showDayDetail cần colEl; truyền g (SVG <g>) làm sentinel,
+    // active class được đánh dấu bằng data-active trên <g>
+    window._chartBarGroups = barGroups; // expose để showDayDetail dùng
+
+    let restored = false;
+    if (_selectedHistoryDate) {
+        barGroups.forEach(({ day, g }) => {
+            if (day.ds === _selectedHistoryDate && (day.min > 0 || day.fcWords > 0)) {
+                showDayDetail(day, g);
+                restored = true;
+            }
+        });
+    }
+    if (!restored) {
+        const last = barGroups[barGroups.length - 1];
+        if (last && last.day.today && (last.day.min > 0 || last.day.fcWords > 0)) {
+            showDayDetail(last.day, last.g);
+        }
+    }
+}
+
+// Show detailed breakdown for a clicked day
+function showDayDetail(day, colEl) {
+    _selectedHistoryDate = day.ds;   // Ghi nhớ ngày đang chọn
+    // Đánh dấu cột active trên SVG bar groups
+    const groups = window._chartBarGroups || [];
+    groups.forEach(({ day: d, g }) => {
+        // hover overlay = first child rect
+        const overlay = g.querySelector ? g.querySelector('rect') : g.firstChild;
+        if (overlay) {
+            if (d.ds === day.ds) {
+                overlay.setAttribute('opacity', '1');
+                overlay.setAttribute('fill', d.today ? 'rgba(124,58,237,0.18)' : 'rgba(99,102,241,0.16)');
+            } else {
+                overlay.setAttribute('opacity', '0');
+            }
+        }
+    });
+
+    const fcData    = window._pdFcData || {};
+    const fcWords   = fcData[day.ds] || [];
+    const detailEl  = document.getElementById('pdDayDetail');
+    if (!detailEl) return;
+
+    const MODE_LABELS = {
+        flashcard: '🎴 Thẻ Học', wordQuiz: '📝 Từ Vựng',
+        sentenceQuiz: '🧩 Ngữ Pháp', listening: '🎧 Luyện Nghe',
+        readingWriting: '✍️ Đọc & Viết', speaking: '🗣️ Luyện Nói',
+        mockExam: '🏆 Thi Thử'
+    };
+
+    const d     = new Date(day.ds + 'T00:00:00');
+    const title = d.toLocaleDateString('vi-VN', { weekday:'long', day:'numeric', month:'numeric' });
+
+    // Quiz sessions rows
+    let sessionsHtml = '';
+    // Card modes to exclude from quiz section (stored as 'card' by switchMode, 'flashcard' by logFlashcardView)
+    const FC_MODES = new Set(['card', 'flashcard']);
+
+    if (day.entries && day.entries.length > 0) {
+        // Filter out flashcard modes → only real quiz entries
+        const rawQuiz = day.entries.filter(e => !FC_MODES.has(e.mode) && e.answered > 0);
+
+        // Deduplicate: merge entries with same mode+category (ADD answered/correct since log is now delta-based)
+        const merged = {};
+        rawQuiz.forEach(e => {
+            const key = (e.mode || '') + '||' + (e.category || '');
+            if (!merged[key]) {
+                merged[key] = { mode: e.mode, category: e.category, answered: 0, correct: 0, duration: 0 };
+            }
+            merged[key].answered += e.answered;
+            merged[key].correct  += e.correct;
+            merged[key].duration += e.duration;
+        });
+        const quizEntries = Object.values(merged);
+
+        // Flashcard entries (mode 'card' or 'flashcard')
+        const fcEntries = day.entries.filter(e => FC_MODES.has(e.mode));
+
+        // Total time = sum all entry durations (entries are delta-based, no double-counting)
+        const totalMin = Math.round(day.entries.reduce((s,e) => s + e.duration, 0) / 60);
+
+        if (quizEntries.length > 0) {
+            sessionsHtml += `<div style="font-weight:700; color:#475569; margin:6px 0 4px; font-size:0.72rem;">📝 Kết Quả Quiz:</div>`;
+            quizEntries.forEach(e => {
+                const acc = e.answered > 0 ? Math.round(e.correct / e.answered * 100) : 0;
+                const accColor = acc >= 80 ? '#16a34a' : acc >= 60 ? '#d97706' : '#dc2626';
+                sessionsHtml += `
+                    <div class="pdash-day-session-row">
+                        <div>
+                            <span class="pdash-day-session-mode">${MODE_LABELS[e.mode] || e.mode}</span>
+                            ${e.category ? `<span style="color:#94a3b8; font-size:0.67rem;"> · ${e.category}</span>` : ''}
+                        </div>
+                        <div class="pdash-day-session-stat">
+                            <span style="font-weight:800; color:${accColor}">${acc}%</span>
+                            <span style="color:#cbd5e1;"> · ${e.answered} câu · ${Math.round(e.duration/60)}p</span>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        if (fcEntries.length > 0 || fcWords.length > 0) {
+            sessionsHtml += `<div style="font-weight:700; color:#475569; margin:8px 0 4px; font-size:0.72rem;">🎴 Thẻ Học: <span style="color:#6366f1">${fcWords.length} từ đã xem</span></div>`;
+        }
+
+        sessionsHtml += `<div style="margin-top:6px; font-size:0.7rem; color:#94a3b8;">⏱️ Tổng thời gian: <strong style="color:#3730a3">${totalMin} phút</strong></div>`;
+    } else if (fcWords.length > 0) {
+        sessionsHtml = `<div style="color:#64748b; font-size:0.72rem; margin-bottom:6px;">🎴 Chỉ học Thẻ Học hôm này</div>`;
+    }
+
+    // Flashcard words chips
+    let fcHtml = '';
+    if (fcWords.length > 0) {
+        const MAX_SHOW = 15;
+        // Escape HTML để xử lý đúng các từ có ký tự đặc biệt (What's this?, can't, ...)
+        const _esc = s => String(s || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+        const makeChip = (w, i, hidden) => {
+            const enText = typeof w === 'string' ? w : (w.en || '');
+            const viText = typeof w === 'string' ? '' : (w.vi || '');
+            return `<span class="pdash-day-fc-chip" title="${_esc(viText)}" data-fc-idx="${i}"${
+                hidden ? ' data-fc-hist-extra style="display:none;cursor:pointer"' : ' style="cursor:pointer"'
+            }>🔊 ${_esc(enText)}</span>`;
+        };
+
+        const visibleChips = fcWords.slice(0, MAX_SHOW).map((w, i) => makeChip(w, i, false)).join('');
+        const hiddenChips  = fcWords.slice(MAX_SHOW).map((w, i) => makeChip(w, MAX_SHOW + i, true)).join('');
+        const moreBtn = fcWords.length > MAX_SHOW
+            ? `<button class="pdash-fc-toggle" id="_fcHistExpandBtn">▼ Xem thêm ${fcWords.length - MAX_SHOW} từ nữa</button>`
+            : '';
+
+        fcHtml = `<div style="font-weight:700; color:#475569; margin-top:8px; font-size:0.72rem;">📖 Từ đã học qua Thẻ: <span style="font-weight:400; color:#94a3b8;">(${fcWords.length} từ)</span></div>
+                  <div class="pdash-day-fc-words" id="_fcChipContainer">${visibleChips}${hiddenChips}</div>
+                  ${moreBtn}`;
+    }
+
+    if (!sessionsHtml && !fcHtml) {
+        detailEl.style.display = 'none';
+        return;
+    }
+
+    detailEl.style.display = 'block';
+    detailEl.innerHTML = `
+        <div class="pdash-day-detail">
+            <div class="pdash-day-detail-title">📅 ${title}</div>
+            ${sessionsHtml}
+            ${fcHtml}
+        </div>`;
+
+    // Gắn sự kiện phát âm cho TẤT CẢ chip (cả visible lẫn hidden)
+    if (fcWords.length > 0) {
+        const container = document.getElementById('_fcChipContainer');
+        if (container) {
+            container.querySelectorAll('[data-fc-idx]').forEach(chip => {
+                const idx = parseInt(chip.getAttribute('data-fc-idx'), 10);
+                const raw  = fcWords[idx];
+                // Hỗ trợ cả format cũ (string) lẫn mới ({en, vi})
+                const enText = raw ? (typeof raw === 'string' ? raw : raw.en) : null;
+                if (enText) {
+                    chip.addEventListener('click', function(ev) {
+                        ev.stopPropagation();
+                        speakText(null, enText, 0.85);
+                    });
+                }
+            });
+        }
+        // Nút "▼ Xem thêm" — xổ ra toàn bộ chip ẩn
+        const expandBtn = document.getElementById('_fcHistExpandBtn');
+        if (expandBtn) {
+            expandBtn.addEventListener('click', function() {
+                document.querySelectorAll('[data-fc-hist-extra]').forEach(el => {
+                    el.style.display = 'inline-flex';
+                });
+                expandBtn.style.display = 'none';
+            });
+        }
+    }
+
+    // Smooth scroll to detail
+    setTimeout(() => detailEl.scrollIntoView({ behavior:'smooth', block:'nearest' }), 80);
+
+    // close placeholder - buildParentDashboard was closed above, need re-close
+    // (this fn is standalone, called from click handler)
+}
+
+
+
+function generateRecommendations(log, todayMin, todayAnswered, weakCats, errList) {
+    const recs = [];
+    const todayStr = _todayStr();
+
+    // 1. Chưa học hôm nay
+    if (todayAnswered === 0) {
+        recs.push({ title: '📅 Hôm nay chưa học', body: 'Hãy dành ít nhất 10–15 phút hôm nay để duy trì thói quen học đều đặn.' });
+    } else if (todayMin < 10) {
+        recs.push({ title: '⏱️ Hôm nay học chưa đủ', body: `Mới học ${todayMin} phút hôm nay. Hãy dành thêm vài phút để ôn luyện thêm.` });
+    }
+
+    // 2. Chủ đề yếu
+    if (weakCats.length > 0) {
+        const w = weakCats[0];
+        recs.push({ title: `⚠️ Chủ đề cần chú ý: ${w.cat}`,
+                    body: `Đang đạt ${w.acc}% ở chủ đề này. Hãy ôn luyện thêm 15 phút mỗi ngày để đạt trên 75%.` });
+    }
+
+    // 3. Từ hay sai
+    if (errList.length >= 3) {
+        const topWord = errList[0];
+        recs.push({ title: `📝 Từ cần ghi nhớ đặc biệt: "${topWord.en}"`,
+                    body: `Đã sai từ này ${topWord.count} lần (${topWord.vi}). Hãy viết từ này ra giấy và luyện dùng trong câu.` });
+    }
+
+    // 4. Kiểm tra streak
+    const s = typeof streak !== 'undefined' ? streak : 0;
+    if (s === 0 && todayAnswered > 5) {
+        recs.push({ title: '🔥 Chuỗi học bị đứt', body: 'Chuỗi trả lời đúng liên tiếp đang bằng 0. Hãy bắt đầu lại và cố gắng trả lời đúng liên tục để xây dựng lại chuỗi.' });
+    }
+
+    // 5. Nếu đã giỏi — gợi ý lên trình độ cao hơn
+    const levelOrder = ['PreA1','A1','A2','B1','B2','IELTS'];
+    const levelNow = (typeof currentCEFRLevel !== 'undefined') ? currentCEFRLevel : 'PreA1';
+    const recentAcc = log.filter(e => e.answered > 0).slice(-20);
+    if (recentAcc.length >= 10) {
+        const totalA = recentAcc.reduce((s,e) => s + e.answered, 0);
+        const totalC = recentAcc.reduce((s,e) => s + e.correct,  0);
+        const overallAcc = Math.round(totalC / totalA * 100);
+        const idx = levelOrder.indexOf(levelNow);
+        if (overallAcc >= 85 && idx >= 0 && idx < levelOrder.length - 1) {
+            recs.push({ title: `🚀 Sẵn sàng lên trình độ cao hơn!`,
+                        body: `Đang đạt ${overallAcc}% chính xác. Hãy thử chuyển sang trình độ ${levelOrder[idx+1]} để tiếp tục thử thách!` });
+        }
+    }
+
+    return recs;
+}
+</script>
 </html>

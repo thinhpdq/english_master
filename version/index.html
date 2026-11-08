@@ -1345,7 +1345,7 @@
         <!-- STATS OVERVIEW -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-number">3.5.1</div>
+                <div class="stat-number">3.5.2</div>
                 <div class="stat-label">Latest Release</div>
             </div>
             <div class="stat-card">
@@ -1370,8 +1370,8 @@
             </div>
             <div class="filter-tags">
                 <button class="tag-btn active" onclick="setFilter('all', this)">All Versions</button>
-                <button class="tag-btn" onclick="setFilter('latest', this)">✨ Latest (3.5.1)</button>
-                <button class="tag-btn" onclick="setFilter('stable', this)">🛡️ Stable (3.5.0 - 3.0.0)</button>
+                <button class="tag-btn" onclick="setFilter('latest', this)">✨ Latest (3.5.2)</button>
+                <button class="tag-btn" onclick="setFilter('stable', this)">🛡️ Stable (3.5.1 - 3.0.0)</button>
                 <button class="tag-btn" onclick="setFilter('archive', this)">📜 Archive (2.0.0 - 1.0.0)</button>
             </div>
         </div>
@@ -1379,12 +1379,44 @@
         <!-- VERSION CARDS LIST -->
         <div class="version-grid" id="versionGrid">
 
-            <!-- VERSION 3.5.1 (LATEST BUILD) -->
-            <div class="version-card latest" data-category="latest" data-keywords="3.5.1 Enhance application with advanced features">
+            <!-- VERSION 3.5.2 (LATEST BUILD) -->
+            <div class="version-card latest" data-category="latest" data-keywords="3.5.2 Enhance application with advanced features">
+                <div class="card-header">
+                    <div class="version-title-group">
+                        <div class="version-title">english_master_3_5_2.html</div>
+                        <span class="status-badge badge-latest">✨ Latest Release</span>
+                    </div>
+                    <div class="meta-info">
+                        <span>📅 11/2026</span>
+                        <span>📦 ~12.4 MB</span>
+                    </div>
+                </div>
+
+                <div class="release-notes-box">
+                    <div class="release-notes-title">📋 3.5.2 — Enhance application with advanced features:</div>
+                    <ul class="release-notes-list">
+                        <li>Tính năng Theo Dõi Học Tập giúp bạn dễ dàng nắm bắt tiến độ, thói quen học daily, phân tích chi tiết điểm mạnh - điểm yếu theo từng chủ đề và tự động gợi ý lộ trình cải thiện từ vựng lẫn ngữ pháp hiệu quả. Đồng thời hệ thống tự động dọn dẹp nhật ký sau 60 ngày hoặc cho phép bạn chủ động xóa dữ liệu bất cứ lúc nào.</li>
+                        <li>Ghi nhớ tiến độ: Ứng dụng tự động lưu lại thẻ học bạn đang xem dở và hiển thị ngay khi bạn mở lại app, giúp bạn học tiếp không gián đoạn.</li>
+                        <li>Sửa một số lỗi.</li>
+                    </ul>
+                </div>
+
+                <div class="card-actions">
+                    <button onclick="downloadVersionFile('./release/english_master_3_5_2.html', 'english_master_3_5_2.html', event)" class="btn btn-download">
+                        📥 Tải File HTML (3.5.2)
+                    </button>
+                    <a href="./release/english_master_3_5_2.html" target="_blank" rel="noopener" class="btn btn-launch">
+                        🚀 Chạy Trực Tiếp
+                    </a>
+                </div>
+            </div>
+
+            <!-- VERSION 3.5.1 (stable) -->
+            <div class="version-card" data-category="stable" data-keywords="3.5.1 Enhance application with advanced features">
                 <div class="card-header">
                     <div class="version-title-group">
                         <div class="version-title">english_master_3_5_1.html</div>
-                        <span class="status-badge badge-latest">✨ Latest Release</span>
+                        <span class="status-badge badge-stable">🛡️ Stable</span>
                     </div>
                     <div class="meta-info">
                         <span>📅 10/2026</span>

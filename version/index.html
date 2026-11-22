@@ -1345,7 +1345,7 @@
         <!-- STATS OVERVIEW -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-number">3.5.2</div>
+                <div class="stat-number">3.5.3</div>
                 <div class="stat-label">Latest Release</div>
             </div>
             <div class="stat-card">
@@ -1370,8 +1370,8 @@
             </div>
             <div class="filter-tags">
                 <button class="tag-btn active" onclick="setFilter('all', this)">All Versions</button>
-                <button class="tag-btn" onclick="setFilter('latest', this)">✨ Latest (3.5.2)</button>
-                <button class="tag-btn" onclick="setFilter('stable', this)">🛡️ Stable (3.5.1 - 3.0.0)</button>
+                <button class="tag-btn" onclick="setFilter('latest', this)">✨ Latest (3.5.3)</button>
+                <button class="tag-btn" onclick="setFilter('stable', this)">🛡️ Stable (3.5.2 - 3.0.0)</button>
                 <button class="tag-btn" onclick="setFilter('archive', this)">📜 Archive (2.0.0 - 1.0.0)</button>
             </div>
         </div>
@@ -1379,12 +1379,43 @@
         <!-- VERSION CARDS LIST -->
         <div class="version-grid" id="versionGrid">
 
-            <!-- VERSION 3.5.2 (LATEST BUILD) -->
-            <div class="version-card latest" data-category="latest" data-keywords="3.5.2 Enhance application with advanced features">
+            <!-- VERSION 3.5.3 (LATEST BUILD) -->
+            <div class="version-card latest" data-category="latest" data-keywords="3.5.3 Grammar Module & Irregular Verb Lookup">
+                <div class="card-header">
+                    <div class="version-title-group">
+                        <div class="version-title">english_master_3_5_3.html</div>
+                        <span class="status-badge badge-latest">✨ Latest Release</span>
+                    </div>
+                    <div class="meta-info">
+                        <span>📅 11/2026</span>
+                        <span>📦 ~13.0 MB</span>
+                    </div>
+                </div>
+
+                <div class="release-notes-box">
+                    <div class="release-notes-title">📋 3.5.3 — Grammar Module & Irregular Verb Lookup:</div>
+                    <ul class="release-notes-list">
+                        <li>⚡ Tra cứu Động từ Bất quy tắc: Gõ bất kỳ động từ bất quy tắc nào vào ô tìm kiếm (ví dụ: send, keep, buy...) — hệ thống tự động hiển thị flashcard với đầy đủ nghĩa tiếng Việt, V1 → V2 → V3, câu ví dụ kèm bản dịch và phát âm. Hỗ trợ 160+ động từ phổ biến. </li>
+                        <li>📐 Module Học Ngữ Pháp: Lộ trình học ngữ pháp theo nhiều cấp độ, gồm 3 bước: Lý thuyết → Luyện tập sửa câu sai (7 câu/chủ điểm) → Kiểm tra. Hệ thống tự động phát hiện và highlight đúng lỗi sai, đưa ra gợi ý có cấu trúc (lỗi ở đâu → tại sao sai → đáp án đúng) và chấp nhận linh hoạt nhiều cách diễn đạt đúng khác nhau.</li>
+                    </ul>
+                </div>
+
+                <div class="card-actions">
+                    <button onclick="downloadVersionFile('./release/english_master_3_5_3.html', 'english_master_3_5_3.html', event)" class="btn btn-download">
+                        📥 Tải File HTML (3.5.3)
+                    </button>
+                    <a href="./release/english_master_3_5_3.html" target="_blank" rel="noopener" class="btn btn-launch">
+                        🚀 Chạy Trực Tiếp
+                    </a>
+                </div>
+            </div>
+
+            <!-- VERSION 3.5.2 -->
+            <div class="version-card" data-category="stable" data-keywords="3.5.2 Enhance application with advanced features">
                 <div class="card-header">
                     <div class="version-title-group">
                         <div class="version-title">english_master_3_5_2.html</div>
-                        <span class="status-badge badge-latest">✨ Latest Release</span>
+                        <span class="status-badge badge-stable">🛡️ Stable</span>
                     </div>
                     <div class="meta-info">
                         <span>📅 11/2026</span>

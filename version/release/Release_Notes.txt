@@ -3,12 +3,11 @@ Release Notes
 ====================================================================================================
 
    * Build Branch:
-        release/github/20261108_1655_english_master_3_5_2
+        release/github/20261122_1745_english_master_3_5_3
 
    * Build Date:
-        2026-11-08 16:55
+        2026-11-22 17:45
 
    * Release Notes:
-        1) Tính năng Theo Dõi Học Tập giúp bạn dễ dàng nắm bắt tiến độ, thói quen học daily, phân tích chi tiết điểm mạnh - điểm yếu theo từng chủ đề và tự động gợi ý lộ trình cải thiện từ vựng lẫn ngữ pháp hiệu quả. Đồng thời hệ thống tự động dọn dẹp nhật ký sau 60 ngày hoặc cho phép bạn chủ động xóa dữ liệu bất cứ lúc nào.
-        2) Ghi nhớ tiến độ: Ứng dụng tự động lưu lại thẻ học bạn đang xem dở và hiển thị ngay khi bạn mở lại app, giúp bạn học tiếp không gián đoạn.
-        3) Sửa một số lỗi.
+        1) ⚡ Tra cứu Động từ Bất quy tắc: Gõ bất kỳ động từ bất quy tắc nào vào ô tìm kiếm (ví dụ: send, keep, buy...) — hệ thống tự động hiển thị flashcard với đầy đủ nghĩa tiếng Việt, V1 → V2 → V3, câu ví dụ kèm bản dịch và phát âm. Hỗ trợ 160+ động từ phổ biến.
+        2) 📐 Module Học Ngữ Pháp: Lộ trình học ngữ pháp theo nhiều cấp độ, gồm 3 bước: Lý thuyết → Luyện tập sửa câu sai (7 câu/chủ điểm) → Kiểm tra. Hệ thống tự động phát hiện và highlight đúng lỗi sai, đưa ra gợi ý có cấu trúc (lỗi ở đâu → tại sao sai → đáp án đúng) và chấp nhận linh hoạt nhiều cách diễn đạt đúng khác nhau.

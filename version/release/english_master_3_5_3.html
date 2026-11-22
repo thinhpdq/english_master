@@ -289635,31 +289635,77 @@ function handleSearch(query) {
         return 0;
     });
 
-    // ── Irregular verb fallback ──────────────────────────────────────────────
-    // If query is a single word that exists in irregularVerbsMap but has no
-    // exact-match result in the DB, synthesise a virtual flashcard so users
-    // can always look up any irregular verb directly (e.g. "keep", "spend").
-    const _iMap = window.irregularVerbsMap || {};
-    const _isSingleWord = !rawQuery.includes(' ');
-    const _hasExact = results.length > 0 && results[0].en.toLowerCase() === rawQuery;
-    if (_isSingleWord && !_hasExact && _iMap[rawQuery]) {
-        const _vb = _iMap[rawQuery];
-        const _cap = rawQuery.charAt(0).toUpperCase() + rawQuery.slice(1);
-        const _virtualCard = {
-            en: _cap,
-            phonetic: '',
-            // Nếu data mới có trường vi riêng → dùng; không thì fallback về dạng cũ
-            vi: _vb.vi || `Động từ bất quy tắc — V2: ${_vb.v2} / V3: ${_vb.v3}`,
-            img: '⚡',
-            grammar: 'Động từ bất quy tắc',
-            example: _vb.example || '',
-            exampleVi: _vb.exampleVi || '',
-            _level: 'B1',
-            _isIrregFallback: true  // flag để UI nhận biết
+    // ── Irregular verb priority lookup ───────────────────────────────────────
+    // Tra cứu động từ bất quy tắc theo V1 / V2 / V3 / nghĩa tiếng Việt.
+    // Luôn ưu tiên hiển thị kết quả irregular TRƯỚC kết quả từ kho từ vựng.
+    // Logic kho từ vựng (results bên trên) vẫn giữ nguyên, không bị thay đổi.
+    (function _irregularPriorityLookup() {
+        const _iMap = window.irregularVerbsMap || {};
+        if (!Object.keys(_iMap).length) return;
+
+        // Helper: build a virtual flashcard for one irregular verb entry
+        const _makeCard = (v1Key, _vb) => ({
+            en:         v1Key.charAt(0).toUpperCase() + v1Key.slice(1),
+            phonetic:   '',
+            vi:         _vb.vi || `Động từ bất quy tắc — V2: ${_vb.v2} / V3: ${_vb.v3}`,
+            img:        '⚡',
+            grammar:    'Động từ bất quy tắc',
+            example:    _vb.example  || '',
+            exampleVi:  _vb.exampleVi || '',
+            _level:     'B1',
+            _isIrregFallback: true
+        });
+
+        const irregHits = [];   // matched irregular verb cards (may be multiple)
+        const seenV1    = new Set();
+
+        // Helper: score a hit (1 = exact, 2 = starts-with, 3 = contains)
+        const _hitScore = (haystack, needle) => {
+            if (!haystack) return 0;
+            const h = haystack.toLowerCase();
+            if (h === needle)              return 1;
+            if (h.startsWith(needle))      return 2;
+            if (h.includes(needle))        return 3;
+            return 0;
         };
-        results.unshift(_virtualCard);
-    }
-    // ────────────────────────────────────────────────────────────────────────
+
+        Object.entries(_iMap).forEach(([v1Key, _vb]) => {
+            // --- Match axes ---
+            // Axis 1: V1 (base form)
+            const s1 = _hitScore(v1Key, rawQuery);
+            // Axis 2: V2 (past simple) — may be "went / went" with slashes
+            const v2Parts = (_vb.v2 || '').split('/').map(p => p.trim());
+            const s2 = Math.min(...v2Parts.map(p => _hitScore(p, rawQuery) || 999));
+            // Axis 3: V3 (past participle)
+            const v3Parts = (_vb.v3 || '').split('/').map(p => p.trim());
+            const s3 = Math.min(...v3Parts.map(p => _hitScore(p, rawQuery) || 999));
+            // Axis 4: Vietnamese meaning
+            const s4 = _hitScore(_vb.vi, rawQuery);
+
+            const best = Math.min(
+                s1 || 999,
+                s2 === 999 ? 999 : s2,
+                s3 === 999 ? 999 : s3,
+                s4 || 999
+            );
+
+            if (best < 999 && !seenV1.has(v1Key)) {
+                seenV1.add(v1Key);
+                irregHits.push({ v1Key, _vb, score: best });
+            }
+        });
+
+        if (!irregHits.length) return;
+
+        // Sort: exact (1) → starts-with (2) → contains (3)
+        irregHits.sort((a, b) => a.score - b.score || a.v1Key.localeCompare(b.v1Key));
+
+        // Prepend irregular verb cards BEFORE the vocabulary DB results
+        const irregCards = irregHits.map(({ v1Key, _vb }) => _makeCard(v1Key, _vb));
+        results.unshift(...irregCards);
+    })();
+    // ─────────────────────────────────────────────────────────────────────────
+
 
     currentCardList = results.length > 0 ? results : [...vocabularyData[currentCategory]];
     currentIndex = 0;
